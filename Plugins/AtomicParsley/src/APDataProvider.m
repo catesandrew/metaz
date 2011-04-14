@@ -157,7 +157,7 @@
             //@"contentRating",
             @"genre",
             @"album", @"albumArtist", @"purchaseDate", @"description",
-            @"longDescription", @"stik",
+            @"longdesc", @"stik",
             @"TVShowName", @"TVEpisode",
             @"TVSeasonNum", @"TVEpisodeNum", @"TVNetwork", @"podcastURL",
             @"podcastGUID",@"category", @"keyword", @"advisory",

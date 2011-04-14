@@ -233,6 +233,7 @@
 		1BEC79071197B74400337403 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B449E2110DCCC1D00B9C751 /* GTMStackTrace.h */; };
 		1BF5AD4B105DFC92005DD03E /* QueueWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5AD4A105DFC92005DD03E /* QueueWindowController.m */; };
 		1BF5ADBD105E0B8E005DD03E /* FileViewBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5ADBC105E0B8E005DD03E /* FileViewBox.m */; };
+		496D06AB12CBB413000672C9 /* MetaX.icns in Resources */ = {isa = PBXBuildFile; fileRef = 496D06AA12CBB413000672C9 /* MetaX.icns */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -943,6 +944,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* MetaZ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MetaZ_Prefix.pch; path = App/MetaZ_Prefix.pch; sourceTree = "<group>"; };
+		496D06AA12CBB413000672C9 /* MetaX.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = MetaX.icns; path = App/resources/MetaX.icns; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = App/Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MetaZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1851,6 +1853,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				496D06AA12CBB413000672C9 /* MetaX.icns */,
 				1BCECEC410E98E4200D0AD35 /* Credits.html */,
 				1B44958410D6128700B9C751 /* Growl Registration Ticket.growlRegDict */,
 				1B03325510B15FF100B28E3A /* StopProgressOn.png */,
@@ -2267,6 +2270,7 @@
 				1B44958510D6128700B9C751 /* Growl Registration Ticket.growlRegDict in Resources */,
 				1B42F21F10DD5D6D00AFEBF6 /* MiniProgressGradient.png in Resources */,
 				1BCECEC510E98E4200D0AD35 /* Credits.html in Resources */,
+				496D06AB12CBB413000672C9 /* MetaX.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2334,7 +2338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -o errexit\n#set -x\n\nif [ \"${CONFIGURATION}\" != \"Release\" ]; then exit; fi\n\nPATH=$PATH:/usr/local/bin:/usr/bin:/sw/bin:/opt/local/bin\nexport GITV=`git log -n1 --pretty=oneline --format=%h`\nexport DATEV=`date +%y.%m.%d.%H`\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://github.com/downloads/griff/metaz\"\nRELEASENOTES_URL=\"http://griff.github.com/metaz/release-notes.html#version-$VERSION\"\n\nARCHIVE_FILENAME=\"$PROJECT_NAME-$VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN_PRIVKEY_NAME=\"MetaZ Sparkle Private\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nmkdir -p DSYMS\ncp -R *.dSYM DSYMS/\n\n#ditto -ck --keepParent \"$PROJECT_NAME.app.dSYM\" \"$PROJECT_NAME-$VERSION-$GITV+dYSM.zip\"\nditto -ck DSYMS \"$PROJECT_NAME-$VERSION-$GITV+dYSM.zip\"\nrm -rf DSYMS\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(\n\topenssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n\t| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g') \\\n\t| openssl enc -base64\n)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat > \"$PROJECT_NAME-$VERSION.xml\" <<EOF\n\t\t<item>\n\t\t\t<title>Version $VERSION</title>\n\t\t\t<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n\t\t\t<pubDate>$PUBDATE</pubDate>\n\t\t\t<enclosure\n\t\t\t\turl=\"$DOWNLOAD_URL\"\n\t\t\t\tsparkle:version=\"$DATEV\"\n\t\t\t\tsparkle:shortVersionString=\"$VERSION\"\n\t\t\t\ttype=\"application/octet-stream\"\n\t\t\t\tlength=\"$SIZE\"\n\t\t\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t\t\t/>\n\t\t</item>\nEOF\n\necho scp \"'$HOME/svn/my-cool-app/build/Release/$ARCHIVE_FILENAME'\" www.example.com:download/\necho scp \"'$WD/appcast.xml'\" www.example.com:web/software/my-cool-app/appcast.xml\n";
+			shellScript = "set -o errexit\n#set -x\n\n#if [ \"${CONFIGURATION}\" != \"Release\" ]; then exit; fi\nexit\n\nPATH=$PATH:/usr/local/bin:/usr/bin:/sw/bin:/opt/local/bin\nexport GITV=`git log -n1 --pretty=oneline --format=%h`\nexport DATEV=`date +%y.%m.%d.%H`\n\nVERSION=$(defaults read \"$BUILT_PRODUCTS_DIR/$PROJECT_NAME.app/Contents/Info\" CFBundleShortVersionString)\nDOWNLOAD_BASE_URL=\"http://github.com/downloads/griff/metaz\"\nRELEASENOTES_URL=\"http://griff.github.com/metaz/release-notes.html#version-$VERSION\"\n\nARCHIVE_FILENAME=\"$PROJECT_NAME-$VERSION.zip\"\nDOWNLOAD_URL=\"$DOWNLOAD_BASE_URL/$ARCHIVE_FILENAME\"\nKEYCHAIN_PRIVKEY_NAME=\"MetaZ Sparkle Private\"\n\nWD=$PWD\ncd \"$BUILT_PRODUCTS_DIR\"\nrm -f \"$PROJECT_NAME\"*.zip\nditto -ck --keepParent \"$PROJECT_NAME.app\" \"$ARCHIVE_FILENAME\"\n\nmkdir -p DSYMS\ncp -R *.dSYM DSYMS/\n\n#ditto -ck --keepParent \"$PROJECT_NAME.app.dSYM\" \"$PROJECT_NAME-$VERSION-$GITV+dYSM.zip\"\nditto -ck DSYMS \"$PROJECT_NAME-$VERSION-$GITV+dYSM.zip\"\nrm -rf DSYMS\n\nSIZE=$(stat -f %z \"$ARCHIVE_FILENAME\")\nPUBDATE=$(date +\"%a, %d %b %G %T %z\")\nSIGNATURE=$(openssl dgst -sha1 -binary < \"$ARCHIVE_FILENAME\" \\\n| openssl dgst -dss1 -sign <(security find-generic-password -g -s \"$KEYCHAIN_PRIVKEY_NAME\" 2>&1 1>/dev/null | perl -pe '($_) = /\"(.+)\"/; s/\\\\012/\\n/g' | perl -MXML::LibXML -e 'print XML::LibXML->new()->parse_file(\"-\")->findvalue(q(//string[preceding-sibling::key[1] = \"NOTE\"]))') \\\n| openssl enc -base64)\n\n[ $SIGNATURE ] || { echo Unable to load signing private key with name \"'$KEYCHAIN_PRIVKEY_NAME'\" from keychain; false; }\n\ncat > \"$PROJECT_NAME-$VERSION.xml\" <<EOF\n\t\t<item>\n\t\t\t<title>Version $VERSION</title>\n\t\t\t<sparkle:releaseNotesLink>$RELEASENOTES_URL</sparkle:releaseNotesLink>\n\t\t\t<pubDate>$PUBDATE</pubDate>\n\t\t\t<enclosure\n\t\t\t\turl=\"$DOWNLOAD_URL\"\n\t\t\t\tsparkle:version=\"$DATEV\"\n\t\t\t\tsparkle:shortVersionString=\"$VERSION\"\n\t\t\t\ttype=\"application/octet-stream\"\n\t\t\t\tlength=\"$SIZE\"\n\t\t\t\tsparkle:dsaSignature=\"$SIGNATURE\"\n\t\t\t/>\n\t\t</item>\nEOF\n\necho scp \"'$HOME/svn/my-cool-app/build/Release/$ARCHIVE_FILENAME'\" www.example.com:download/\necho scp \"'$WD/appcast.xml'\" www.example.com:web/software/my-cool-app/appcast.xml\n";
 			showEnvVarsInLog = 0;
 		};
 		1BEA6D70106EA6D1004B1A7F /* Build Documentation */ = {
