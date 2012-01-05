@@ -262,6 +262,14 @@
 		1BEC79071197B74400337403 /* GTMStackTrace.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B449E2110DCCC1D00B9C751 /* GTMStackTrace.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BF5AD4B105DFC92005DD03E /* QueueWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5AD4A105DFC92005DD03E /* QueueWindowController.m */; };
 		1BF5ADBD105E0B8E005DD03E /* FileViewBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5ADBC105E0B8E005DD03E /* FileViewBox.m */; };
+		49942B0414B572A600F0843F /* MetaZKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA325C410545ACA00276F57 /* MetaZKit.framework */; };
+		49942B1C14B5734000F0843F /* mp4chaps in Resources */ = {isa = PBXBuildFile; fileRef = 49942B0E14B5734000F0843F /* mp4chaps */; };
+		49942B1E14B5734000F0843F /* mp4tags in Resources */ = {isa = PBXBuildFile; fileRef = 49942B0F14B5734000F0843F /* mp4tags */; };
+		49942B2014B5734000F0843F /* MP4v2DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1214B5734000F0843F /* MP4v2DataProvider.m */; };
+		49942B2214B5734000F0843F /* MP4v2Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1414B5734000F0843F /* MP4v2Plugin.m */; };
+		49942B2414B5734000F0843F /* MP4v2ReadDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */; };
+		49942B2614B5734000F0843F /* MP4v2WriteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1814B5734000F0843F /* MP4v2WriteManager.m */; };
+		49942B2B14B5789C00F0843F /* MP4v2Plugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -414,6 +422,27 @@
 			remoteGlobalIDString = 1BEA6E71106EF2A0004B1A7F;
 			remoteInfo = AtomicParsleyPlugin;
 		};
+		49942AF814B572A600F0843F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B2022F810B393CA00EE548A;
+			remoteInfo = "Plist Marcos";
+		};
+		49942AFA14B572A600F0843F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BA325C310545ACA00276F57;
+			remoteInfo = MetaZKit;
+		};
+		49942B2914B5787500F0843F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49942AF614B572A600F0843F;
+			remoteInfo = MP4v2;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -436,6 +465,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				49942B2B14B5789C00F0843F /* MP4v2Plugin.mzplugin in Copy Plugins */,
 				1B299DB714AE4D3A0048B7C0 /* TheMovieDb.mzplugin in Copy Plugins */,
 				1B4F53D8116EA0BE003221B1 /* TheTVDBPlugin.mzplugin in Copy Plugins */,
 				1B03302110B0C9A600B28E3A /* AmazonPlugin.mzplugin in Copy Plugins */,
@@ -1066,6 +1096,18 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		32CA4F630368D1EE00C91783 /* MetaZ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MetaZ_Prefix.pch; path = App/MetaZ_Prefix.pch; sourceTree = "<group>"; };
+		49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MP4v2Plugin.mzplugin; sourceTree = BUILT_PRODUCTS_DIR; };
+		49942B0C14B5733F00F0843F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		49942B0E14B5734000F0843F /* mp4chaps */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4chaps; sourceTree = "<group>"; };
+		49942B0F14B5734000F0843F /* mp4tags */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4tags; sourceTree = "<group>"; };
+		49942B1114B5734000F0843F /* MP4v2DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2DataProvider.h; sourceTree = "<group>"; };
+		49942B1214B5734000F0843F /* MP4v2DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2DataProvider.m; sourceTree = "<group>"; };
+		49942B1314B5734000F0843F /* MP4v2Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2Plugin.h; sourceTree = "<group>"; };
+		49942B1414B5734000F0843F /* MP4v2Plugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2Plugin.m; sourceTree = "<group>"; };
+		49942B1514B5734000F0843F /* MP4v2ReadDataTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2ReadDataTask.h; sourceTree = "<group>"; };
+		49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2ReadDataTask.m; sourceTree = "<group>"; };
+		49942B1714B5734000F0843F /* MP4v2WriteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2WriteManager.h; sourceTree = "<group>"; };
+		49942B1814B5734000F0843F /* MP4v2WriteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2WriteManager.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = App/Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MetaZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1135,6 +1177,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				1BEA6E97106EF662004B1A7F /* MetaZKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49942B0314B572A600F0843F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49942B0414B572A600F0843F /* MetaZKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1275,6 +1325,7 @@
 				1B42F25810DEB0D300AFEBF6 /* IMDBPlugin.mzplugin */,
 				1B4F53C9116E9F44003221B1 /* TheTVDBPlugin.mzplugin */,
 				1B8CB90B14ACD62000F859F7 /* TheMovieDb.mzplugin */,
+				49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2048,6 +2099,7 @@
 		1BEA6E68106EF248004B1A7F /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				49942B0B14B5733F00F0843F /* MP4v2 */,
 				1B8CB8FA14ACD5C700F859F7 /* TheMovieDb */,
 				1B4F538D116E9E1F003221B1 /* TheTVDB */,
 				1B42F23B10DEB05000AFEBF6 /* IMDB */,
@@ -2171,6 +2223,43 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		49942B0B14B5733F00F0843F /* MP4v2 */ = {
+			isa = PBXGroup;
+			children = (
+				49942B0D14B5733F00F0843F /* Resources */,
+				49942B1014B5734000F0843F /* Classes */,
+			);
+			name = MP4v2;
+			path = Plugins/MP4v2;
+			sourceTree = "<group>";
+		};
+		49942B0D14B5733F00F0843F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				49942B0C14B5733F00F0843F /* Info.plist */,
+				49942B0E14B5734000F0843F /* mp4chaps */,
+				49942B0F14B5734000F0843F /* mp4tags */,
+			);
+			name = Resources;
+			path = resources;
+			sourceTree = "<group>";
+		};
+		49942B1014B5734000F0843F /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				49942B1114B5734000F0843F /* MP4v2DataProvider.h */,
+				49942B1214B5734000F0843F /* MP4v2DataProvider.m */,
+				49942B1314B5734000F0843F /* MP4v2Plugin.h */,
+				49942B1414B5734000F0843F /* MP4v2Plugin.m */,
+				49942B1514B5734000F0843F /* MP4v2ReadDataTask.h */,
+				49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */,
+				49942B1714B5734000F0843F /* MP4v2WriteManager.h */,
+				49942B1814B5734000F0843F /* MP4v2WriteManager.m */,
+			);
+			name = Classes;
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2394,6 +2483,25 @@
 			productReference = 1BEA6E72106EF2A0004B1A7F /* AtomicParsleyPlugin.mzplugin */;
 			productType = "com.apple.product-type.bundle";
 		};
+		49942AF614B572A600F0843F /* MP4v2 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49942B0514B572A600F0843F /* Build configuration list for PBXNativeTarget "MP4v2" */;
+			buildPhases = (
+				49942AFB14B572A600F0843F /* Resources */,
+				49942AFE14B572A600F0843F /* Sources */,
+				49942B0314B572A600F0843F /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49942AF714B572A600F0843F /* PBXTargetDependency */,
+				49942AF914B572A600F0843F /* PBXTargetDependency */,
+			);
+			name = MP4v2;
+			productName = AtomicParsleyPlugin;
+			productReference = 49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */;
+			productType = "com.apple.product-type.bundle";
+		};
 		8D1107260486CEB800E47090 /* MetaZ */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "MetaZ" */;
@@ -2417,6 +2525,7 @@
 				1B4F53D2116EA0B7003221B1 /* PBXTargetDependency */,
 				1B20239310B395FA00EE548A /* PBXTargetDependency */,
 				1B299DA414AE4D2A0048B7C0 /* PBXTargetDependency */,
+				49942B2A14B5787500F0843F /* PBXTargetDependency */,
 			);
 			name = MetaZ;
 			productInstallPath = "$(HOME)/Applications";
@@ -2470,6 +2579,7 @@
 				1B42F25710DEB0D300AFEBF6 /* IMDB */,
 				1B4F53B3116E9F44003221B1 /* TheTVDB */,
 				1B8CB90A14ACD62000F859F7 /* TheMovieDb */,
+				49942AF614B572A600F0843F /* MP4v2 */,
 			);
 		};
 /* End PBXProject section */
@@ -2535,6 +2645,15 @@
 			files = (
 				1B040C14107F9DA20027FA0D /* mp4chaps in Resources */,
 				1B44949910D57D6900B9C751 /* AtomicParsley in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49942AFB14B572A600F0843F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49942B1C14B5734000F0843F /* mp4chaps in Resources */,
+				49942B1E14B5734000F0843F /* mp4tags in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2798,6 +2917,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		49942AFE14B572A600F0843F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49942B2014B5734000F0843F /* MP4v2DataProvider.m in Sources */,
+				49942B2214B5734000F0843F /* MP4v2Plugin.m in Sources */,
+				49942B2414B5734000F0843F /* MP4v2ReadDataTask.m in Sources */,
+				49942B2614B5734000F0843F /* MP4v2WriteManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2957,6 +3087,21 @@
 			isa = PBXTargetDependency;
 			target = 1BEA6E71106EF2A0004B1A7F /* AtomicParsley */;
 			targetProxy = 1BEA6F29106EF693004B1A7F /* PBXContainerItemProxy */;
+		};
+		49942AF714B572A600F0843F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B2022F810B393CA00EE548A /* Plist Marcos */;
+			targetProxy = 49942AF814B572A600F0843F /* PBXContainerItemProxy */;
+		};
+		49942AF914B572A600F0843F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BA325C310545ACA00276F57 /* MetaZKit */;
+			targetProxy = 49942AFA14B572A600F0843F /* PBXContainerItemProxy */;
+		};
+		49942B2A14B5787500F0843F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49942AF614B572A600F0843F /* MP4v2 */;
+			targetProxy = 49942B2914B5787500F0843F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3844,6 +3989,100 @@
 			};
 			name = Release;
 		};
+		49942B0614B572A600F0843F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = Plugins/MP4v2/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
+				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+					"-framework",
+					MetaZKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MP4v2Plugin;
+				USER_HEADER_SEARCH_PATHS = Plugins/MP4v2/src;
+				WRAPPER_EXTENSION = mzplugin;
+			};
+			name = Debug;
+		};
+		49942B0714B572A600F0843F /* Remote Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = Plugins/MP4v2/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
+				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+					"-framework",
+					MetaZKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MP4v2Plugin;
+				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
+				USER_HEADER_SEARCH_PATHS = Plugins/MP4v2/src;
+				WRAPPER_EXTENSION = mzplugin;
+			};
+			name = "Remote Debug";
+		};
+		49942B0814B572A600F0843F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = Plugins/MP4v2/Info.plist;
+				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
+				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
+				INFOPLIST_PREPROCESS = YES;
+				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+					"-framework",
+					MetaZKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = MP4v2Plugin;
+				USER_HEADER_SEARCH_PATHS = Plugins/MP4v2/src;
+				WRAPPER_EXTENSION = mzplugin;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4024,6 +4263,16 @@
 				1BEA6E74106EF2A1004B1A7F /* Debug */,
 				1B44938110C95B0A00B9C751 /* Remote Debug */,
 				1BEA6E75106EF2A1004B1A7F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49942B0514B572A600F0843F /* Build configuration list for PBXNativeTarget "MP4v2" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49942B0614B572A600F0843F /* Debug */,
+				49942B0714B572A600F0843F /* Remote Debug */,
+				49942B0814B572A600F0843F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
