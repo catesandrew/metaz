@@ -140,20 +140,6 @@
     [tagdict release];
     [super dealloc];
 }
-/*
-- (id)retain
-{
-    NSLog(@"APReadChapter retain %d", [self retainCount]);
-    return [super retain];
-}
-
-- (oneway void)release
-{
-    NSUInteger count = [self retainCount]-1;
-    [super release];
-    NSLog(@"APReadChapter release %d", count);
-}
-*/
 
 - (void)parseData
 {

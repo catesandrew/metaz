@@ -409,7 +409,7 @@
 
 - (NSString *)identifier
 {
-    return @"org.maven-group.MetaZ.AtomicParsleyPlugin";
+    return @"org.maven-group.MetaZ.MP4v2Plugin";
 }
 
 -(NSArray *)types

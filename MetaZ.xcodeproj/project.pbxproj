@@ -230,7 +230,6 @@
 		1BEA6E8C106EF4CD004B1A7F /* APDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA6E8B106EF4CD004B1A7F /* APDataProvider.m */; };
 		1BEA6E91106EF534004B1A7F /* AtomicParsleyPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BEA6E90106EF534004B1A7F /* AtomicParsleyPlugin.m */; };
 		1BEA6E97106EF662004B1A7F /* MetaZKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA325C410545ACA00276F57 /* MetaZKit.framework */; };
-		1BEA6F33106EF6FC004B1A7F /* AtomicParsleyPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1BEA6E72106EF2A0004B1A7F /* AtomicParsleyPlugin.mzplugin */; };
 		1BEA6F9A106EFC3F004B1A7F /* MetaData.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B119FCA104304C5004C93D3 /* MetaData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BEA6F9B106EFC3F004B1A7F /* MetaEdits.h in Headers */ = {isa = PBXBuildFile; fileRef = 1B119FC7104300ED004C93D3 /* MetaEdits.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1BEA6F9C106EFC3F004B1A7F /* MetaEdits.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B119FC8104300ED004C93D3 /* MetaEdits.m */; };
@@ -270,6 +269,9 @@
 		49942B2414B5734000F0843F /* MP4v2ReadDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */; };
 		49942B2614B5734000F0843F /* MP4v2WriteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1814B5734000F0843F /* MP4v2WriteManager.m */; };
 		49942B2B14B5789C00F0843F /* MP4v2Plugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */; };
+		49D4AF1414B62BF200B54BAC /* AtomicParsleyPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1BEA6E72106EF2A0004B1A7F /* AtomicParsleyPlugin.mzplugin */; };
+		49D4AF1514B62C0000B54BAC /* IMDBPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1B42F25810DEB0D300AFEBF6 /* IMDBPlugin.mzplugin */; };
+		49D4AF1814B62C6D00B54BAC /* mp4info in Resources */ = {isa = PBXBuildFile; fileRef = 49D4AF1614B62C5E00B54BAC /* mp4info */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
@@ -415,13 +417,6 @@
 			remoteGlobalIDString = 1BA325C310545ACA00276F57;
 			remoteInfo = MetaZKit;
 		};
-		1BEA6F29106EF693004B1A7F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1BEA6E71106EF2A0004B1A7F;
-			remoteInfo = AtomicParsleyPlugin;
-		};
 		49942AF814B572A600F0843F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
@@ -442,6 +437,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 49942AF614B572A600F0843F;
 			remoteInfo = MP4v2;
+		};
+		49D4AF1214B62BD800B54BAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1BEA6E71106EF2A0004B1A7F;
+			remoteInfo = AtomicParsley;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -465,12 +467,13 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				49D4AF1514B62C0000B54BAC /* IMDBPlugin.mzplugin in Copy Plugins */,
+				49D4AF1414B62BF200B54BAC /* AtomicParsleyPlugin.mzplugin in Copy Plugins */,
 				49942B2B14B5789C00F0843F /* MP4v2Plugin.mzplugin in Copy Plugins */,
 				1B299DB714AE4D3A0048B7C0 /* TheMovieDb.mzplugin in Copy Plugins */,
 				1B4F53D8116EA0BE003221B1 /* TheTVDBPlugin.mzplugin in Copy Plugins */,
 				1B03302110B0C9A600B28E3A /* AmazonPlugin.mzplugin in Copy Plugins */,
 				1B040EEE1081C0110027FA0D /* TagChimp.mzplugin in Copy Plugins */,
-				1BEA6F33106EF6FC004B1A7F /* AtomicParsleyPlugin.mzplugin in Copy Plugins */,
 			);
 			name = "Copy Plugins";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1108,6 +1111,7 @@
 		49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2ReadDataTask.m; sourceTree = "<group>"; };
 		49942B1714B5734000F0843F /* MP4v2WriteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2WriteManager.h; sourceTree = "<group>"; };
 		49942B1814B5734000F0843F /* MP4v2WriteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2WriteManager.m; sourceTree = "<group>"; };
+		49D4AF1614B62C5E00B54BAC /* mp4info */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4info; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = App/Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MetaZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -2238,6 +2242,7 @@
 		49942B0D14B5733F00F0843F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				49D4AF1614B62C5E00B54BAC /* mp4info */,
 				49942B0C14B5733F00F0843F /* Info.plist */,
 				49942B0E14B5734000F0843F /* mp4chaps */,
 				49942B0F14B5734000F0843F /* mp4tags */,
@@ -2520,12 +2525,12 @@
 				1BA325CC10545BAE00276F57 /* PBXTargetDependency */,
 				1B040EEA1081C0030027FA0D /* PBXTargetDependency */,
 				1B032F9310B0C41200B28E3A /* PBXTargetDependency */,
-				1BEA6F2A106EF693004B1A7F /* PBXTargetDependency */,
 				1B060E1110E269F60009D847 /* PBXTargetDependency */,
 				1B4F53D2116EA0B7003221B1 /* PBXTargetDependency */,
 				1B20239310B395FA00EE548A /* PBXTargetDependency */,
 				1B299DA414AE4D2A0048B7C0 /* PBXTargetDependency */,
 				49942B2A14B5787500F0843F /* PBXTargetDependency */,
+				49D4AF1314B62BD800B54BAC /* PBXTargetDependency */,
 			);
 			name = MetaZ;
 			productInstallPath = "$(HOME)/Applications";
@@ -2652,6 +2657,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49D4AF1814B62C6D00B54BAC /* mp4info in Resources */,
 				49942B1C14B5734000F0843F /* mp4chaps in Resources */,
 				49942B1E14B5734000F0843F /* mp4tags in Resources */,
 			);
@@ -3083,11 +3089,6 @@
 			target = 1BA325C310545ACA00276F57 /* MetaZKit */;
 			targetProxy = 1BEA6E77106EF2B0004B1A7F /* PBXContainerItemProxy */;
 		};
-		1BEA6F2A106EF693004B1A7F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1BEA6E71106EF2A0004B1A7F /* AtomicParsley */;
-			targetProxy = 1BEA6F29106EF693004B1A7F /* PBXContainerItemProxy */;
-		};
 		49942AF714B572A600F0843F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 1B2022F810B393CA00EE548A /* Plist Marcos */;
@@ -3102,6 +3103,11 @@
 			isa = PBXTargetDependency;
 			target = 49942AF614B572A600F0843F /* MP4v2 */;
 			targetProxy = 49942B2914B5787500F0843F /* PBXContainerItemProxy */;
+		};
+		49D4AF1314B62BD800B54BAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1BEA6E71106EF2A0004B1A7F /* AtomicParsley */;
+			targetProxy = 49D4AF1214B62BD800B54BAC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
