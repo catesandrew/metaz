@@ -44,26 +44,3 @@
 - (id)initWithFileName:(NSString*)fileName dictionary:(NSMutableDictionary *)tagdict;
 
 @end
-
-/*
-@interface APReadOperationsController : MZOperationsController
-{
-    id<MZDataReadDelegate> delegate;
-    id<MZDataProvider> provider;
-    NSString* fileName;
-    NSMutableDictionary* tagdict;
-}
-@property(readonly) NSMutableDictionary* tagdict;
-
-+ (id)controllerWithProvider:(id<MZDataProvider>)provider
-                fromFileName:(NSString *)fileName
-                    delegate:(id<MZDataReadDelegate>)delegate;
-
-- (id)initWithProvider:(id<MZDataProvider>)provider
-          fromFileName:(NSString *)fileName
-              delegate:(id<MZDataReadDelegate>)delegate;
-
-- (void)operationsFinished;
-
-@end
-*/

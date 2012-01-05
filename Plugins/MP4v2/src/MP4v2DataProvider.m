@@ -82,8 +82,8 @@
 
 + (NSString *)launchPath
 {
-    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR("org.maven-group.metaz.AtomicParsleyPlugin"));
-    CFURLRef pathUrl = CFBundleCopyResourceURL(myBundle, CFSTR("AtomicParsley"), NULL, NULL);
+    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR("org.maven-group.metaz.MP4v2Plugin"));
+    CFURLRef pathUrl = CFBundleCopyResourceURL(myBundle, CFSTR("mp4tags"), NULL, NULL);
     NSString* path = (NSString*)CFURLCopyFileSystemPath(pathUrl, kCFURLPOSIXPathStyle);
     CFRelease(pathUrl);
     return [path autorelease];
@@ -91,7 +91,7 @@
 
 + (NSString *)launchChapsPath
 {
-    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR("org.maven-group.metaz.AtomicParsleyPlugin"));
+    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR("org.maven-group.metaz.MP4v2Plugin"));
     CFURLRef pathUrl = CFBundleCopyResourceURL(myBundle, CFSTR("mp4chaps"), NULL, NULL);
     NSString* path = (NSString*)CFURLCopyFileSystemPath(pathUrl, kCFURLPOSIXPathStyle);
     CFRelease(pathUrl);
@@ -452,33 +452,6 @@
     return op;
 }
 
-/*
-- (MetaLoaded *)loadFromFile:(NSString *)fileName
-{
-    NSTask* task = [[NSTask alloc] init];
-    [task setLaunchPath:[self launchPath]];
-    [task setArguments:[NSArray arrayWithObjects:fileName, @"-t", nil]];
-    NSPipe* out = [NSPipe pipe];
-    [task setStandardOutput:out];
-    NSPipe* err = [NSPipe pipe];
-    [task setStandardError:err];
-    [task launch];
-    
-    NSData* data = [[out fileHandleForReading] readDataToEndOfFile];
-    [task waitUntilExit];
-    [APDataProvider logFromProgram:@"AtomicParsley" pipe:err];
-
-    int status = [task terminationStatus];
-    [task release];
-    if (status != 0)
-    {
-        MZLoggerError(@"AtomicParsley failed. %d", status);
-        return nil;
-    }
-    
-}
-*/
-
 - (void)parseData:(NSData *)data withFileName:(NSString *)fileName dict:(NSMutableDictionary *)tagdict
 {
     NSString* str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
@@ -649,101 +622,6 @@
     if(covr)
         [tagdict setObject:[NSNull null] forKey:MZPictureTagIdent];
 
-    /*
-    {
-        task = [[NSTask alloc] init];
-        [task setLaunchPath:[self launchPath]];
-        NSString* file = [NSString temporaryPathWithFormat:@"MetaZImage_%@"];
-        [task setArguments:[NSArray arrayWithObjects:fileName, @"-e", file, nil]];
-        NSPipe* err = [NSPipe pipe];
-        [task setStandardError:err];
-        [task setStandardOutput:err];
-        [task launch];
-        [task waitUntilExit];
-        [APDataProvider logFromProgram:@"AtomicParsley" pipe:err];
-        [task release];
-        
-        file = [file stringByAppendingString:@"_artwork_1"];
-        
-        NSFileManager* mgr = [NSFileManager manager];
-        BOOL isDir;
-        if([mgr fileExistsAtPath:[file stringByAppendingString:@".png"] isDirectory:&isDir] && !isDir)
-        {
-            NSData* data = [NSData dataWithContentsOfFile:[file stringByAppendingString:@".png"]];
-            [tagdict setObject:data forKey:MZPictureTagIdent];
-            [mgr removeItemAtPath:[file stringByAppendingString:@".png"] error:NULL];
-        }
-        else if([mgr fileExistsAtPath:[file stringByAppendingString:@".jpg"] isDirectory:&isDir] && !isDir)
-        {
-            NSData* data = [NSData dataWithContentsOfFile:[file stringByAppendingString:@".jpg"]];
-            [tagdict setObject:data forKey:MZPictureTagIdent];
-            [mgr removeItemAtPath:[file stringByAppendingString:@".jpg"] error:NULL];
-        }
-    }
-    
-    
-    // Chapter reading
-    {
-        task = [[NSTask alloc] init];
-        [task setLaunchPath:[self launchChapsPath]];
-        [task setArguments:[NSArray arrayWithObjects:@"-l", fileName, nil]];
-        NSPipe* out = [NSPipe pipe];
-        [task setStandardOutput:out];
-        NSPipe* err = [NSPipe pipe];
-        [task setStandardError:err];
-        [task launch];
-
-        NSData* data = [[out fileHandleForReading] readDataToEndOfFile];
-        [task waitUntilExit];
-        [APDataProvider logFromProgram:@"mp4chaps" pipe:err];
-        int chapStatus = [task terminationStatus];
-        [task release];
-        
-        if(chapStatus != 0)
-        {
-            MZLoggerError(@"mp4chaps failed. %d", chapStatus);
-            return nil;
-        }
-
-        NSString* str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-
-        NSRange f = [str rangeOfString:@"Duration "];
-        NSString* movieDurationStr = [str substringWithRange:NSMakeRange(f.location+f.length, 12)];
-        //MZLoggerDebug(@"Movie duration '%@'", movieDurationStr);
-        MZTimeCode* movieDuration = [MZTimeCode timeCodeWithString:movieDurationStr];
-        [tagdict setObject:movieDuration forKey:MZDurationTagIdent];
-
-        NSArray* lines = [str componentsSeparatedByString:@"\tChapter #"];
-        if([lines count]>1)
-        {
-            NSMutableArray* chapters = [NSMutableArray array];
-            int len = [lines count];
-            for(int i=1; i<len; i++)
-            {
-                NSString* line = [[lines objectAtIndex:i]
-                    stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-
-                NSString* startStr = [line substringWithRange:NSMakeRange(6, 12)];
-                NSString* durationStr = [line substringWithRange:NSMakeRange(21, 12)];
-                NSString* name = [line substringWithRange:NSMakeRange(37, [line length]-38)];
-                //MZLoggerDebug(@"Found args: '%@' '%@' '%@'", start, duration, name);
-
-                MZTimeCode* start = [MZTimeCode timeCodeWithString:startStr];
-                MZTimeCode* duration = [MZTimeCode timeCodeWithString:durationStr];
-
-                if(!start || !duration)
-                    break;
-                    
-                MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:start duration:duration text:name];
-                [chapters addObject:item];
-            }
-            if([chapters count] == len-1)
-                [tagdict setObject:chapters forKey:MZChaptersTagIdent];
-        }
-    }
-    
-    return [MetaLoaded metaWithOwner:self filename:fileName dictionary:tagdict];
-    */
 }
 
 void sortTags(NSMutableArray* args, NSDictionary* changes, NSString* tag, NSString* sortType)
@@ -1110,23 +988,6 @@ void sortTags(NSMutableArray* args, NSDictionary* changes, NSString* tag, NSStri
     [ctrl addOperationsToQueue:queue];
 
     return ctrl;
-    /*
-    NSTask* task = [[[NSTask alloc] init] autorelease];
-    [task setLaunchPath:[self launchPath]];
-    [task setArguments:args];
-    
-    APWriteManager* manager = [APWriteManager
-            managerForProvider:self
-                          task:task
-                      delegate:delegate
-                         edits:data
-                   pictureFile:pictureFile
-                  chaptersFile:chaptersFile];
-    [manager start];
-    [writes addObject:manager];
-    
-    return manager;
-    */
 }
 
 - (void)removeWriteManager:(id)writeManager
