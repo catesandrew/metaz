@@ -269,11 +269,50 @@
 		49942B2414B5734000F0843F /* MP4v2ReadDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */; };
 		49942B2614B5734000F0843F /* MP4v2WriteManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1814B5734000F0843F /* MP4v2WriteManager.m */; };
 		49942B2B14B5789C00F0843F /* MP4v2Plugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */; };
+		499DBF8014B6BE99003EC6BC /* lang.c in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF7814B6BE99003EC6BC /* lang.c */; };
+		499DBF8114B6BE99003EC6BC /* mathematics.c in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF7A14B6BE99003EC6BC /* mathematics.c */; };
+		499DBF8214B6BE99003EC6BC /* rational.c in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF7C14B6BE99003EC6BC /* rational.c */; };
+		499DBF8A14B6BF48003EC6BC /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF8914B6BF48003EC6BC /* RegexKitLite.m */; };
 		49D4AF1414B62BF200B54BAC /* AtomicParsleyPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1BEA6E72106EF2A0004B1A7F /* AtomicParsleyPlugin.mzplugin */; };
 		49D4AF1514B62C0000B54BAC /* IMDBPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1B42F25810DEB0D300AFEBF6 /* IMDBPlugin.mzplugin */; };
 		49D4AF1814B62C6D00B54BAC /* mp4info in Resources */ = {isa = PBXBuildFile; fileRef = 49D4AF1614B62C5E00B54BAC /* mp4info */; };
+		49DAC9CE14B6C2CC00A1F471 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A91F622C0FB0A56F00B96B33 /* libicucore.dylib */; };
+		49DACA7014B6C42100A1F471 /* MP42AACImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3514B6C42100A1F471 /* MP42AACImporter.mm */; };
+		49DACA7114B6C42100A1F471 /* MP42AC3Importer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3714B6C42100A1F471 /* MP42AC3Importer.m */; };
+		49DACA7214B6C42100A1F471 /* MP42AudioTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3914B6C42100A1F471 /* MP42AudioTrack.m */; };
+		49DACA7314B6C42100A1F471 /* MP42CCImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3B14B6C42100A1F471 /* MP42CCImporter.m */; };
+		49DACA7414B6C42100A1F471 /* MP42ChapterTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3D14B6C42100A1F471 /* MP42ChapterTrack.m */; };
+		49DACA7514B6C42100A1F471 /* MP42ClosedCaptionTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3F14B6C42100A1F471 /* MP42ClosedCaptionTrack.m */; };
+		49DACA7614B6C42100A1F471 /* MP42File.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4114B6C42100A1F471 /* MP42File.m */; };
+		49DACA7714B6C42100A1F471 /* MP42FileImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4314B6C42100A1F471 /* MP42FileImporter.m */; };
+		49DACA7814B6C42100A1F471 /* MP42H264Importer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4514B6C42100A1F471 /* MP42H264Importer.mm */; };
+		49DACA7914B6C42100A1F471 /* MP42Metadata.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4714B6C42100A1F471 /* MP42Metadata.m */; };
+		49DACA7A14B6C42100A1F471 /* MP42MkvImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4914B6C42100A1F471 /* MP42MkvImporter.m */; };
+		49DACA7B14B6C42100A1F471 /* MP42MovImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4B14B6C42100A1F471 /* MP42MovImporter.m */; };
+		49DACA7C14B6C42100A1F471 /* MP42Mp4Importer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4D14B6C42100A1F471 /* MP42Mp4Importer.m */; };
+		49DACA7D14B6C42100A1F471 /* MP42Muxer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA4F14B6C42100A1F471 /* MP42Muxer.m */; };
+		49DACA7E14B6C42100A1F471 /* MP42Sample.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5114B6C42100A1F471 /* MP42Sample.m */; };
+		49DACA7F14B6C42100A1F471 /* MP42SrtImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5314B6C42100A1F471 /* MP42SrtImporter.m */; };
+		49DACA8014B6C42100A1F471 /* MP42SubtitleTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5514B6C42100A1F471 /* MP42SubtitleTrack.m */; };
+		49DACA8114B6C42100A1F471 /* MP42Track.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5714B6C42100A1F471 /* MP42Track.m */; };
+		49DACA8214B6C42100A1F471 /* MP42Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5914B6C42100A1F471 /* MP42Utilities.m */; };
+		49DACA8314B6C42100A1F471 /* MP42VideoTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5B14B6C42100A1F471 /* MP42VideoTrack.m */; };
+		49DACA8414B6C42100A1F471 /* downmix.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5D14B6C42100A1F471 /* downmix.c */; };
+		49DACA8514B6C42100A1F471 /* MatroskaFile.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA5F14B6C42100A1F471 /* MatroskaFile.c */; };
+		49DACA8614B6C42100A1F471 /* MatroskaParser.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA6114B6C42100A1F471 /* MatroskaParser.c */; };
+		49DACA8714B6C42100A1F471 /* mbs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA6314B6C42100A1F471 /* mbs.cpp */; };
+		49DACA8814B6C42100A1F471 /* SBAudioConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA6714B6C42100A1F471 /* SBAudioConverter.m */; };
+		49DACA8B14B6C42100A1F471 /* sfifo.c in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA6C14B6C42100A1F471 /* sfifo.c */; };
+		49DACA8C14B6C42100A1F471 /* SubUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA6F14B6C42100A1F471 /* SubUtilities.m */; };
+		49DACA8F14B6C63000A1F471 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DACA8D14B6C61900A1F471 /* AudioToolbox.framework */; };
+		49DACA9214B6C66400A1F471 /* QTKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DACA9014B6C65500A1F471 /* QTKit.framework */; };
+		49DACA9514B6C68000A1F471 /* QuickTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49DACA9314B6C67700A1F471 /* QuickTime.framework */; };
+		49DACA9614B6C68B00A1F471 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		49DACA9714B6C69800A1F471 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B0DEDDF10610412009D293F /* Quartz.framework */; };
+		49DACA9814B6C6D000A1F471 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B523B9013F4B3BE00C20B7D /* libz.dylib */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		A9C1E8560F31F395003A08F3 /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A9C1E8550F31F395003A08F3 /* libmp4v2.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1111,9 +1150,79 @@
 		49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2ReadDataTask.m; sourceTree = "<group>"; };
 		49942B1714B5734000F0843F /* MP4v2WriteManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2WriteManager.h; sourceTree = "<group>"; };
 		49942B1814B5734000F0843F /* MP4v2WriteManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2WriteManager.m; sourceTree = "<group>"; };
+		499DBF7714B6BE99003EC6BC /* common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = common.h; sourceTree = "<group>"; };
+		499DBF7814B6BE99003EC6BC /* lang.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = lang.c; sourceTree = "<group>"; };
+		499DBF7914B6BE99003EC6BC /* lang.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = lang.h; sourceTree = "<group>"; };
+		499DBF7A14B6BE99003EC6BC /* mathematics.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mathematics.c; sourceTree = "<group>"; };
+		499DBF7B14B6BE99003EC6BC /* mathematics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mathematics.h; sourceTree = "<group>"; };
+		499DBF7C14B6BE99003EC6BC /* rational.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = rational.c; sourceTree = "<group>"; };
+		499DBF7D14B6BE99003EC6BC /* rational.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rational.h; sourceTree = "<group>"; };
+		499DBF8714B6BF18003EC6BC /* mp4v2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mp4v2.h; path = ../../../../../../../include/mp4v2/mp4v2.h; sourceTree = "<group>"; };
+		499DBF8814B6BF48003EC6BC /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		499DBF8914B6BF48003EC6BC /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		49D4AF1614B62C5E00B54BAC /* mp4info */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4info; sourceTree = "<group>"; };
+		49DACA3414B6C42100A1F471 /* MP42AACImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42AACImporter.h; sourceTree = "<group>"; };
+		49DACA3514B6C42100A1F471 /* MP42AACImporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MP42AACImporter.mm; sourceTree = "<group>"; };
+		49DACA3614B6C42100A1F471 /* MP42AC3Importer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42AC3Importer.h; sourceTree = "<group>"; };
+		49DACA3714B6C42100A1F471 /* MP42AC3Importer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42AC3Importer.m; sourceTree = "<group>"; };
+		49DACA3814B6C42100A1F471 /* MP42AudioTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42AudioTrack.h; sourceTree = "<group>"; };
+		49DACA3914B6C42100A1F471 /* MP42AudioTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42AudioTrack.m; sourceTree = "<group>"; };
+		49DACA3A14B6C42100A1F471 /* MP42CCImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42CCImporter.h; sourceTree = "<group>"; };
+		49DACA3B14B6C42100A1F471 /* MP42CCImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42CCImporter.m; sourceTree = "<group>"; };
+		49DACA3C14B6C42100A1F471 /* MP42ChapterTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42ChapterTrack.h; sourceTree = "<group>"; };
+		49DACA3D14B6C42100A1F471 /* MP42ChapterTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42ChapterTrack.m; sourceTree = "<group>"; };
+		49DACA3E14B6C42100A1F471 /* MP42ClosedCaptionTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42ClosedCaptionTrack.h; sourceTree = "<group>"; };
+		49DACA3F14B6C42100A1F471 /* MP42ClosedCaptionTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42ClosedCaptionTrack.m; sourceTree = "<group>"; };
+		49DACA4014B6C42100A1F471 /* MP42File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42File.h; sourceTree = "<group>"; };
+		49DACA4114B6C42100A1F471 /* MP42File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42File.m; sourceTree = "<group>"; };
+		49DACA4214B6C42100A1F471 /* MP42FileImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42FileImporter.h; sourceTree = "<group>"; };
+		49DACA4314B6C42100A1F471 /* MP42FileImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42FileImporter.m; sourceTree = "<group>"; };
+		49DACA4414B6C42100A1F471 /* MP42H264Importer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42H264Importer.h; sourceTree = "<group>"; };
+		49DACA4514B6C42100A1F471 /* MP42H264Importer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MP42H264Importer.mm; sourceTree = "<group>"; };
+		49DACA4614B6C42100A1F471 /* MP42Metadata.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42Metadata.h; sourceTree = "<group>"; };
+		49DACA4714B6C42100A1F471 /* MP42Metadata.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42Metadata.m; sourceTree = "<group>"; };
+		49DACA4814B6C42100A1F471 /* MP42MkvImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42MkvImporter.h; sourceTree = "<group>"; };
+		49DACA4914B6C42100A1F471 /* MP42MkvImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42MkvImporter.m; sourceTree = "<group>"; };
+		49DACA4A14B6C42100A1F471 /* MP42MovImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42MovImporter.h; sourceTree = "<group>"; };
+		49DACA4B14B6C42100A1F471 /* MP42MovImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42MovImporter.m; sourceTree = "<group>"; };
+		49DACA4C14B6C42100A1F471 /* MP42Mp4Importer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42Mp4Importer.h; sourceTree = "<group>"; };
+		49DACA4D14B6C42100A1F471 /* MP42Mp4Importer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42Mp4Importer.m; sourceTree = "<group>"; };
+		49DACA4E14B6C42100A1F471 /* MP42Muxer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42Muxer.h; sourceTree = "<group>"; };
+		49DACA4F14B6C42100A1F471 /* MP42Muxer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42Muxer.m; sourceTree = "<group>"; };
+		49DACA5014B6C42100A1F471 /* MP42Sample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42Sample.h; sourceTree = "<group>"; };
+		49DACA5114B6C42100A1F471 /* MP42Sample.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42Sample.m; sourceTree = "<group>"; };
+		49DACA5214B6C42100A1F471 /* MP42SrtImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42SrtImporter.h; sourceTree = "<group>"; };
+		49DACA5314B6C42100A1F471 /* MP42SrtImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42SrtImporter.m; sourceTree = "<group>"; };
+		49DACA5414B6C42100A1F471 /* MP42SubtitleTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42SubtitleTrack.h; sourceTree = "<group>"; };
+		49DACA5514B6C42100A1F471 /* MP42SubtitleTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42SubtitleTrack.m; sourceTree = "<group>"; };
+		49DACA5614B6C42100A1F471 /* MP42Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42Track.h; sourceTree = "<group>"; };
+		49DACA5714B6C42100A1F471 /* MP42Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42Track.m; sourceTree = "<group>"; };
+		49DACA5814B6C42100A1F471 /* MP42Utilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42Utilities.h; sourceTree = "<group>"; };
+		49DACA5914B6C42100A1F471 /* MP42Utilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42Utilities.m; sourceTree = "<group>"; };
+		49DACA5A14B6C42100A1F471 /* MP42VideoTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42VideoTrack.h; sourceTree = "<group>"; };
+		49DACA5B14B6C42100A1F471 /* MP42VideoTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP42VideoTrack.m; sourceTree = "<group>"; };
+		49DACA5D14B6C42100A1F471 /* downmix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = downmix.c; sourceTree = "<group>"; };
+		49DACA5E14B6C42100A1F471 /* downmix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = downmix.h; sourceTree = "<group>"; };
+		49DACA5F14B6C42100A1F471 /* MatroskaFile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MatroskaFile.c; sourceTree = "<group>"; };
+		49DACA6014B6C42100A1F471 /* MatroskaFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatroskaFile.h; sourceTree = "<group>"; };
+		49DACA6114B6C42100A1F471 /* MatroskaParser.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = MatroskaParser.c; sourceTree = "<group>"; };
+		49DACA6214B6C42100A1F471 /* MatroskaParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatroskaParser.h; sourceTree = "<group>"; };
+		49DACA6314B6C42100A1F471 /* mbs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = mbs.cpp; sourceTree = "<group>"; };
+		49DACA6414B6C42100A1F471 /* mbs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mbs.h; sourceTree = "<group>"; };
+		49DACA6514B6C42100A1F471 /* mpeg4ip_bitstream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mpeg4ip_bitstream.h; sourceTree = "<group>"; };
+		49DACA6614B6C42100A1F471 /* SBAudioConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBAudioConverter.h; sourceTree = "<group>"; };
+		49DACA6714B6C42100A1F471 /* SBAudioConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBAudioConverter.m; sourceTree = "<group>"; };
+		49DACA6C14B6C42100A1F471 /* sfifo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sfifo.c; sourceTree = "<group>"; };
+		49DACA6D14B6C42100A1F471 /* sfifo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sfifo.h; sourceTree = "<group>"; };
+		49DACA6E14B6C42100A1F471 /* SubUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubUtilities.h; sourceTree = "<group>"; };
+		49DACA6F14B6C42100A1F471 /* SubUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubUtilities.m; sourceTree = "<group>"; };
+		49DACA8D14B6C61900A1F471 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
+		49DACA9014B6C65500A1F471 /* QTKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QTKit.framework; path = /System/Library/Frameworks/QTKit.framework; sourceTree = "<absolute>"; };
+		49DACA9314B6C67700A1F471 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = App/Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* MetaZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MetaZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A91F622C0FB0A56F00B96B33 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = /usr/lib/libicucore.dylib; sourceTree = "<absolute>"; };
+		A9C1E8550F31F395003A08F3 /* libmp4v2.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmp4v2.a; path = /usr/local/lib/libmp4v2.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1189,6 +1298,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				49942B0414B572A600F0843F /* MetaZKit.framework in Frameworks */,
+				A9C1E8560F31F395003A08F3 /* libmp4v2.a in Frameworks */,
+				49DACA9614B6C68B00A1F471 /* Cocoa.framework in Frameworks */,
+				49DACA9214B6C66400A1F471 /* QTKit.framework in Frameworks */,
+				49DACA9514B6C68000A1F471 /* QuickTime.framework in Frameworks */,
+				49DACA8F14B6C63000A1F471 /* AudioToolbox.framework in Frameworks */,
+				49DAC9CE14B6C2CC00A1F471 /* libicucore.dylib in Frameworks */,
+				49DACA9814B6C6D000A1F471 /* libz.dylib in Frameworks */,
+				49DACA9714B6C69800A1F471 /* Quartz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1295,12 +1412,16 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49DACA9314B6C67700A1F471 /* QuickTime.framework */,
+				49DACA9014B6C65500A1F471 /* QTKit.framework */,
+				49DACA8D14B6C61900A1F471 /* AudioToolbox.framework */,
 				1B0DEDDF10610412009D293F /* Quartz.framework */,
 				1BB6C10A1052B154001D3D1D /* Sparkle.framework */,
 				1B11A00610457B0D004C93D3 /* RubyCocoa.framework */,
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
 				1B44956C10D6118F00B9C751 /* Growl.framework */,
 				1B523B8813F4B39400C20B7D /* SystemConfiguration.framework */,
+				A91F622C0FB0A56F00B96B33 /* libicucore.dylib */,
 				1B523B9013F4B3BE00C20B7D /* libz.dylib */,
 				1B523B9613F4B3D900C20B7D /* CoreServices.framework */,
 			);
@@ -1311,6 +1432,7 @@
 			isa = PBXGroup;
 			children = (
 				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				A9C1E8550F31F395003A08F3 /* libmp4v2.a */,
 				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
 				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
 			);
@@ -2232,6 +2354,8 @@
 		49942B0B14B5733F00F0843F /* MP4v2 */ = {
 			isa = PBXGroup;
 			children = (
+				49DACA3314B6C42100A1F471 /* Wrapper */,
+				499DBF7614B6BE99003EC6BC /* Others */,
 				49942B0D14B5733F00F0843F /* Resources */,
 				49942B1014B5734000F0843F /* Classes */,
 			);
@@ -2265,6 +2389,95 @@
 			);
 			name = Classes;
 			path = src;
+			sourceTree = "<group>";
+		};
+		499DBF7614B6BE99003EC6BC /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				499DBF8814B6BF48003EC6BC /* RegexKitLite.h */,
+				499DBF8914B6BF48003EC6BC /* RegexKitLite.m */,
+				499DBF8714B6BF18003EC6BC /* mp4v2.h */,
+				499DBF7714B6BE99003EC6BC /* common.h */,
+				499DBF7814B6BE99003EC6BC /* lang.c */,
+				499DBF7914B6BE99003EC6BC /* lang.h */,
+				499DBF7A14B6BE99003EC6BC /* mathematics.c */,
+				499DBF7B14B6BE99003EC6BC /* mathematics.h */,
+				499DBF7C14B6BE99003EC6BC /* rational.c */,
+				499DBF7D14B6BE99003EC6BC /* rational.h */,
+			);
+			name = Others;
+			path = src/Others;
+			sourceTree = "<group>";
+		};
+		49DACA3314B6C42100A1F471 /* Wrapper */ = {
+			isa = PBXGroup;
+			children = (
+				49DACA3414B6C42100A1F471 /* MP42AACImporter.h */,
+				49DACA3514B6C42100A1F471 /* MP42AACImporter.mm */,
+				49DACA3614B6C42100A1F471 /* MP42AC3Importer.h */,
+				49DACA3714B6C42100A1F471 /* MP42AC3Importer.m */,
+				49DACA3814B6C42100A1F471 /* MP42AudioTrack.h */,
+				49DACA3914B6C42100A1F471 /* MP42AudioTrack.m */,
+				49DACA3A14B6C42100A1F471 /* MP42CCImporter.h */,
+				49DACA3B14B6C42100A1F471 /* MP42CCImporter.m */,
+				49DACA3C14B6C42100A1F471 /* MP42ChapterTrack.h */,
+				49DACA3D14B6C42100A1F471 /* MP42ChapterTrack.m */,
+				49DACA3E14B6C42100A1F471 /* MP42ClosedCaptionTrack.h */,
+				49DACA3F14B6C42100A1F471 /* MP42ClosedCaptionTrack.m */,
+				49DACA4014B6C42100A1F471 /* MP42File.h */,
+				49DACA4114B6C42100A1F471 /* MP42File.m */,
+				49DACA4214B6C42100A1F471 /* MP42FileImporter.h */,
+				49DACA4314B6C42100A1F471 /* MP42FileImporter.m */,
+				49DACA4414B6C42100A1F471 /* MP42H264Importer.h */,
+				49DACA4514B6C42100A1F471 /* MP42H264Importer.mm */,
+				49DACA4614B6C42100A1F471 /* MP42Metadata.h */,
+				49DACA4714B6C42100A1F471 /* MP42Metadata.m */,
+				49DACA4814B6C42100A1F471 /* MP42MkvImporter.h */,
+				49DACA4914B6C42100A1F471 /* MP42MkvImporter.m */,
+				49DACA4A14B6C42100A1F471 /* MP42MovImporter.h */,
+				49DACA4B14B6C42100A1F471 /* MP42MovImporter.m */,
+				49DACA4C14B6C42100A1F471 /* MP42Mp4Importer.h */,
+				49DACA4D14B6C42100A1F471 /* MP42Mp4Importer.m */,
+				49DACA4E14B6C42100A1F471 /* MP42Muxer.h */,
+				49DACA4F14B6C42100A1F471 /* MP42Muxer.m */,
+				49DACA5014B6C42100A1F471 /* MP42Sample.h */,
+				49DACA5114B6C42100A1F471 /* MP42Sample.m */,
+				49DACA5214B6C42100A1F471 /* MP42SrtImporter.h */,
+				49DACA5314B6C42100A1F471 /* MP42SrtImporter.m */,
+				49DACA5414B6C42100A1F471 /* MP42SubtitleTrack.h */,
+				49DACA5514B6C42100A1F471 /* MP42SubtitleTrack.m */,
+				49DACA5614B6C42100A1F471 /* MP42Track.h */,
+				49DACA5714B6C42100A1F471 /* MP42Track.m */,
+				49DACA5814B6C42100A1F471 /* MP42Utilities.h */,
+				49DACA5914B6C42100A1F471 /* MP42Utilities.m */,
+				49DACA5A14B6C42100A1F471 /* MP42VideoTrack.h */,
+				49DACA5B14B6C42100A1F471 /* MP42VideoTrack.m */,
+				49DACA5C14B6C42100A1F471 /* muxer */,
+				49DACA6614B6C42100A1F471 /* SBAudioConverter.h */,
+				49DACA6714B6C42100A1F471 /* SBAudioConverter.m */,
+				49DACA6C14B6C42100A1F471 /* sfifo.c */,
+				49DACA6D14B6C42100A1F471 /* sfifo.h */,
+				49DACA6E14B6C42100A1F471 /* SubUtilities.h */,
+				49DACA6F14B6C42100A1F471 /* SubUtilities.m */,
+			);
+			name = Wrapper;
+			path = src/Wrapper;
+			sourceTree = "<group>";
+		};
+		49DACA5C14B6C42100A1F471 /* muxer */ = {
+			isa = PBXGroup;
+			children = (
+				49DACA5D14B6C42100A1F471 /* downmix.c */,
+				49DACA5E14B6C42100A1F471 /* downmix.h */,
+				49DACA5F14B6C42100A1F471 /* MatroskaFile.c */,
+				49DACA6014B6C42100A1F471 /* MatroskaFile.h */,
+				49DACA6114B6C42100A1F471 /* MatroskaParser.c */,
+				49DACA6214B6C42100A1F471 /* MatroskaParser.h */,
+				49DACA6314B6C42100A1F471 /* mbs.cpp */,
+				49DACA6414B6C42100A1F471 /* mbs.h */,
+				49DACA6514B6C42100A1F471 /* mpeg4ip_bitstream.h */,
+			);
+			path = muxer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2931,6 +3144,37 @@
 				49942B2214B5734000F0843F /* MP4v2Plugin.m in Sources */,
 				49942B2414B5734000F0843F /* MP4v2ReadDataTask.m in Sources */,
 				49942B2614B5734000F0843F /* MP4v2WriteManager.m in Sources */,
+				499DBF8014B6BE99003EC6BC /* lang.c in Sources */,
+				499DBF8114B6BE99003EC6BC /* mathematics.c in Sources */,
+				499DBF8214B6BE99003EC6BC /* rational.c in Sources */,
+				499DBF8A14B6BF48003EC6BC /* RegexKitLite.m in Sources */,
+				49DACA7014B6C42100A1F471 /* MP42AACImporter.mm in Sources */,
+				49DACA7114B6C42100A1F471 /* MP42AC3Importer.m in Sources */,
+				49DACA7214B6C42100A1F471 /* MP42AudioTrack.m in Sources */,
+				49DACA7314B6C42100A1F471 /* MP42CCImporter.m in Sources */,
+				49DACA7414B6C42100A1F471 /* MP42ChapterTrack.m in Sources */,
+				49DACA7514B6C42100A1F471 /* MP42ClosedCaptionTrack.m in Sources */,
+				49DACA7614B6C42100A1F471 /* MP42File.m in Sources */,
+				49DACA7714B6C42100A1F471 /* MP42FileImporter.m in Sources */,
+				49DACA7814B6C42100A1F471 /* MP42H264Importer.mm in Sources */,
+				49DACA7914B6C42100A1F471 /* MP42Metadata.m in Sources */,
+				49DACA7A14B6C42100A1F471 /* MP42MkvImporter.m in Sources */,
+				49DACA7B14B6C42100A1F471 /* MP42MovImporter.m in Sources */,
+				49DACA7C14B6C42100A1F471 /* MP42Mp4Importer.m in Sources */,
+				49DACA7D14B6C42100A1F471 /* MP42Muxer.m in Sources */,
+				49DACA7E14B6C42100A1F471 /* MP42Sample.m in Sources */,
+				49DACA7F14B6C42100A1F471 /* MP42SrtImporter.m in Sources */,
+				49DACA8014B6C42100A1F471 /* MP42SubtitleTrack.m in Sources */,
+				49DACA8114B6C42100A1F471 /* MP42Track.m in Sources */,
+				49DACA8214B6C42100A1F471 /* MP42Utilities.m in Sources */,
+				49DACA8314B6C42100A1F471 /* MP42VideoTrack.m in Sources */,
+				49DACA8414B6C42100A1F471 /* downmix.c in Sources */,
+				49DACA8514B6C42100A1F471 /* MatroskaFile.c in Sources */,
+				49DACA8614B6C42100A1F471 /* MatroskaParser.c in Sources */,
+				49DACA8714B6C42100A1F471 /* mbs.cpp in Sources */,
+				49DACA8814B6C42100A1F471 /* SBAudioConverter.m in Sources */,
+				49DACA8B14B6C42100A1F471 /* sfifo.c in Sources */,
+				49DACA8C14B6C42100A1F471 /* SubUtilities.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3442,28 +3686,6 @@
 			};
 			name = Debug;
 		};
-		1B42F25C10DEB0D400AFEBF6 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = Plugins/IMDB/Info.plist;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = IMDBPlugin;
-				USER_HEADER_SEARCH_PATHS = "Plugins/IMDB/**";
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
-		};
 		1B42F25D10DEB0D400AFEBF6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -3488,218 +3710,6 @@
 				ZERO_LINK = NO;
 			};
 			name = Release;
-		};
-		1B44937E10C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
-				GCC_C_LANGUAGE_STANDARD = c99;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
-				SDKROOT = "";
-				USE_HEADERMAP = NO;
-			};
-			name = "Remote Debug";
-		};
-		1B44937F10C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/Externals\"",
-				);
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = App/MetaZ_Prefix.pch;
-				HEADER_SEARCH_PATHS = (
-					Externals/MGViewAnimation,
-					Externals/UKDockProgressIndicator,
-					"Externals/google-toolbox-for-mac/**",
-				);
-				IBC_OTHER_FLAGS = "--plugin /System/Library/Frameworks/Quartz.framework/Versions/A/Frameworks/ImageKit.framework/Resources/ImageKitIBPlugin.ibplugin";
-				INFOPLIST_FILE = App/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Applications";
-				PRODUCT_NAME = MetaZ;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-			};
-			name = "Remote Debug";
-		};
-		1B44938010C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				DOCUMENTATION_FOLDER_PATH = "$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/Documentation";
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				FRAMEWORK_VERSION = A;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = Framework/MetaZKit_Prefix.pch;
-				GCC_VERSION = "";
-				HEADER_SEARCH_PATHS = "Externals/google-toolbox-for-mac/**";
-				INFOPLIST_FILE = Framework/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "@executable_path/../Frameworks";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = MetaZKit;
-				SYMROOT = "";
-				USER_HEADER_SEARCH_PATHS = Framework/src;
-			};
-			name = "Remote Debug";
-		};
-		1B44938110C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = Plugins/AtomicParsley/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-framework",
-					MetaZKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = AtomicParsleyPlugin;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-				USER_HEADER_SEARCH_PATHS = Plugins/AtomicParsley/src;
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
-		};
-		1B44938210C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = Plugins/TagChimp/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = TagChimp;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-				USER_HEADER_SEARCH_PATHS = "Plugins/TagChimp/**";
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
-		};
-		1B44938310C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = (
-					Externals/hmac,
-					"$(TARGET_BUILD_DIR)/include",
-				);
-				INFOPLIST_FILE = Plugins/Amazon/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-lz",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = AmazonPlugin;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-				USER_HEADER_SEARCH_PATHS = "Plugins/Amazon/**";
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
-		};
-		1B44938410C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/Cocoa.framework/Headers/Cocoa.h";
-				INFOPLIST_FILE = "Framework/Test-Info.plist";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Cocoa,
-					"-framework",
-					SenTestingKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = MetaZKitTest;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-				WRAPPER_EXTENSION = octest;
-			};
-			name = "Remote Debug";
-		};
-		1B44938510C95B0A00B9C751 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				PRODUCT_NAME = "Plist Macos";
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-			};
-			name = "Remote Debug";
 		};
 		1B4F53C6116E9F44003221B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3727,35 +3737,6 @@
 				WRAPPER_EXTENSION = mzplugin;
 			};
 			name = Debug;
-		};
-		1B4F53C7116E9F44003221B1 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/include";
-				INFOPLIST_FILE = Plugins/TheTVDB/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-lz",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = TheTVDBPlugin;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-				USER_HEADER_SEARCH_PATHS = "Plugins/TheTVDB/**";
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
 		};
 		1B4F53C8116E9F44003221B1 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3812,31 +3793,6 @@
 				WRAPPER_EXTENSION = mzplugin;
 			};
 			name = Debug;
-		};
-		1B8CB90E14ACD62100F859F7 /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = Plugins/TheMovieDb/Info.plist;
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Library/Bundles";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = TheMovieDb;
-				USER_HEADER_SEARCH_PATHS = "Plugins/TheMovieDb/**";
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
 		};
 		1B8CB90F14ACD62100F859F7 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -3998,19 +3954,26 @@
 		49942B0614B572A600F0843F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = Plugins/MP4v2/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
 				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/include/mp4v2,
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -4019,60 +3982,34 @@
 					"-framework",
 					MetaZKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = MP4v2Plugin;
-				USER_HEADER_SEARCH_PATHS = Plugins/MP4v2/src;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) Plugins/MP4v2/src/**";
 				WRAPPER_EXTENSION = mzplugin;
 			};
 			name = Debug;
 		};
-		49942B0714B572A600F0843F /* Remote Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COPY_PHASE_STRIP = NO;
-				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
-				INFOPLIST_FILE = Plugins/MP4v2/Info.plist;
-				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
-				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
-				INFOPLIST_PREPROCESS = YES;
-				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
-				OTHER_LDFLAGS = (
-					"-framework",
-					Foundation,
-					"-framework",
-					AppKit,
-					"-framework",
-					MetaZKit,
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = MP4v2Plugin;
-				SYMROOT = /Volumes/ibsoar/Documents/MetaZ;
-				USER_HEADER_SEARCH_PATHS = Plugins/MP4v2/src;
-				WRAPPER_EXTENSION = mzplugin;
-			};
-			name = "Remote Debug";
-		};
 		49942B0814B572A600F0843F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = "$(TARGET_BUILD_DIR)/**";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				HEADER_SEARCH_PATHS = /usr/local/include;
 				INFOPLIST_FILE = Plugins/MP4v2/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-C";
 				INFOPLIST_PREFIX_HEADER = "$(CONFIGURATION_TEMP_DIR)/Plist Marcos.build/PlistMacros.h";
 				INFOPLIST_PREPROCESS = YES;
 				INSTALL_PATH = "$(HOME)/Library/Application Support/MetaZ/Plugins";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/include/mp4v2,
+				);
 				OTHER_LDFLAGS = (
 					"-framework",
 					Foundation,
@@ -4081,11 +4018,9 @@
 					"-framework",
 					MetaZKit,
 				);
-				PREBINDING = NO;
 				PRODUCT_NAME = MP4v2Plugin;
-				USER_HEADER_SEARCH_PATHS = Plugins/MP4v2/src;
+				USER_HEADER_SEARCH_PATHS = "$(inherited) Plugins/MP4v2/src/**";
 				WRAPPER_EXTENSION = mzplugin;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -4153,15 +4088,18 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = "/usr/local/include/**";
 				PREBINDING = NO;
-				SDKROOT = "";
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				STRIP_INSTALLED_PRODUCT = NO;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/**";
 				USE_HEADERMAP = NO;
 			};
 			name = Debug;
@@ -4169,13 +4107,16 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				LIBRARY_SEARCH_PATHS = "/usr/local/include/**";
 				PREBINDING = NO;
-				SDKROOT = "";
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include/**";
 				USE_HEADERMAP = NO;
 			};
 			name = Release;
@@ -4187,7 +4128,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B032F6910B0C12200B28E3A /* Debug */,
-				1B44938310C95B0A00B9C751 /* Remote Debug */,
 				1B032F6A10B0C12200B28E3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4197,7 +4137,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B03304510B0CD3D00B28E3A /* Debug */,
-				1B44938410C95B0A00B9C751 /* Remote Debug */,
 				1B03304610B0CD3D00B28E3A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4207,7 +4146,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B040EC01081B3C10027FA0D /* Debug */,
-				1B44938210C95B0A00B9C751 /* Remote Debug */,
 				1B040EC11081B3C10027FA0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4217,7 +4155,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B2022F910B393CB00EE548A /* Debug */,
-				1B44938510C95B0A00B9C751 /* Remote Debug */,
 				1B2022FA10B393CB00EE548A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4227,7 +4164,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B42F25B10DEB0D400AFEBF6 /* Debug */,
-				1B42F25C10DEB0D400AFEBF6 /* Remote Debug */,
 				1B42F25D10DEB0D400AFEBF6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4237,7 +4173,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B4F53C6116E9F44003221B1 /* Debug */,
-				1B4F53C7116E9F44003221B1 /* Remote Debug */,
 				1B4F53C8116E9F44003221B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4247,7 +4182,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1B8CB90D14ACD62100F859F7 /* Debug */,
-				1B8CB90E14ACD62100F859F7 /* Remote Debug */,
 				1B8CB90F14ACD62100F859F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4257,7 +4191,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1BA325C610545ACB00276F57 /* Debug */,
-				1B44938010C95B0A00B9C751 /* Remote Debug */,
 				1BA325C710545ACB00276F57 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4267,7 +4200,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				1BEA6E74106EF2A1004B1A7F /* Debug */,
-				1B44938110C95B0A00B9C751 /* Remote Debug */,
 				1BEA6E75106EF2A1004B1A7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4277,7 +4209,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				49942B0614B572A600F0843F /* Debug */,
-				49942B0714B572A600F0843F /* Remote Debug */,
 				49942B0814B572A600F0843F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4287,7 +4218,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4B08A954540054247B /* Debug */,
-				1B44937F10C95B0A00B9C751 /* Remote Debug */,
 				C01FCF4C08A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4297,7 +4227,6 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
-				1B44937E10C95B0A00B9C751 /* Remote Debug */,
 				C01FCF5008A954540054247B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
