@@ -3519,7 +3519,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																				<nil key="NS.nil"/>
 																				<object class="NSAttributedString" key="NS.nan">
 																					<string key="NSString">NaN</string>
-																					<object class="NSDictionary" key="NSAttributes" id="971240727">
+																					<object class="NSDictionary" key="NSAttributes" id="567349451">
 																						<bool key="EncodedWithXMLCoder">YES</bool>
 																						<reference key="dict.sortedKeys" ref="0"/>
 																						<reference key="dict.values" ref="0"/>
@@ -3635,7 +3635,7 @@ AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAIAAQABAAAAAA</bytes>
 																				</object>
 																				<object class="NSAttributedString" key="NS.nan">
 																					<string key="NSString">NaN</string>
-																					<reference key="NSAttributes" ref="971240727"/>
+																					<reference key="NSAttributes" ref="567349451"/>
 																				</object>
 																				<reference key="NS.min" ref="23221730"/>
 																				<reference key="NS.max" ref="23221730"/>
