@@ -9,6 +9,7 @@
 #import "MP4v2DataProvider.h"
 #import "MP4v2WriteManager.h"
 #import "MP4v2ReadDataTask.h"
+#import "MP42File.h"
 
 @interface MP4v2DataProvider ()
 
@@ -430,6 +431,16 @@
         controllerWithProvider:self
                   fromFileName:fileName
                       delegate:delegate];
+    
+    mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
+    
+//    if ( outError != NULL && !mp4File ) {
+//		*outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+//        
+//        return NO;
+//	}
+//    
+//    return YES;
         
     MP4v2ReadDataTask* dataRead = [MP4v2ReadDataTask taskWithProvider:self fromFileName:fileName dictionary:op.tagdict];
     [dataRead setLaunchPath:[self launchPath]];

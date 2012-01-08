@@ -9,8 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import <MetaZKit/MetaZKit.h>
 
+@class MP42File;
+
 @interface MP4v2DataProvider : NSObject <MZDataProvider>
 {
+    MP42File  *mp4File;
     NSArray* types;
     NSArray* tags;
     NSDictionary* read_mapping;
