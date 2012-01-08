@@ -21,6 +21,7 @@
     self = [super init];
     if(self)
     {
+        lock = [[NSLock alloc] init];
         provider = [theProvider retain];
         fileName = [theFileName retain];
         tagdict = [theTagdict retain];
@@ -36,10 +37,13 @@
     [super dealloc];
 }
 
-- (void)parseData
+- (void)main
 {
-    [provider parseData:self.data withFileName:fileName dict:tagdict];
+    [lock lock];
+    [provider parseData:fileName dict:tagdict];    
+    [lock unlock];
 }
+
 
 @end
 
@@ -146,41 +150,41 @@
     if(!tagdict)
         return;
         
-    NSString* str = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease];
-    
-    NSRange f = [str rangeOfString:@"Duration "];
-    NSString* movieDurationStr = [str substringWithRange:NSMakeRange(f.location+f.length, 12)];
-    //MZLoggerDebug(@"Movie duration '%@'", movieDurationStr);
-    MZTimeCode* movieDuration = [MZTimeCode timeCodeWithString:movieDurationStr];
-    [tagdict setObject:movieDuration forKey:MZDurationTagIdent];
-    
-    NSArray* lines = [str componentsSeparatedByString:@"\tChapter #"];
-    if([lines count]>1)
-    {
-        NSMutableArray* chapters = [NSMutableArray array];
-        int len = [lines count];
-        for(int i=1; i<len; i++)
-        {
-            NSString* line = [[lines objectAtIndex:i]
-                              stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-            
-            NSString* startStr = [line substringWithRange:NSMakeRange(6, 12)];
-            NSString* durationStr = [line substringWithRange:NSMakeRange(21, 12)];
-            NSString* name = [line substringWithRange:NSMakeRange(37, [line length]-38)];
-            //MZLoggerDebug(@"Found args: '%@' '%@' '%@'", start, duration, name);
-            
-            MZTimeCode* start = [MZTimeCode timeCodeWithString:startStr];
-            MZTimeCode* duration = [MZTimeCode timeCodeWithString:durationStr];
-            
-            if(!start || !duration)
-                break;
-            
-            MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:start duration:duration text:name];
-            [chapters addObject:item];
-        }
-        if([chapters count] == len-1)
-            [tagdict setObject:chapters forKey:MZChaptersTagIdent];
-    }
+//    NSString* str = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease];
+//    
+//    NSRange f = [str rangeOfString:@"Duration "];
+//    NSString* movieDurationStr = [str substringWithRange:NSMakeRange(f.location+f.length, 12)];
+//    //MZLoggerDebug(@"Movie duration '%@'", movieDurationStr);
+//    MZTimeCode* movieDuration = [MZTimeCode timeCodeWithString:movieDurationStr];
+//    [tagdict setObject:movieDuration forKey:MZDurationTagIdent];
+//    
+//    NSArray* lines = [str componentsSeparatedByString:@"\tChapter #"];
+//    if([lines count]>1)
+//    {
+//        NSMutableArray* chapters = [NSMutableArray array];
+//        int len = [lines count];
+//        for(int i=1; i<len; i++)
+//        {
+//            NSString* line = [[lines objectAtIndex:i]
+//                              stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            
+//            NSString* startStr = [line substringWithRange:NSMakeRange(6, 12)];
+//            NSString* durationStr = [line substringWithRange:NSMakeRange(21, 12)];
+//            NSString* name = [line substringWithRange:NSMakeRange(37, [line length]-38)];
+//            //MZLoggerDebug(@"Found args: '%@' '%@' '%@'", start, duration, name);
+//            
+//            MZTimeCode* start = [MZTimeCode timeCodeWithString:startStr];
+//            MZTimeCode* duration = [MZTimeCode timeCodeWithString:durationStr];
+//            
+//            if(!start || !duration)
+//                break;
+//            
+//            MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:start duration:duration text:name];
+//            [chapters addObject:item];
+//        }
+//        if([chapters count] == len-1)
+//            [tagdict setObject:chapters forKey:MZChaptersTagIdent];
+//    }
 }
 
 @end

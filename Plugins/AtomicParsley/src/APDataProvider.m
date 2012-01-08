@@ -137,7 +137,6 @@
             initWithObjects:readmapvalues
                     forKeys:readmapkeys];
 
-
         NSArray* writemapkeys = [NSArray arrayWithObjects:
             MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
             //MZRatingTagIdent,
@@ -481,6 +480,11 @@
 
 - (void)parseData:(NSData *)data withFileName:(NSString *)fileName dict:(NSMutableDictionary *)tagdict
 {
+//    "©nam"  The Terminator
+//    "©ART"  Michael Biehn, Linda Hamilton, Bill Paxton
+//    "©cmt"  {'imdb_id':'tt0088247', 'tmdb_id':'218'}
+//    "©gen"  Thriller
+//    "©day" 1984-10-26T07:00:00Z   
     NSString* str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
     NSArray* atoms = [str componentsSeparatedByString:@"Atom \""];
     
@@ -490,11 +494,13 @@
         NSRange split = [atom rangeOfString:@"\" contains: "];
         if(split.location == NSNotFound)
             continue;
-        NSString* type = [atom substringToIndex:split.location];
-        NSString* content = [[atom substringFromIndex:split.location+split.length] 
+        NSString* type = [atom substringToIndex:split.location]; // ©nam, ©ART, ©cmt, ©gen, ©day
+        NSString* content = [[atom substringFromIndex:split.location+split.length]  // The Terminator, Thriller, ...
                 stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         [dict setObject:content forKey:type];
     }
+    
+    // dict[©nam] == "The Terminator"
     
     //NSMutableDictionary* tagdict = [NSMutableDictionary dictionaryWithCapacity:[tags count]];
     // Initialize a null value for all known keys
@@ -504,6 +510,7 @@
     // Store real parsed values using a simple key -> key mapping
     for(NSString* map in [read_mapping allKeys])
     {
+        // read_mapping[ "ldes" ] == MZLongDescriptionTagIdent
         NSString* tagId = [read_mapping objectForKey:map];
         MZTag* tag = [MZTag tagForIdentifier:tagId];
         NSString* value = [dict objectForKey:map];

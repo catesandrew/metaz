@@ -17,43 +17,17 @@
 
 @implementation MP4v2DataProvider
 
-+ (void)logFromProgram:(NSString *)program pipe:(NSPipe *)pipe
-{
-    NSData* data = [[pipe fileHandleForReading] readDataToEndOfFile];
-    NSString* str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    if([str length] > 0)
-        MZLoggerDebug(@"Read from %@: %@", program, str);
-}
-
-+ (int)testReadFile:(NSString *)filePath
-{
-    NSTask* task = [[NSTask alloc] init];
-    [task setLaunchPath:[self launchChapsPath]];
-    [task setArguments:[NSArray arrayWithObjects:@"-l", filePath, nil]];
-    NSPipe* err = [NSPipe pipe];
-    [task setStandardError:err];
-    [task setStandardOutput:err];
-    [task launch];
-    [task waitUntilExit];
-    [self logFromProgram:@"mp4chaps" pipe:err];
-    int ret = [task terminationStatus];
-    if(ret!=0)
-        MZLoggerDebug(@"Encountered bad chapter write issue: %d", ret);
-    [task release];
-    return ret;
-}
-
 + (int)removeChaptersFromFile:(NSString *)filePath
 {
     NSTask* task = [[NSTask alloc] init];
-    [task setLaunchPath:[self launchChapsPath]];
+//    [task setLaunchPath:[self launchChapsPath]];
     [task setArguments:[NSArray arrayWithObjects:@"-r", filePath, nil]];
     NSPipe* err = [NSPipe pipe];
     [task setStandardError:err];
     [task setStandardOutput:err];
     [task launch];
     [task waitUntilExit];
-    [self logFromProgram:@"mp4chaps" pipe:err];
+//    [self logFromProgram:@"mp4chaps" pipe:err];
     int ret = [task terminationStatus];
     [task release];
     return ret;
@@ -63,14 +37,14 @@
 {
     
     NSTask* task = [[NSTask alloc] init];
-    [task setLaunchPath:[self launchChapsPath]];
+//    [task setLaunchPath:[self launchChapsPath]];
     [task setArguments:[NSArray arrayWithObjects:@"--import", chaptersFile, filePath, nil]];
     NSPipe* err = [NSPipe pipe];
     [task setStandardError:err];
     [task setStandardOutput:err];
     [task launch];
     [task waitUntilExit];
-    [self logFromProgram:@"mp4chaps" pipe:err];
+//    [self logFromProgram:@"mp4chaps" pipe:err];
     int ret = [task terminationStatus];
     [task release];
     return ret;
@@ -78,6 +52,25 @@
 
 - (id)init
 {
+//    - (NSArray *) availableMetadata
+//    {
+//        return [NSArray arrayWithObjects:  @"Name", @"Artist", @"Album Artist", @"Album", @"Grouping", @"Composer",
+//                @"Comments", @"Genre", @"Release Date", @"Track #", @"Disk #", @"Tempo", @"TV Show", @"TV Episode #",
+//                @"TV Network", @"TV Episode ID", @"TV Season", @"Description", @"Long Description", @"Rating", @"Rating Annotation",
+//                @"Studio", @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
+//                @"Lyrics", @"Copyright", @"Encoding Tool", @"Encoded By", @"Keywords", @"Category", @"contentID", @"artistID", @"playlistID", @"genreID", @"composerID",
+//                @"XID", @"iTunes Account", @"Sort Name", @"Sort Artist", @"Sort Album Artist", @"Sort Album", @"Sort Composer", @"Sort TV Show", nil];
+//    }
+//    
+//    - (NSArray *) writableMetadata
+//    {
+//        return [NSArray arrayWithObjects:  @"Name", @"Artist", @"Album Artist", @"Album", @"Grouping", @"Composer",
+//                @"Comments", @"Genre", @"Release Date", @"Track #", @"Disk #", @"Tempo", @"TV Show", @"TV Episode #",
+//                @"TV Network", @"TV Episode ID", @"TV Season", @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
+//                @"Studio", @"Description", @"Long Description", @"Rating", @"Rating Annotation",
+//                @"Lyrics", @"Copyright", @"Encoding Tool", @"Encoded By", @"Keywords", @"Category", @"contentID", @"XID", @"iTunes Account", @"Sort Name",
+//                @"Sort Artist", @"Sort Album Artist", @"Sort Album", @"Sort Composer", @"Sort TV Show", nil];
+//    }
     self = [super init];
     if(self)
     {
@@ -87,17 +80,17 @@
             @"org.maven-group.mpeg4-video", nil];
         tags = [[MZTag allKnownTags] retain];
         NSArray* readmapkeys = [NSArray arrayWithObjects:
-            @"©nam", @"©ART", @"©day",
-            //@"com.apple.iTunes;iTunEXTC", @"©gen",
-            @"©alb", @"aART", @"purd", @"desc",
-            @"ldes", @"stik",
-            @"tvsh", @"tven",
-            @"tvsn", @"tves", @"tvnn", @"purl",
-            @"egid", @"catg", @"keyw", @"rtng",
-            @"pcst", @"cprt", @"©grp", @"©too",
-            @"©cmt", @"pgap", @"cpil", @"sonm",
-            @"soar", @"soaa", @"soal",
-            @"sosn", nil];
+            @"Name", @"Artist", @"Release Date",
+            //@"com.apple.iTunes;iTunEXTC", @"Genre",
+            @"Album", @"Album Artist", @"purd", @"Description", //MZPurchaseDateTagIdent
+            @"Long Description", @"stik", //MZVideoTypeTagIdent
+            @"TV Show", @"TV Episode ID",
+            @"TV Season", @"TV Episode #", @"TV Network", @"purl", // MZFeedURLTagIdent
+            @"egid", @"Category", @"Keywords", @"rtng", //MZEpisodeURLTagIdent, MZAdvisoryTagIdent
+            @"pcst", @"Copyright", @"Grouping", @"Encoding Tool", // MZPodcastTagIdent
+            @"Comments", @"pgap", @"cpil", @"Sort Name", // MZGaplessTagIdent, MZCompilationTagIdent
+            @"Sort Artist", @"Sort Album Artist", @"Sort Album",
+            @"Sort TV Show", nil];
         NSArray* readmapvalues = [NSArray arrayWithObjects:
             MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
             //MZRatingTagIdent, MZGenreTagIdent,
@@ -256,20 +249,20 @@
             nil];
         NSArray* ratingvalues = [NSArray arrayWithObjects:
         // US
-            @"mpaa|G|100|",
-            @"mpaa|PG|200|",
-            @"mpaa|PG-13|300|",
-            @"mpaa|R|400|",
-            @"mpaa|NC-17|500|",
-            @"mpaa|UNRATED|600|",
+            @"2",
+            @"3",
+            @"4",
+            @"5",
+            @"6",
+            @"7",
             
         // US-TV
-            @"us-tv|TV-Y7|100|",
-            @"us-tv|TV-Y|200|",
-            @"us-tv|TV-G|300|",
-            @"us-tv|TV-PG|400|",
-            @"us-tv|TV-14|500|",
-            @"us-tv|TV-MA|600|",
+            @"9",
+            @"10",
+            @"11",
+            @"12",
+            @"13",
+            @"14",
             
         // UK
             @"uk-movie|U|100|",
@@ -408,112 +401,97 @@
                   fromFileName:fileName
                       delegate:delegate];
     
-    mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
-    
-//    if ( outError != NULL && !mp4File ) {
-//		*outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-//        
-//        return NO;
-//	}
-//    
-//    return YES;
-        
     MP4v2ReadDataTask* dataRead = [MP4v2ReadDataTask taskWithProvider:self fromFileName:fileName dictionary:op.tagdict];
-//    [dataRead setLaunchPath:[self launchPath]];
-    [dataRead setArguments:[NSArray arrayWithObjects:fileName, @"-t", nil]];
     [op addOperation:dataRead];
 
-    MP4v2PictureReadDataTask* pictureRead = [MP4v2PictureReadDataTask taskWithDictionary:op.tagdict];
+//    MP4v2PictureReadDataTask* pictureRead = [MP4v2PictureReadDataTask taskWithDictionary:op.tagdict];
 //    [pictureRead setLaunchPath:[self launchPath]];
-    [pictureRead setArguments:[NSArray arrayWithObjects:fileName, @"-e", pictureRead.file, nil]];
-    [pictureRead addDependency:dataRead];
-    [op addOperation:pictureRead];
+//    [pictureRead setArguments:[NSArray arrayWithObjects:fileName, @"-e", pictureRead.file, nil]];
+//    [pictureRead addDependency:dataRead];
+//    [op addOperation:pictureRead];
         
-    MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:op.tagdict];
+//    MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:op.tagdict];
 //    [chapterRead setLaunchPath:[self launchChapsPath]];
-    [chapterRead addDependency:pictureRead];
-    [op addOperation:chapterRead];
+//    [chapterRead addDependency:pictureRead];
+//    [op addOperation:chapterRead];
 
     [op addOperationsToQueue:queue];
 
     return op;
 }
 
-- (void)parseData:(NSData *)data withFileName:(NSString *)fileName dict:(NSMutableDictionary *)tagdict
+- (void)parseData:(NSString *)fileName dict:(NSMutableDictionary *)tagdict
 {
-    NSString* str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
-    NSArray* atoms = [str componentsSeparatedByString:@"Atom \""];
-    
-    NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:[atoms count]];
-    for(NSString* atom in atoms)
-    {
-        NSRange split = [atom rangeOfString:@"\" contains: "];
-        if(split.location == NSNotFound)
-            continue;
-        NSString* type = [atom substringToIndex:split.location];
-        NSString* content = [[atom substringFromIndex:split.location+split.length] 
-                stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        [dict setObject:content forKey:type];
+    mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
+//    if ( !mp4File ) {
+//		*outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
+//	}
+
+    NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:[tags count]];
+    MP42Metadata* metadata = [mp4File metadata];    
+    NSString * tag_value;
+    NSString * tag_key;
+    for (NSString * tag_key in metadata.tagsDict) {
+        tag_value = [metadata.tagsDict valueForKey:tag_key];
+        if (tag_value) {
+//            MZLoggerDebug(@"%@ %@", tag_key, tag_value);
+            [dict setObject:tag_value forKey:tag_key];
+        }
     }
-    
-    //NSMutableDictionary* tagdict = [NSMutableDictionary dictionaryWithCapacity:[tags count]];
+
     // Initialize a null value for all known keys
     for(MZTag* tag in tags)
         [tagdict setObject:[NSNull null] forKey:[tag identifier]];
 
     // Store real parsed values using a simple key -> key mapping
-    for(NSString* map in [read_mapping allKeys])
+    for(NSString* map in [read_mapping allKeys]) //map == purd
     {
-        NSString* tagId = [read_mapping objectForKey:map];
+        NSString* tagId = [read_mapping objectForKey:map]; // tagId == purchaseDate
         MZTag* tag = [MZTag tagForIdentifier:tagId];
-        NSString* value = [dict objectForKey:map];
-        //MZLoggerDebug(@"%@ %@", tagId, value);
+        NSString* value = [dict objectForKey:map]; // map == purd
+//        MZLoggerDebug(@"%@ %@", tagId, value);
         if(value)
             [tagdict setObject:[tag convertObjectForStorage:[tag objectFromString:value]] forKey:tagId];
     }
     
     // Special genre handling
-    NSString* genre = [dict objectForKey:@"gnre"];
-    if(!genre)
-        genre = [dict objectForKey:@"©gen"]; 
+    NSString* genre = [dict objectForKey:@"Genre"];
     if(genre)
     {
-        MZLoggerDebug(@"Genre %@", genre);
+//        MZLoggerDebug(@"Genre %@", genre);
         [tagdict setObject:genre forKey:MZGenreTagIdent];
     }
     
     // Special rating handling
-    NSString* rating = [dict objectForKey:@"com.apple.iTunes;iTunEXTC"];
+    NSNumber *rating = [dict objectForKey:@"Rating"];
+    NSString *rating_index = [rating stringValue];
     if(rating)
     {
-        MZLoggerDebug(@"Rating %@", rating);
-        id rate = [rating_read objectForKey:rating];
+//        MZLoggerDebug(@"Rating %@", rating);
+        id rate = [rating_read objectForKey:rating_index];
         if(rate)
             [tagdict setObject:rate forKey:MZRatingTagIdent];
     }
     
     // Special video type handling (stik)
-    /*
-    NSString* stik = [dict objectForKey:@"stik"];
+    NSString* stik = [metadata mediaKindAsString];
     if(stik)
     {
         MZVideoType stikNo = MZUnsetVideoType;
-        if([stik isEqualToString:@"Movie"])
-            stikNo = MZMovieVideoType;
-        else if([stik isEqualToString:@"Normal"])
-            stikNo = MZNormalVideoType;
+        if([stik isEqualToString:@"Music"])
+            stikNo = MZMusicType;
         else if([stik isEqualToString:@"Audiobook"])
             stikNo = MZAudiobookVideoType;
-        else if([stik isEqualToString:@"Whacked Bookmark"])
-            stikNo = MZWhackedBookmarkVideoType;
         else if([stik isEqualToString:@"Music Video"])
             stikNo = MZMusicVideoType;
-        else if([stik isEqualToString:@"Short Film"])
-            stikNo = MZShortFilmVideoType;
+        else if([stik isEqualToString:@"Movie"])
+            stikNo = MZMovieVideoType;
         else if([stik isEqualToString:@"TV Show"])
             stikNo = MZTVShowVideoType;
         else if([stik isEqualToString:@"Booklet"])
             stikNo = MZBookletVideoType;
+        else if([stik isEqualToString:@"Ringtone"])
+            stikNo = MZRingtoneVideoType;
         if(stikNo!=MZUnsetVideoType)
         {
             MZTag* tag = [MZTag tagForIdentifier:MZVideoTypeTagIdent];
@@ -521,44 +499,47 @@
                         forKey:MZVideoTypeTagIdent];
         }
     }
-    */
     
     // Special handling for cast, directors, producers and screenwriters
-    NSString* iTunMOVIStr = [dict objectForKey:@"com.apple.iTunes;iTunMOVI"];
-    if(iTunMOVIStr)
+    NSString* value = [dict objectForKey:@"Cast"];
+    if(value)
     {
-        NSDictionary* iTunMOVI = [iTunMOVIStr propertyList];
-        NSArray* value = [iTunMOVI objectForKey:@"cast"];
-        if(value)
-        {
-            value = [value arrayByPerformingSelector:@selector(objectForKey:) withObject:@"name"];
-            [tagdict setObject:[value componentsJoinedByString:@", "] forKey:MZActorsTagIdent];
-        }
-
-        value = [iTunMOVI objectForKey:@"directors"];
-        if(value)
-        {
-            value = [value arrayByPerformingSelector:@selector(objectForKey:) withObject:@"name"];
-            [tagdict setObject:[value componentsJoinedByString:@", "] forKey:MZDirectorTagIdent];
-        }
-
-        value = [iTunMOVI objectForKey:@"producers"];
-        if(value)
-        {
-            value = [value arrayByPerformingSelector:@selector(objectForKey:) withObject:@"name"];
-            [tagdict setObject:[value componentsJoinedByString:@", "] forKey:MZProducerTagIdent];
-        }
-
-        value = [iTunMOVI objectForKey:@"screenwriters"];
-        if(value)
-        {
-            value = [value arrayByPerformingSelector:@selector(objectForKey:) withObject:@"name"];
-            [tagdict setObject:[value componentsJoinedByString:@", "] forKey:MZScreenwriterTagIdent];
-        }
+        [tagdict setObject:value forKey:MZActorsTagIdent];
     }
     
+    value = [dict objectForKey:@"Director"];
+    if(value)
+    {
+        [tagdict setObject:value forKey:MZDirectorTagIdent];
+    }
+    
+    value = [dict objectForKey:@"Codirector"];
+    if(value)
+    {
+//        [tagdict setObject:value forKey:MZCoDirectorTagIdent];
+    }
+    
+    value = [dict objectForKey:@"Producers"];
+    if(value)
+    {
+        [tagdict setObject:value forKey:MZProducerTagIdent];
+    }
+    
+    value = [dict objectForKey:@"Screenwriters"];
+    if(value)
+    {
+        [tagdict setObject:value forKey:MZScreenwriterTagIdent];
+    }
+    
+    value = [dict objectForKey:@"Studio"];
+    if(value)
+    {
+//        [tagdict setObject:value forKey:MZStudioTagIdent];
+    }
+    
+    
     // Special handling of track
-    NSString* trkn = [dict objectForKey:@"trkn"];
+    NSString* trkn = [dict objectForKey:@"Track #"];
     if(trkn)
     {
         NSArray* trks = [trkn componentsSeparatedByString:@"/"];
@@ -577,7 +558,7 @@
     }
     
     // Special handling of disc num
-    NSString* disk = [dict objectForKey:@"disk"];
+    NSString* disk = [dict objectForKey:@"Disk #"];
     if(disk)
     {
         NSArray* trks = [disk componentsSeparatedByString:@"/"];
@@ -605,9 +586,9 @@
     }
 
     // Special image handling
-    NSString* covr = [dict objectForKey:@"covr"];
-    if(covr)
-        [tagdict setObject:[NSNull null] forKey:MZPictureTagIdent];
+//    NSString* covr = [dict objectForKey:@"covr"];
+//    if(covr)
+//        [tagdict setObject:[NSNull null] forKey:MZPictureTagIdent];
 
 }
 

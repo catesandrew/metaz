@@ -8,14 +8,13 @@
 typedef enum
 {
     MZUnsetVideoType = -1,
-    MZMovieVideoType = 0,
-    MZNormalVideoType = 1,
+    MZMusicType = 1,
     MZAudiobookVideoType = 2,
-    MZWhackedBookmarkVideoType = 5,
     MZMusicVideoType = 6,
-    MZShortFilmVideoType = 9,
+    MZMovieVideoType = 9,
     MZTVShowVideoType = 10,
-    MZBookletVideoType = 11
+    MZBookletVideoType = 11,
+    MZRingtoneVideoType = 14
     
 } MZVideoType;
 
@@ -148,8 +147,10 @@ MZKIT_EXTERN NSString* const MZLongDescriptionTagIdent;
 MZKIT_EXTERN NSString* const MZVideoTypeTagIdent;
 MZKIT_EXTERN NSString* const MZActorsTagIdent;
 MZKIT_EXTERN NSString* const MZDirectorTagIdent;
+MZKIT_EXTERN NSString* const MZCoDirectorTagIdent;
 MZKIT_EXTERN NSString* const MZProducerTagIdent;
 MZKIT_EXTERN NSString* const MZScreenwriterTagIdent;
+MZKIT_EXTERN NSString* const MZStudioTagIdent;
 MZKIT_EXTERN NSString* const MZTVShowTagIdent;
 MZKIT_EXTERN NSString* const MZTVEpisodeIDTagIdent;
 MZKIT_EXTERN NSString* const MZTVSeasonTagIdent;

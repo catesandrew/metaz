@@ -10,15 +10,16 @@
 #import <MetaZKit/MetaZKit.h>
 #import "MP4v2DataProvider.h"
 
-@interface MP4v2ReadDataTask : MZParseTaskOperation
+@interface MP4v2ReadDataTask : NSOperation
 {
     MP4v2DataProvider* provider;
     NSMutableDictionary* tagdict;
     NSString* fileName;
+    NSLock *lock;
 }
 + (id)taskWithProvider:(MP4v2DataProvider*)provider fromFileName:(NSString *)fileName dictionary:(NSMutableDictionary *)tagdict;
 - (id)initWithProvider:(MP4v2DataProvider*)provider fromFileName:(NSString *)fileName dictionary:(NSMutableDictionary *)tagdict;
-
+- (void)main;
 @end
 
 

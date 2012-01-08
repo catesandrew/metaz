@@ -23,14 +23,12 @@
     NSMutableArray* writes;
 }
 
-+ (void)logFromProgram:(NSString *)program pipe:(NSPipe *)pipe;
-+ (int)testReadFile:(NSString *)filePath;
 + (int)removeChaptersFromFile:(NSString *)filePath;
 + (int)importChaptersFromFile:(NSString *)chaptersFile toFile:(NSString *)filePath;
 
 - (id)init;
 - (void)removeWriteManager:(id)writeManager;
 
-- (void)parseData:(NSData *)data withFileName:(NSString *)fileName dict:(NSMutableDictionary *)tagdict;
+- (void)parseData:(NSString *)fileName dict:(NSMutableDictionary *)tagdict;
 
 @end

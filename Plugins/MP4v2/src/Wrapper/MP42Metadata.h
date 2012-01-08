@@ -98,6 +98,7 @@ enum rating_type {
 - (void) removeTagForKey:(NSString *)aKey;
 - (BOOL) setTag:(id)value forKey:(NSString *)key;
 - (BOOL) setMediaKindFromString:(NSString *)mediaKindString;
+- (NSString *) mediaKindAsString;
 - (BOOL) setContentRatingFromString:(NSString *)contentRatingString;
 - (BOOL) setArtworkFromFilePath:(NSString *)imageFilePath;
 

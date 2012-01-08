@@ -352,6 +352,19 @@ static const genreType_t genreType_strings[] = {
     return NO;
 }
 
+- (NSString *) mediaKindAsString
+{
+    mediaKind_t *mediaKindList;
+    NSString *mediaKindString;
+    for (mediaKindList = (mediaKind_t*) mediaKind_strings; mediaKindList->english_name; mediaKindList++) {
+        if (mediaKind == mediaKindList->stik) {
+            mediaKindString = mediaKindList->english_name;
+            break;  
+        }
+    }
+    return mediaKindString;
+}
+
 - (BOOL) setContentRatingFromString:(NSString *)contentRatingString;
 {
     contentRating_t *contentRatingList;
