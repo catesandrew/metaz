@@ -13,11 +13,6 @@
 
 @interface MP4v2DataProvider ()
 
-+ (NSString *)launchPath;
-+ (NSString *)launchChapsPath;
-- (NSString *)launchPath;
-- (NSString *)launchChapsPath;
-
 @end
 
 @implementation MP4v2DataProvider
@@ -80,25 +75,6 @@
     [task release];
     return ret;
 }
-
-+ (NSString *)launchPath
-{
-    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR("org.maven-group.metaz.MP4v2Plugin"));
-    CFURLRef pathUrl = CFBundleCopyResourceURL(myBundle, CFSTR("mp4tags"), NULL, NULL);
-    NSString* path = (NSString*)CFURLCopyFileSystemPath(pathUrl, kCFURLPOSIXPathStyle);
-    CFRelease(pathUrl);
-    return [path autorelease];
-}
-
-+ (NSString *)launchChapsPath
-{
-    CFBundleRef myBundle = CFBundleGetBundleWithIdentifier(CFSTR("org.maven-group.metaz.MP4v2Plugin"));
-    CFURLRef pathUrl = CFBundleCopyResourceURL(myBundle, CFSTR("mp4chaps"), NULL, NULL);
-    NSString* path = (NSString*)CFURLCopyFileSystemPath(pathUrl, kCFURLPOSIXPathStyle);
-    CFRelease(pathUrl);
-    return [path autorelease];
-}
-
 
 - (id)init
 {
@@ -443,18 +419,18 @@
 //    return YES;
         
     MP4v2ReadDataTask* dataRead = [MP4v2ReadDataTask taskWithProvider:self fromFileName:fileName dictionary:op.tagdict];
-    [dataRead setLaunchPath:[self launchPath]];
+//    [dataRead setLaunchPath:[self launchPath]];
     [dataRead setArguments:[NSArray arrayWithObjects:fileName, @"-t", nil]];
     [op addOperation:dataRead];
 
     MP4v2PictureReadDataTask* pictureRead = [MP4v2PictureReadDataTask taskWithDictionary:op.tagdict];
-    [pictureRead setLaunchPath:[self launchPath]];
+//    [pictureRead setLaunchPath:[self launchPath]];
     [pictureRead setArguments:[NSArray arrayWithObjects:fileName, @"-e", pictureRead.file, nil]];
     [pictureRead addDependency:dataRead];
     [op addOperation:pictureRead];
         
     MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:op.tagdict];
-    [chapterRead setLaunchPath:[self launchChapsPath]];
+//    [chapterRead setLaunchPath:[self launchChapsPath]];
     [chapterRead addDependency:pictureRead];
     [op addOperation:chapterRead];
 
@@ -1004,17 +980,6 @@ void sortTags(NSMutableArray* args, NSDictionary* changes, NSString* tag, NSStri
 - (void)removeWriteManager:(id)writeManager
 {
     [writes removeObject:writeManager];
-}
-
-
-- (NSString *)launchPath
-{
-    return [[self class] launchPath];
-}
-
-- (NSString *)launchChapsPath
-{
-    return [[self class] launchChapsPath];
 }
 
 

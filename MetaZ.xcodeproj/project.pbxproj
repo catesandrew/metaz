@@ -262,8 +262,6 @@
 		1BF5AD4B105DFC92005DD03E /* QueueWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5AD4A105DFC92005DD03E /* QueueWindowController.m */; };
 		1BF5ADBD105E0B8E005DD03E /* FileViewBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 1BF5ADBC105E0B8E005DD03E /* FileViewBox.m */; };
 		49942B0414B572A600F0843F /* MetaZKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1BA325C410545ACA00276F57 /* MetaZKit.framework */; };
-		49942B1C14B5734000F0843F /* mp4chaps in Resources */ = {isa = PBXBuildFile; fileRef = 49942B0E14B5734000F0843F /* mp4chaps */; };
-		49942B1E14B5734000F0843F /* mp4tags in Resources */ = {isa = PBXBuildFile; fileRef = 49942B0F14B5734000F0843F /* mp4tags */; };
 		49942B2014B5734000F0843F /* MP4v2DataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1214B5734000F0843F /* MP4v2DataProvider.m */; };
 		49942B2214B5734000F0843F /* MP4v2Plugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1414B5734000F0843F /* MP4v2Plugin.m */; };
 		49942B2414B5734000F0843F /* MP4v2ReadDataTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 49942B1614B5734000F0843F /* MP4v2ReadDataTask.m */; };
@@ -275,7 +273,6 @@
 		499DBF8A14B6BF48003EC6BC /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF8914B6BF48003EC6BC /* RegexKitLite.m */; };
 		49D4AF1414B62BF200B54BAC /* AtomicParsleyPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1BEA6E72106EF2A0004B1A7F /* AtomicParsleyPlugin.mzplugin */; };
 		49D4AF1514B62C0000B54BAC /* IMDBPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1B42F25810DEB0D300AFEBF6 /* IMDBPlugin.mzplugin */; };
-		49D4AF1814B62C6D00B54BAC /* mp4info in Resources */ = {isa = PBXBuildFile; fileRef = 49D4AF1614B62C5E00B54BAC /* mp4info */; };
 		49DAC9CE14B6C2CC00A1F471 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A91F622C0FB0A56F00B96B33 /* libicucore.dylib */; };
 		49DACA7014B6C42100A1F471 /* MP42AACImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3514B6C42100A1F471 /* MP42AACImporter.mm */; };
 		49DACA7114B6C42100A1F471 /* MP42AC3Importer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3714B6C42100A1F471 /* MP42AC3Importer.m */; };
@@ -1140,8 +1137,6 @@
 		32CA4F630368D1EE00C91783 /* MetaZ_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MetaZ_Prefix.pch; path = App/MetaZ_Prefix.pch; sourceTree = "<group>"; };
 		49942B0914B572A600F0843F /* MP4v2Plugin.mzplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MP4v2Plugin.mzplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		49942B0C14B5733F00F0843F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		49942B0E14B5734000F0843F /* mp4chaps */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4chaps; sourceTree = "<group>"; };
-		49942B0F14B5734000F0843F /* mp4tags */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4tags; sourceTree = "<group>"; };
 		49942B1114B5734000F0843F /* MP4v2DataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2DataProvider.h; sourceTree = "<group>"; };
 		49942B1214B5734000F0843F /* MP4v2DataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MP4v2DataProvider.m; sourceTree = "<group>"; };
 		49942B1314B5734000F0843F /* MP4v2Plugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP4v2Plugin.h; sourceTree = "<group>"; };
@@ -1160,7 +1155,6 @@
 		499DBF8714B6BF18003EC6BC /* mp4v2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mp4v2.h; path = ../../../../../../../include/mp4v2/mp4v2.h; sourceTree = "<group>"; };
 		499DBF8814B6BF48003EC6BC /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		499DBF8914B6BF48003EC6BC /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
-		49D4AF1614B62C5E00B54BAC /* mp4info */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = mp4info; sourceTree = "<group>"; };
 		49DACA3414B6C42100A1F471 /* MP42AACImporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42AACImporter.h; sourceTree = "<group>"; };
 		49DACA3514B6C42100A1F471 /* MP42AACImporter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MP42AACImporter.mm; sourceTree = "<group>"; };
 		49DACA3614B6C42100A1F471 /* MP42AC3Importer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MP42AC3Importer.h; sourceTree = "<group>"; };
@@ -2366,10 +2360,7 @@
 		49942B0D14B5733F00F0843F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				49D4AF1614B62C5E00B54BAC /* mp4info */,
 				49942B0C14B5733F00F0843F /* Info.plist */,
-				49942B0E14B5734000F0843F /* mp4chaps */,
-				49942B0F14B5734000F0843F /* mp4tags */,
 			);
 			name = Resources;
 			path = resources;
@@ -2870,9 +2861,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49D4AF1814B62C6D00B54BAC /* mp4info in Resources */,
-				49942B1C14B5734000F0843F /* mp4chaps in Resources */,
-				49942B1E14B5734000F0843F /* mp4tags in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
