@@ -30,6 +30,11 @@
     [super dealloc];
 }
 
+- (MP4Duration) mp4Duration
+{
+    return [self timestamp];
+}
+
 @synthesize timestamp;
 @synthesize title;
 

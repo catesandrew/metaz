@@ -22,13 +22,3 @@
 - (void)main;
 
 @end
-
-@interface MP4v2ChapterReadDataTask : MZParseTaskOperation
-{
-    NSMutableDictionary* tagdict;
-}
-
-+ (id)taskWithFileName:(NSString*)fileName dictionary:(NSMutableDictionary *)tagdict;
-- (id)initWithFileName:(NSString*)fileName dictionary:(NSMutableDictionary *)tagdict;
-
-@end

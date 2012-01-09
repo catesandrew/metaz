@@ -5,7 +5,8 @@
 //  Created by Brian Olsen on 30/12/11.
 //  Copyright 2011 Maven-Group. All rights reserved.
 //
-
+//  TODO: Add a browser of all the available artwork available for a movie.
+// 
 #import "TheMovieDbSearch.h"
 #import "Access.h"
 #import "TheMovieDbPlugin.h"

@@ -10,13 +10,14 @@
 #import "mp4v2.h"
 
 @interface SBTextSample : NSObject {
+@public
     MP4Duration timestamp;
     NSString *title;
 }
 
 @property(readwrite, retain) NSString *title;
 @property(readwrite) MP4Duration timestamp;
-
+- (MP4Duration) mp4Duration;
 @end
 
 @interface SBSubLine : NSObject

@@ -383,11 +383,6 @@
     MP4v2ReadDataTask* dataRead = [MP4v2ReadDataTask taskWithProvider:self fromFileName:fileName dictionary:op.tagdict];
     [op addOperation:dataRead];
         
-//    MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:op.tagdict];
-//    [chapterRead setLaunchPath:[self launchChapsPath]];
-//    [chapterRead addDependency:pictureRead];
-//    [op addOperation:chapterRead];
-
     [op addOperationsToQueue:queue];
 
     return op;
@@ -401,7 +396,7 @@
     MP42Metadata* metadata = [mp4File metadata];    
     NSString * tag_value;
     NSString * tag_key;
-    for (NSString * tag_key in metadata.tagsDict) {
+    for (tag_key in metadata.tagsDict) {
         tag_value = [metadata.tagsDict valueForKey:tag_key];
         if (tag_value) {
 //            MZLoggerDebug(@"%@ %@", tag_key, tag_value);
@@ -566,6 +561,70 @@
                     [tagdict setObject:nsdata forKey:MZPictureTagIdent];
                     break;
                 }
+            }
+        }
+    }
+    
+    // Duration
+    NSUInteger duration = [mp4File movieDuration];
+    if (duration) {
+        MZTimeCode* movieDuration = [[MZTimeCode alloc] initWithMillis:duration];
+        NSString *description = [movieDuration description];
+        MZLoggerDebug(@"Movie duration '%@'", description);
+        [tagdict setObject:movieDuration forKey:MZDurationTagIdent];
+    }
+    
+    // Chapters
+    MP42ChapterTrack* chapterTrack = [mp4File chapters];
+    if (chapterTrack != NULL) {       
+        NSArray *chaps = [chapterTrack chapters];
+        if (chaps != NULL) {
+            NSUInteger chapter_count = [chaps count];
+            NSMutableArray* chapters = [NSMutableArray array];
+            MP4Duration sum = 0;
+            for (int i = 1; i < chapter_count; i++) {
+                SBTextSample *sb_prev = [chaps objectAtIndex:i-1];
+                SBTextSample *sb_current = [chaps objectAtIndex:i];
+                
+                NSString *ch_name = [sb_prev title];
+                MP4Duration prev_timestamp = [sb_prev mp4Duration];
+                MP4Duration ch_timestamp = [sb_current mp4Duration];
+                ch_timestamp = ch_timestamp - prev_timestamp;
+                
+                MZTimeCode* ch_start = [[MZTimeCode alloc] initWithMillis:sum];
+                MZTimeCode* ch_duration = [[MZTimeCode alloc] initWithMillis:ch_timestamp];
+                
+//              NSString *start_description = [ch_start description];
+//              NSString *duration_description = [ch_duration description];
+//              MZLoggerDebug(@"Chapter: '%@':'%@'-'%@'", ch_name, start_description, duration_description)
+                
+                if(!ch_start || !ch_duration)
+                    break;
+                
+                MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:ch_start duration:ch_duration text:ch_name];
+                [chapters addObject:item];
+                [item release];
+                sum = sum + ch_timestamp;
+            }
+            
+            // last chapter
+            SBTextSample *sb_last = [chaps objectAtIndex:chapter_count-1];
+            NSString *ch_name = [sb_last title];
+            MP4Duration ch_timestamp = [sb_last mp4Duration];
+            ch_timestamp = duration - ch_timestamp;
+            
+            MZTimeCode* ch_start = [[MZTimeCode alloc] initWithMillis:sum];
+            MZTimeCode* ch_duration = [[MZTimeCode alloc] initWithMillis:ch_timestamp];
+               
+            if(ch_start && ch_duration) {
+                MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:ch_start duration:ch_duration text:ch_name];
+                [chapters addObject:item];
+                [item release];
+                sum = sum + ch_timestamp;
+            }
+            
+            if([chapters count] == chapter_count) {
+                [tagdict setObject:chapters forKey:MZChaptersTagIdent];
             }
         }
     }
@@ -891,10 +950,10 @@ void sortTags(NSMutableArray* args, NSDictionary* changes, NSString* tag, NSStri
     // (I think it is a cache flush issue) so that a subsequent chapter write
     // breaks the file. I hope (have not encountered the issue in a long time)
     // that this extra chapter read at least detects the issue.
-    MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:nil];
-    [chapterRead setLaunchPath:[self launchChapsPath]];
-    [chapterRead addDependency:mainWrite];
-    [ctrl addOperation:chapterRead];
+//    MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:nil];
+//    [chapterRead setLaunchPath:[self launchChapsPath]];
+//    [chapterRead addDependency:mainWrite];
+//    [ctrl addOperation:chapterRead];
 
     // Special chapters handling
     id chaptersObj = [changes objectForKey:MZChaptersTagIdent];
@@ -925,7 +984,7 @@ void sortTags(NSMutableArray* args, NSDictionary* changes, NSString* tag, NSStri
                 taskWithFileName:fileName
                     chaptersFile:chaptersFile];
         [chapterWrite setLaunchPath:[self launchChapsPath]];
-        [chapterWrite addDependency:chapterRead];
+//        [chapterWrite addDependency:chapterRead];
         [ctrl addOperation:chapterWrite];
     }
 
