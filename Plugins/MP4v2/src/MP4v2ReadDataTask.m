@@ -34,6 +34,7 @@
     [provider release];
     [fileName release];
     [tagdict release];
+    [lock release];
     [super dealloc];
 }
 
@@ -42,80 +43,6 @@
     [lock lock];
     [provider parseData:fileName dict:tagdict];    
     [lock unlock];
-}
-
-
-@end
-
-
-@implementation MP4v2PictureReadDataTask
-
-+ (id)taskWithDictionary:(NSMutableDictionary *)tagdict
-{
-    return [[[[self class] alloc] initWithDictionary:tagdict] autorelease];
-}
-
-- (id)initWithDictionary:(NSMutableDictionary *)theTagdict
-{
-    self = [super init];
-    if(self)
-    {
-        tagdict = [theTagdict retain];
-        file = [[NSString temporaryPathWithFormat:@"MetaZImage_%@"] retain];
-    }
-    return self;
-}
-
-
-- (void)dealloc
-{
-    [tagdict release];
-    [file release];
-    [super dealloc];
-}
-
-@synthesize file;
-
-- (void)startOnMainThread
-{
-    if([tagdict objectForKey:MZPictureTagIdent])
-        [super startOnMainThread];
-    else
-    {
-        self.executing = NO;
-        self.finished = YES;
-    }
-}
-
-- (void)taskTerminatedWithStatus:(int)status
-{
-    if(status != 0 || [self isCancelled])
-    {
-        [self setErrorFromStatus:status];
-        self.executing = NO;
-        self.finished = YES;
-        return;
-    }
-
-    NSString* artfile = [file stringByAppendingString:@"_artwork_1"];
-        
-    NSFileManager* mgr = [NSFileManager manager];
-    BOOL isDir;
-    if([mgr fileExistsAtPath:[artfile stringByAppendingString:@".png"] isDirectory:&isDir] && !isDir)
-    {
-        NSData* data = [NSData dataWithContentsOfFile:[artfile stringByAppendingString:@".png"]];
-        [tagdict setObject:data forKey:MZPictureTagIdent];
-        [mgr removeItemAtPath:[artfile stringByAppendingString:@".png"] error:NULL];
-    }
-    else if([mgr fileExistsAtPath:[artfile stringByAppendingString:@".jpg"] isDirectory:&isDir] && !isDir)
-    {
-        NSData* data = [NSData dataWithContentsOfFile:[artfile stringByAppendingString:@".jpg"]];
-        [tagdict setObject:data forKey:MZPictureTagIdent];
-        [mgr removeItemAtPath:[artfile stringByAppendingString:@".jpg"] error:NULL];
-    }
-    
-    self.executing = NO;
-    self.finished = YES;
 }
 
 @end

@@ -20,21 +20,8 @@
 + (id)taskWithProvider:(MP4v2DataProvider*)provider fromFileName:(NSString *)fileName dictionary:(NSMutableDictionary *)tagdict;
 - (id)initWithProvider:(MP4v2DataProvider*)provider fromFileName:(NSString *)fileName dictionary:(NSMutableDictionary *)tagdict;
 - (void)main;
-@end
-
-
-@interface MP4v2PictureReadDataTask : MZTaskOperation
-{
-    NSMutableDictionary* tagdict;
-    NSString* file;
-}
-@property(readonly) NSString* file;
-
-+ (id)taskWithDictionary:(NSMutableDictionary *)tagdict;
-- (id)initWithDictionary:(NSMutableDictionary *)tagdict;
 
 @end
-
 
 @interface MP4v2ChapterReadDataTask : MZParseTaskOperation
 {

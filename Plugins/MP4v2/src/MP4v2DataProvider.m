@@ -52,25 +52,6 @@
 
 - (id)init
 {
-//    - (NSArray *) availableMetadata
-//    {
-//        return [NSArray arrayWithObjects:  @"Name", @"Artist", @"Album Artist", @"Album", @"Grouping", @"Composer",
-//                @"Comments", @"Genre", @"Release Date", @"Track #", @"Disk #", @"Tempo", @"TV Show", @"TV Episode #",
-//                @"TV Network", @"TV Episode ID", @"TV Season", @"Description", @"Long Description", @"Rating", @"Rating Annotation",
-//                @"Studio", @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
-//                @"Lyrics", @"Copyright", @"Encoding Tool", @"Encoded By", @"Keywords", @"Category", @"contentID", @"artistID", @"playlistID", @"genreID", @"composerID",
-//                @"XID", @"iTunes Account", @"Sort Name", @"Sort Artist", @"Sort Album Artist", @"Sort Album", @"Sort Composer", @"Sort TV Show", nil];
-//    }
-//    
-//    - (NSArray *) writableMetadata
-//    {
-//        return [NSArray arrayWithObjects:  @"Name", @"Artist", @"Album Artist", @"Album", @"Grouping", @"Composer",
-//                @"Comments", @"Genre", @"Release Date", @"Track #", @"Disk #", @"Tempo", @"TV Show", @"TV Episode #",
-//                @"TV Network", @"TV Episode ID", @"TV Season", @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
-//                @"Studio", @"Description", @"Long Description", @"Rating", @"Rating Annotation",
-//                @"Lyrics", @"Copyright", @"Encoding Tool", @"Encoded By", @"Keywords", @"Category", @"contentID", @"XID", @"iTunes Account", @"Sort Name",
-//                @"Sort Artist", @"Sort Album Artist", @"Sort Album", @"Sort Composer", @"Sort TV Show", nil];
-//    }
     self = [super init];
     if(self)
     {
@@ -81,9 +62,8 @@
         tags = [[MZTag allKnownTags] retain];
         NSArray* readmapkeys = [NSArray arrayWithObjects:
             @"Name", @"Artist", @"Release Date",
-            //@"com.apple.iTunes;iTunEXTC", @"Genre",
-            @"Album", @"Album Artist", @"purd", @"Description", //MZPurchaseDateTagIdent
-            @"Long Description", @"stik", //MZVideoTypeTagIdent
+            @"Album", @"Album Artist", @"Purchase Date", @"Description", 
+            @"Long Description",
             @"TV Show", @"TV Episode ID",
             @"TV Season", @"TV Episode #", @"TV Network", @"purl", // MZFeedURLTagIdent
             @"egid", @"Category", @"Keywords", @"rtng", //MZEpisodeURLTagIdent, MZAdvisoryTagIdent
@@ -93,9 +73,8 @@
             @"Sort TV Show", nil];
         NSArray* readmapvalues = [NSArray arrayWithObjects:
             MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
-            //MZRatingTagIdent, MZGenreTagIdent,
             MZAlbumTagIdent, MZAlbumArtistTagIdent, MZPurchaseDateTagIdent, MZShortDescriptionTagIdent,
-            MZLongDescriptionTagIdent, MZVideoTypeTagIdent,
+            MZLongDescriptionTagIdent, 
             MZTVShowTagIdent, MZTVEpisodeIDTagIdent,
             MZTVSeasonTagIdent, MZTVEpisodeTagIdent, MZTVNetworkTagIdent, MZFeedURLTagIdent,
             MZEpisodeURLTagIdent, MZCategoryTagIdent, MZKeywordTagIdent, MZAdvisoryTagIdent,
@@ -403,12 +382,6 @@
     
     MP4v2ReadDataTask* dataRead = [MP4v2ReadDataTask taskWithProvider:self fromFileName:fileName dictionary:op.tagdict];
     [op addOperation:dataRead];
-
-//    MP4v2PictureReadDataTask* pictureRead = [MP4v2PictureReadDataTask taskWithDictionary:op.tagdict];
-//    [pictureRead setLaunchPath:[self launchPath]];
-//    [pictureRead setArguments:[NSArray arrayWithObjects:fileName, @"-e", pictureRead.file, nil]];
-//    [pictureRead addDependency:dataRead];
-//    [op addOperation:pictureRead];
         
 //    MP4v2ChapterReadDataTask* chapterRead = [MP4v2ChapterReadDataTask taskWithFileName:fileName dictionary:op.tagdict];
 //    [chapterRead setLaunchPath:[self launchChapsPath]];
@@ -423,9 +396,6 @@
 - (void)parseData:(NSString *)fileName dict:(NSMutableDictionary *)tagdict
 {
     mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
-//    if ( !mp4File ) {
-//		*outError = [NSError errorWithDomain:NSOSStatusErrorDomain code:unimpErr userInfo:NULL];
-//	}
 
     NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:[tags count]];
     MP42Metadata* metadata = [mp4File metadata];    
@@ -516,7 +486,7 @@
     value = [dict objectForKey:@"Codirector"];
     if(value)
     {
-//        [tagdict setObject:value forKey:MZCoDirectorTagIdent];
+        [tagdict setObject:value forKey:MZCoDirectorTagIdent];
     }
     
     value = [dict objectForKey:@"Producers"];
@@ -534,7 +504,7 @@
     value = [dict objectForKey:@"Studio"];
     if(value)
     {
-//        [tagdict setObject:value forKey:MZStudioTagIdent];
+        [tagdict setObject:value forKey:MZStudioTagIdent];
     }
     
     
@@ -584,12 +554,21 @@
         NSString* newTitle = [MZPluginController extractTitleFromFilename:fileName];
         [tagdict setObject:newTitle forKey:MZTitleTagIdent];
     }
-
+    
     // Special image handling
-//    NSString* covr = [dict objectForKey:@"covr"];
-//    if(covr)
-//        [tagdict setObject:[NSNull null] forKey:MZPictureTagIdent];
-
+    NSImage *artwork = [metadata artwork];
+    if (artwork) {
+        NSArray *imageReps = [artwork representations];        
+        for (NSBitmapImageRep *imageRep in imageReps) {
+            if (imageRep != NULL) {
+                NSData *nsdata = [imageRep TIFFRepresentation];
+                if (nsdata != NULL) {
+                    [tagdict setObject:nsdata forKey:MZPictureTagIdent];
+                    break;
+                }
+            }
+        }
+    }
 }
 
 void sortTags(NSMutableArray* args, NSDictionary* changes, NSString* tag, NSString* sortType)

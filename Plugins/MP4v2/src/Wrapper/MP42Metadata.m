@@ -718,6 +718,7 @@ static const genreType_t genreType_strings[] = {
 
     if (tags->artwork) {
         NSData *imageData = [NSData dataWithBytes:tags->artwork->data length:tags->artwork->size];
+        [tagsDict setObject:imageData forKey:@"Testing"];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
         if (imageRep != nil) {
             artwork = [[NSImage alloc] initWithSize:[imageRep size]];

@@ -43,12 +43,9 @@ void logCallback(MP4LogLevel loglevel, const char* fmt, va_list ap)
             break;
     }
     
-    printf("%s: ", level);
-    vprintf(fmt, ap);
-    printf("\n");
-//    char buffer[2048];
-//    vsprintf(buffer, fmt, ap);
-//    MZLoggerDebug(@"%s", buffer);
+    char buffer[2048];
+    vsprintf(buffer, fmt, ap);
+    MZLoggerDebug(@"%s", buffer);
 }
 
 @implementation MP4v2Plugin
