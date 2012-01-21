@@ -437,13 +437,37 @@ static const genreType_t genreType_strings[] = {
     return [NSString stringWithUTF8String:rating->english_name];    
 }
 
+- (NSString *) ratingDescriptionFromIndex: (NSInteger)index {
+    if (index >= 0 && index < 71) {
+        iTMF_rating_t *rating = (iTMF_rating_t*) rating_strings;
+        rating += index;
+        return [NSString stringWithUTF8String:rating->rating];    
+    }
+    else return nil;
+}
+
 - (NSInteger) ratingIndexFromString: (NSString *)ratingString{
     NSInteger ratingIndex = 0;
     iTMF_rating_t *ratingList;
     NSInteger k = 0;
     for ( ratingList = (iTMF_rating_t*) rating_strings; ratingList->english_name; ratingList++, k++ ) {
-        if ([ratingString isEqualToString:[NSString stringWithUTF8String:ratingList->english_name]])
+        if ([ratingString isEqualToString:[NSString stringWithUTF8String:ratingList->english_name]]) {
             ratingIndex = k;
+            break;
+        }
+    }
+    return ratingIndex;
+}
+
+- (NSInteger) ratingDescriptionIndexFromString: (NSString *)ratingString{
+    NSInteger ratingIndex = 0;
+    iTMF_rating_t *ratingList;
+    NSInteger k = 0;
+    for ( ratingList = (iTMF_rating_t*) rating_strings; ratingList->rating; ratingList++, k++ ) {
+        if ([ratingString isEqualToString:[NSString stringWithUTF8String:ratingList->rating]]) {
+            ratingIndex = k;
+            break;
+        }
     }
     return ratingIndex;
 }
@@ -462,7 +486,7 @@ static const genreType_t genreType_strings[] = {
 }
 
 - (BOOL) setTag:(id)value forKey:(NSString *)key;
-{
+{    
     NSString *regexPositive = @"YES|Yes|yes|1";
 
     if ([key isEqualToString:@"HD Video"]) {
@@ -503,7 +527,7 @@ static const genreType_t genreType_strings[] = {
         if ([value isKindOfClass:[NSNumber class]])
             [tagsDict setValue:value forKey:key];
         else {
-            NSString *rating_index = [[NSNumber numberWithInt:[self ratingIndexFromString:value]] stringValue];
+            NSString *rating_index = [[NSNumber numberWithInt:[self ratingDescriptionIndexFromString:value]] stringValue];
             [tagsDict setValue:rating_index forKey:key];
         }
 
@@ -718,7 +742,6 @@ static const genreType_t genreType_strings[] = {
 
     if (tags->artwork) {
         NSData *imageData = [NSData dataWithBytes:tags->artwork->data length:tags->artwork->size];
-        [tagsDict setObject:imageData forKey:@"Testing"];
         NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
         if (imageRep != nil) {
             artwork = [[NSImage alloc] initWithSize:[imageRep size]];

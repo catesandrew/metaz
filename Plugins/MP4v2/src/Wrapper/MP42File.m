@@ -210,10 +210,10 @@ NSString * const MP42CreateChaptersPreviewTrack = @"ChaptersPreview";
     [pool release];
 }
 
-- (BOOL) writeToUrl:(NSURL *)url withAttributes:(NSDictionary *)attributes error:(NSError **)outError
+- (BOOL) writeToUrl:(NSString *)url withAttributes:(NSDictionary *)attributes error:(NSError **)outError
 {
     BOOL success = YES;
-    filePath = [[url path] retain];
+    filePath = [url retain];
     NSString *fileExtension = [filePath pathExtension];
     char* majorBrand = "mp42";
     char* supportedBrands[4];

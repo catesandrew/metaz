@@ -10,15 +10,6 @@
 #import <MetaZKit/MetaZKit.h>
 #import "MP4v2DataProvider.h"
 
-@interface MP4v2ChapterWriteTask : MZTaskOperation
-{
-    NSString* chaptersFile;
-}
-+ (id)taskWithFileName:(NSString *)fileName chaptersFile:(NSString *)chaptersFile;
-- (id)initWithFileName:(NSString *)fileName chaptersFile:(NSString *)chaptersFile;
-
-@end
-
 @interface MP4v2WriteOperationsController : MZOperationsController
 {
     id<MZDataWriteDelegate> delegate;
@@ -43,11 +34,13 @@
 {
     MP4v2WriteOperationsController* controller;
     NSString* pictureFile;
+    NSLock *lock;
 }
 
 + (id)taskWithController:(MP4v2WriteOperationsController*)controller
              pictureFile:(NSString *)file;
 - (id)initWithController:(MP4v2WriteOperationsController*)controller
              pictureFile:(NSString *)file;
+- (void)main;
 
 @end

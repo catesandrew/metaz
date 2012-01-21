@@ -16,8 +16,7 @@
 }
 
 @property(readwrite, retain) NSString *title;
-@property(readwrite) MP4Duration timestamp;
-- (MP4Duration) mp4Duration;
+@property(getter=getTimestamp, setter=setTimestamp:) MP4Duration timestamp;
 @end
 
 @interface SBSubLine : NSObject

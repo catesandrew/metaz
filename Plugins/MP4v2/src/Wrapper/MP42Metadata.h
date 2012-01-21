@@ -91,7 +91,9 @@ enum rating_type {
 
 - (NSArray *) availableRatings;
 - (NSString *) ratingFromIndex: (NSInteger)index;
+- (NSString *) ratingDescriptionFromIndex: (NSInteger)index;
 - (NSInteger) ratingIndexFromString: (NSString *)ratingString;
+- (NSInteger) ratingDescriptionIndexFromString: (NSString *)ratingString;
 
 - (NSArray *) availableGenres;
 

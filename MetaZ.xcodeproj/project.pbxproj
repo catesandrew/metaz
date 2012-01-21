@@ -272,7 +272,6 @@
 		499DBF8214B6BE99003EC6BC /* rational.c in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF7C14B6BE99003EC6BC /* rational.c */; };
 		499DBF8A14B6BF48003EC6BC /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 499DBF8914B6BF48003EC6BC /* RegexKitLite.m */; };
 		49D4AF1414B62BF200B54BAC /* AtomicParsleyPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1BEA6E72106EF2A0004B1A7F /* AtomicParsleyPlugin.mzplugin */; };
-		49D4AF1514B62C0000B54BAC /* IMDBPlugin.mzplugin in Copy Plugins */ = {isa = PBXBuildFile; fileRef = 1B42F25810DEB0D300AFEBF6 /* IMDBPlugin.mzplugin */; };
 		49DAC9CE14B6C2CC00A1F471 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A91F622C0FB0A56F00B96B33 /* libicucore.dylib */; };
 		49DACA7014B6C42100A1F471 /* MP42AACImporter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3514B6C42100A1F471 /* MP42AACImporter.mm */; };
 		49DACA7114B6C42100A1F471 /* MP42AC3Importer.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DACA3714B6C42100A1F471 /* MP42AC3Importer.m */; };
@@ -340,13 +339,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 1B040EBD1081B3C00027FA0D;
 			remoteInfo = TagChimp;
-		};
-		1B060E1010E269F60009D847 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1B42F25710DEB0D300AFEBF6;
-			remoteInfo = IMDB;
 		};
 		1B20239210B395FA00EE548A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -503,7 +495,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				49D4AF1514B62C0000B54BAC /* IMDBPlugin.mzplugin in Copy Plugins */,
 				49D4AF1414B62BF200B54BAC /* AtomicParsleyPlugin.mzplugin in Copy Plugins */,
 				49942B2B14B5789C00F0843F /* MP4v2Plugin.mzplugin in Copy Plugins */,
 				1B299DB714AE4D3A0048B7C0 /* TheMovieDb.mzplugin in Copy Plugins */,
@@ -2729,7 +2720,6 @@
 				1BA325CC10545BAE00276F57 /* PBXTargetDependency */,
 				1B040EEA1081C0030027FA0D /* PBXTargetDependency */,
 				1B032F9310B0C41200B28E3A /* PBXTargetDependency */,
-				1B060E1110E269F60009D847 /* PBXTargetDependency */,
 				1B4F53D2116EA0B7003221B1 /* PBXTargetDependency */,
 				1B20239310B395FA00EE548A /* PBXTargetDependency */,
 				1B299DA414AE4D2A0048B7C0 /* PBXTargetDependency */,
@@ -3240,11 +3230,6 @@
 			isa = PBXTargetDependency;
 			target = 1B040EBD1081B3C00027FA0D /* TagChimp */;
 			targetProxy = 1B040EE91081C0030027FA0D /* PBXContainerItemProxy */;
-		};
-		1B060E1110E269F60009D847 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1B42F25710DEB0D300AFEBF6 /* IMDB */;
-			targetProxy = 1B060E1010E269F60009D847 /* PBXContainerItemProxy */;
 		};
 		1B20239310B395FA00EE548A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

@@ -14,7 +14,7 @@
 
 -(NSComparisonResult)compare:(SBTextSample *)otherObject
 {
-    MP4Duration otherTimestamp = [otherObject timestamp];
+    MP4Duration otherTimestamp = [otherObject getTimestamp];
 
     if (timestamp < otherTimestamp)
         return NSOrderedAscending;
@@ -30,12 +30,17 @@
     [super dealloc];
 }
 
-- (MP4Duration) mp4Duration
+-(void) setTimestamp: (MP4Duration) ts
 {
-    return [self timestamp];
+    timestamp = ts;
 }
 
-@synthesize timestamp;
+-(MP4Duration) getTimestamp
+{
+    return timestamp;
+}
+
+//@synthesize timestamp;
 @synthesize title;
 
 @end

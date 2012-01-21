@@ -57,7 +57,7 @@ extern NSString * const MP42CreateChaptersPreviewTrack;
 - (void) removeTracksAtIndexes:(NSIndexSet *)indexes;
 - (void) moveTrackAtIndex:(NSUInteger)index toIndex:(NSUInteger)newIndex;
 
-- (BOOL) writeToUrl:(NSURL *)url withAttributes:(NSDictionary *)attributes error:(NSError **)outError;
+- (BOOL) writeToUrl:(NSString *)url withAttributes:(NSDictionary *)attributes error:(NSError **)outError;
 - (BOOL) updateMP4FileWithAttributes:(NSDictionary *)attributes error:(NSError **)outError;
 - (void) optimize;
 

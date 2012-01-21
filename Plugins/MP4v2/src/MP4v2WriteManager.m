@@ -8,50 +8,6 @@
 
 #import "MP4v2WriteManager.h"
 
-
-@implementation MP4v2ChapterWriteTask
-
-+ (id)taskWithFileName:(NSString *)fileName chaptersFile:(NSString *)chaptersFile
-{
-    return [[[self alloc] initWithFileName:fileName chaptersFile:chaptersFile] autorelease];
-}
-
-- (id)initWithFileName:(NSString *)fileName chaptersFile:(NSString *)theChaptersFile
-{
-    self = [super init];
-    if(self)
-    {
-        chaptersFile = [theChaptersFile retain];
-        if([chaptersFile length] == 0)
-            [self setArguments:[NSArray arrayWithObjects:@"-r", fileName, nil]];
-        else
-            [self setArguments:[NSArray arrayWithObjects:@"--import", chaptersFile, fileName, nil]];
-
-    }
-    return self;
-}
-
-- (void)taskTerminatedWithStatus:(int)status
-{
-    NSError* tempError = nil;
-    NSFileManager* mgr = [NSFileManager manager];
-    if([chaptersFile length]>0)
-    {
-        if(![mgr removeItemAtPath:chaptersFile error:&tempError])
-        {
-            MZLoggerError(@"Failed to remove temp chapters file %@", [tempError localizedDescription]);
-            tempError = nil;
-        }
-    }
-    
-    [self setErrorFromStatus:status];
-    self.executing = NO;
-    self.finished = YES;
-}
-
-@end
-
-
 @implementation MP4v2WriteOperationsController
 
 + (id)controllerWithProvider:(id<MZDataProvider>)provider
@@ -114,55 +70,40 @@
     self = [super init];
     if(self)
     {
+        lock = [[NSLock alloc] init];
         controller = [theController retain];
         pictureFile = [file retain];
     }
     return self;
 }
 
-- (void)taskTerminatedWithStatus:(int)status
+- (void)dealloc
 {
-    NSError* tempError = nil;
-    NSFileManager* mgr = [NSFileManager manager];
-
-    if(pictureFile)
-    {
-        if(![mgr removeItemAtPath:pictureFile error:&tempError])
-        {
-            MZLoggerError(@"Failed to remove temp picture file %@", [tempError localizedDescription]);
-            tempError = nil;
-        }
-    }
-    
-    [self setErrorFromStatus:status];
-    self.executing = NO;
-    self.finished = YES;
+    [controller release];
+    [pictureFile release];
+    [lock release];
+    [super dealloc];
 }
 
-- (void)standardOutputGotData:(NSNotification *)note
+- (void)main
 {
-    if(self.finished)
-        return;
-    NSData* data = [[note userInfo]
-            objectForKey:NSFileHandleNotificationDataItem];
-    NSString* str = [[[NSString alloc]
-            initWithData:data
-                encoding:NSUTF8StringEncoding] autorelease];
-    NSString* origStr = str;
-    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if([str hasPrefix:@"Started writing to temp file."])
-        str = [str substringFromIndex:29];
-    str = [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    NSInteger percent = [str integerValue];
-    MZLoggerDebug(@"Got data: %d '%@'", percent, origStr);
+    [lock lock];
+    
+    NSError* tempError = nil;
+    NSFileManager* mgr = [NSFileManager manager];
+    
+//    if(pictureFile)
+//    {
+//        if(![mgr removeItemAtPath:pictureFile error:&tempError])
+//        {
+//            MZLoggerError(@"Failed to remove temp picture file %@", [tempError localizedDescription]);
+//            tempError = nil;
+//        }
+//    }    
     if(percent > 0)
         [controller notifyPercent:percent];
-        
-    if([task isRunning])
-    {
-        [[[task standardOutput] fileHandleForReading]
-            readInBackgroundAndNotify];
-    }
+    
+    [lock unlock];
 }
 
 @end
