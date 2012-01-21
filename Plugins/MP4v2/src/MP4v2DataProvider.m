@@ -789,8 +789,9 @@
     NSString* pictureFile = nil;
     if(pictureObj == [NSNull null])
     {
-//        [args addObject:@"--artwork"];
-//        [args addObject:@"REMOVE_ALL"];
+        if (![metadata setTag:nil forKey:@"Artwork"]) {
+            MZLoggerDebug(@"Artwork not removed");
+        }
     }
     else if(pictureObj)
     {
@@ -805,10 +806,9 @@
         NSError* error = nil;
         if([picture writeToFile:pictureFile options:0 error:&error])
         {
-//            [args addObject:@"--artwork"];
-//            [args addObject:@"REMOVE_ALL"];
-//            [args addObject:@"--artwork"];
-//            [args addObject:pictureFile];
+            if (![metadata setTag:pictureFile forKey:@"Artwork"]) {
+                MZLoggerDebug(@"Artwork not updated for value %@", pictureFile);
+            }
         }
         else
         {
@@ -865,12 +865,20 @@
             MZLoggerDebug(@"Studio not updated for value %@", studio);
         }
     }
+        
+    MP4v2WriteOperationsController* ctrl = [MP4v2WriteOperationsController controllerWithProvider:self delegate:delegate edits:data];
+    MP4v2MainWriteTask* mainWrite = [MP4v2MainWriteTask taskWithController:ctrl];
+    [ctrl addOperation:mainWrite];
     
-//    NSString* fileName;
-//    if([args count]-3 == 0)
-//        fileName = [data loadedFileName];
-//    else
-//        fileName = [data savedTempFileName];
+//    int status=0;
+//    [mainWrite setErrorFromStatus:status];
+    
+    [ctrl notifyPercent:0.10];
+    //    NSString* fileName;
+    //    if([args count]-3 == 0)
+    //        fileName = [data loadedFileName];
+    //    else
+    //        fileName = [data savedTempFileName];
     
     NSError	 **outError;
     NSMutableDictionary * attributes = [[NSMutableDictionary alloc] init];
@@ -884,27 +892,27 @@
         [attributes setObject:[NSNumber numberWithBool:YES] forKey:MP42Create64BitTime];
         success = [mp4File writeToUrl:fileName withAttributes:attributes error:outError];
     }
-    
+    [ctrl notifyPercent:0.8];
     if (optimize)
     {
         [mp4File optimize];
         optimize = NO;
     }
+    [ctrl notifyPercent:0.9];
     [attributes release];
     
+    if (pictureFile) {
+        NSError* tempError = nil;
+        NSFileManager* mgr = [NSFileManager manager];
+        if(![mgr removeItemAtPath:pictureFile error:&tempError])
+        {
+            MZLoggerError(@"Failed to remove temp picture file %@", [tempError localizedDescription]);
+            tempError = nil;
+        }
+    }
+    [ctrl notifyPercent:1.0];
+    [ctrl operationsFinished];
     
-    
-    
-        
-    MP4v2WriteOperationsController* ctrl = 
-        [MP4v2WriteOperationsController controllerWithProvider:self
-                                                   delegate:delegate
-                                                      edits:data];
-
-    MP4v2MainWriteTask* mainWrite = [MP4v2MainWriteTask taskWithController:ctrl pictureFile:pictureFile];
-    [ctrl addOperation:mainWrite];
-
-
     // Special chapters handling
 //    id chaptersObj = [changes objectForKey:MZChaptersTagIdent];
 //    NSString* chaptersFile = nil;

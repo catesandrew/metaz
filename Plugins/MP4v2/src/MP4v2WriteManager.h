@@ -33,14 +33,11 @@
 @interface MP4v2MainWriteTask : MZTaskOperation
 {
     MP4v2WriteOperationsController* controller;
-    NSString* pictureFile;
     NSLock *lock;
 }
 
-+ (id)taskWithController:(MP4v2WriteOperationsController*)controller
-             pictureFile:(NSString *)file;
-- (id)initWithController:(MP4v2WriteOperationsController*)controller
-             pictureFile:(NSString *)file;
++ (id)taskWithController:(MP4v2WriteOperationsController*)controller;
+- (id)initWithController:(MP4v2WriteOperationsController*)controller;
 - (void)main;
 
 @end

@@ -59,20 +59,17 @@
 @implementation MP4v2MainWriteTask
 
 + (id)taskWithController:(MP4v2WriteOperationsController*)controller
-             pictureFile:(NSString *)file
 {
-    return [[[self alloc] initWithController:controller pictureFile:file] autorelease];
+    return [[[self alloc] initWithController:controller] autorelease];
 }
 
 - (id)initWithController:(MP4v2WriteOperationsController*)theController
-             pictureFile:(NSString *)file;
 {
     self = [super init];
     if(self)
     {
         lock = [[NSLock alloc] init];
         controller = [theController retain];
-        pictureFile = [file retain];
     }
     return self;
 }
@@ -80,7 +77,6 @@
 - (void)dealloc
 {
     [controller release];
-    [pictureFile release];
     [lock release];
     [super dealloc];
 }
@@ -88,21 +84,6 @@
 - (void)main
 {
     [lock lock];
-    
-    NSError* tempError = nil;
-    NSFileManager* mgr = [NSFileManager manager];
-    
-//    if(pictureFile)
-//    {
-//        if(![mgr removeItemAtPath:pictureFile error:&tempError])
-//        {
-//            MZLoggerError(@"Failed to remove temp picture file %@", [tempError localizedDescription]);
-//            tempError = nil;
-//        }
-//    }    
-    if(percent > 0)
-        [controller notifyPercent:percent];
-    
     [lock unlock];
 }
 
