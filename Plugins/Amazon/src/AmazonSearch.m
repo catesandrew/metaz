@@ -110,6 +110,7 @@
         
         self.accessKeyId = AMAZON_ACCESS_ID;
         self.secretAccessKey = AMAZON_ACCESS_KEY;
+        self.associateTag = AMAZON_ASSOCIATE_TAG;
     }
     return self;
 }
