@@ -57,7 +57,7 @@
 @end
 
 
-@implementation MP4v2MainWriteTask
+@implementation MP4v2WriteDataTask
 
 + (id)taskWithController:(MP4v2WriteOperationsController*)controller
              metaEdits:(MetaEdits *)meta
@@ -95,12 +95,12 @@
 
 @implementation MP4v2FileWriteOperation
 
-+ (id)operationWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta
++ (id)operationWithMainWrite:(MP4v2WriteDataTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta
 {
     return [[[[self class] alloc] initWithMainWrite:theMp4v2WriteTask metaEdits:meta] autorelease];
 }
 
-- (id)initWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta
+- (id)initWithMainWrite:(MP4v2WriteDataTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta
 {
     self = [super init];
     if(self)

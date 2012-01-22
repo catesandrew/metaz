@@ -32,7 +32,7 @@
 
 @end
 
-@interface MP4v2MainWriteTask : MZOperation
+@interface MP4v2WriteDataTask : MZOperation
 {
     MP4v2WriteOperationsController* controller;
     MetaEdits* data;
@@ -51,14 +51,14 @@
 {
     NSLock *lock;
     MetaEdits* data;
-    MP4v2MainWriteTask* mp4v2WriteTask;
+    MP4v2WriteDataTask* mp4v2WriteTask;
     
     NSDictionary* write_mapping;
     NSDictionary* rating_write;
 }
 
-+ (id)operationWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta;
-- (id)initWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta;
++ (id)operationWithMainWrite:(MP4v2WriteDataTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta;
+- (id)initWithMainWrite:(MP4v2WriteDataTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta;
 - (void)main;
 
 @end
