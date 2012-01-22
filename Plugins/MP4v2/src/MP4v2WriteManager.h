@@ -42,6 +42,8 @@
              metaEdits:(MetaEdits *)meta;
 - (id)initWithController:(MP4v2WriteOperationsController*)controller
              metaEdits:(MetaEdits *)meta;
+- (void)notifyPercent:(NSInteger)percent;
+- (void)operationFinished;
 @end
 
 
@@ -49,14 +51,14 @@
 {
     NSLock *lock;
     MetaEdits* data;
-    MP4v2WriteOperationsController* controller;
+    MP4v2MainWriteTask* mp4v2WriteTask;
     
     NSDictionary* write_mapping;
     NSDictionary* rating_write;
 }
 
-+ (id)operationWithController:(MP4v2WriteOperationsController*)theController metaEdits:(MetaEdits *)meta;
-- (id)initWithController:(MP4v2WriteOperationsController*)theController metaEdits:(MetaEdits *)meta;
++ (id)operationWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta;
+- (id)initWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta;
 - (void)main;
 
 @end

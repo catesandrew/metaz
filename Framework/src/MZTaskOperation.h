@@ -29,6 +29,7 @@
 - (BOOL)isConcurrent;
 - (void)cancel;
 - (BOOL)isRunning;
+- (void)operationTerminated;
 @end 
 
 

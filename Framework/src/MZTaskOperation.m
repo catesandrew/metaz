@@ -71,11 +71,12 @@
         self.finished = YES;
         return;
     }
+
     [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(taskTerminated:)
-     name:NSTaskDidTerminateNotification
-     object:operation];
+         addObserver:self
+         selector:@selector(taskTerminated:)
+         name:NSTaskDidTerminateNotification
+         object:operation];
     
     [operation main];
 }
@@ -98,6 +99,16 @@
 }
 
 - (void)taskTerminated:(NSNotification *)note
+{
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:NSTaskDidTerminateNotification
+     object:operation];
+    self.executing = NO;
+    self.finished = YES;
+}
+
+- (void)operationTerminated
 {
     [[NSNotificationCenter defaultCenter]
      removeObserver:self

@@ -68,14 +68,25 @@
 - (id)initWithController:(MP4v2WriteOperationsController*)theController
              metaEdits:(MetaEdits *)meta
 {
-    MP4v2FileWriteOperation* mp4v2FileWrite = [MP4v2FileWriteOperation operationWithController:theController metaEdits:meta];
+    MP4v2FileWriteOperation* mp4v2FileWrite = [MP4v2FileWriteOperation operationWithMainWrite:self metaEdits:meta];
     self = [super initWithOperation:mp4v2FileWrite];
     if(self)
     {
         controller = [theController retain];
         data = [meta retain];
     }
+
     return self;
+}
+
+- (void)notifyPercent:(NSInteger)percent
+{
+    [controller notifyPercent:percent];
+}
+
+- (void)operationFinished
+{
+    [self operationTerminated];
 }
 
 @end
@@ -84,18 +95,18 @@
 
 @implementation MP4v2FileWriteOperation
 
-+ (id)operationWithController:(MP4v2WriteOperationsController*)theController metaEdits:(MetaEdits *)meta
++ (id)operationWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta
 {
-    return [[[[self class] alloc] initWithController:theController metaEdits:meta] autorelease];
+    return [[[[self class] alloc] initWithMainWrite:theMp4v2WriteTask metaEdits:meta] autorelease];
 }
 
-- (id)initWithController:(MP4v2WriteOperationsController*)theController metaEdits:(MetaEdits *)meta
+- (id)initWithMainWrite:(MP4v2MainWriteTask*)theMp4v2WriteTask metaEdits:(MetaEdits *)meta
 {
     self = [super init];
     if(self)
     {
         lock = [[NSLock alloc] init];
-        controller = [theController retain];
+        mp4v2WriteTask = [theMp4v2WriteTask retain];
         data = [meta retain];
         
 // return [NSArray arrayWithObjects:  @"Composer",
@@ -367,7 +378,7 @@
 - (void)dealloc
 {
     [data release];
-    [controller release];
+    [mp4v2WriteTask release];
     [lock release];
     [rating_write release];
     [write_mapping release];
@@ -599,7 +610,7 @@
         }
     }
     
-    [controller notifyPercent:0.10];
+    [mp4v2WriteTask notifyPercent:0.10];
 //    NSString* fileName;
 //    if([args count]-3 == 0)
 //        fileName = [data loadedFileName];
@@ -618,13 +629,13 @@
         [attributes setObject:[NSNumber numberWithBool:YES] forKey:MP42Create64BitTime];
         success = [mp4File writeToUrl:fileName withAttributes:attributes error:outError];
     }
-    [controller notifyPercent:0.8];
+    [mp4v2WriteTask notifyPercent:0.8];
     if (optimize)
     {
         [mp4File optimize];
         optimize = NO;
     }
-    [controller notifyPercent:0.9];
+    [mp4v2WriteTask notifyPercent:0.9];
     [attributes release];
     
     if (pictureFile) {
@@ -670,8 +681,8 @@
 //        [ctrl addOperation:chapterWrite];
 //    }
     
-    [controller notifyPercent:1.0];
-    [controller operationsFinished];
+    [mp4v2WriteTask notifyPercent:1.0];
+    [mp4v2WriteTask operationFinished];
     [lock unlock];
 
 }
