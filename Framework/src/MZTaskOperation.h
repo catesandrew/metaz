@@ -9,6 +9,30 @@
 #import <Cocoa/Cocoa.h>
 #import <MetaZKit/MZErrorOperation.h>
 
+@interface MZOperation : MZErrorOperation
+{
+    NSOperation* operation;
+    BOOL executing;
+    BOOL finished;
+}
++ (id)taskOperation;
++ (id)taskOperationWithOperation:(NSOperation *)theOperation;
+
+- (id)init;
+- (id)initWithOperation:(NSOperation *)theOperation;
+
+@property(getter=isExecuting,assign) BOOL executing;
+@property(getter=isFinished,assign) BOOL finished;
+
+- (void)start;
+- (void)startOnMainThread;
+- (BOOL)isConcurrent;
+- (void)cancel;
+- (BOOL)isRunning;
+@end 
+
+
+
 @interface MZTaskOperation : MZErrorOperation
 {
     NSTask* task;

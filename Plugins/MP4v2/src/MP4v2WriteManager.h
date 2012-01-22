@@ -10,6 +10,8 @@
 #import <MetaZKit/MetaZKit.h>
 #import "MP4v2DataProvider.h"
 
+@class MP42File;
+
 @interface MP4v2WriteOperationsController : MZOperationsController
 {
     id<MZDataWriteDelegate> delegate;
@@ -30,14 +32,31 @@
 
 @end
 
-@interface MP4v2MainWriteTask : MZTaskOperation
+@interface MP4v2MainWriteTask : MZOperation
 {
     MP4v2WriteOperationsController* controller;
-    NSLock *lock;
+    MetaEdits* data;
 }
 
-+ (id)taskWithController:(MP4v2WriteOperationsController*)controller;
-- (id)initWithController:(MP4v2WriteOperationsController*)controller;
++ (id)taskWithController:(MP4v2WriteOperationsController*)controller
+             metaEdits:(MetaEdits *)meta;
+- (id)initWithController:(MP4v2WriteOperationsController*)controller
+             metaEdits:(MetaEdits *)meta;
+@end
+
+
+@interface MP4v2FileWriteOperation : NSOperation
+{
+    NSLock *lock;
+    MetaEdits* data;
+    MP4v2WriteOperationsController* controller;
+    
+    NSDictionary* write_mapping;
+    NSDictionary* rating_write;
+}
+
++ (id)operationWithController:(MP4v2WriteOperationsController*)theController metaEdits:(MetaEdits *)meta;
+- (id)initWithController:(MP4v2WriteOperationsController*)theController metaEdits:(MetaEdits *)meta;
 - (void)main;
 
 @end

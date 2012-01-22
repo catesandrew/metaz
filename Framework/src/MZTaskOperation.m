@@ -9,6 +9,107 @@
 #import "MZTaskOperation.h"
 #import <MetaZKit/MZLogger.h>
 
+@implementation MZOperation
+
++ (NSSet *)keyPathsForValuesAffectingIsFinished
+{
+    return [NSSet setWithObjects:@"finished", nil];
+}
+
++ (NSSet *)keyPathsForValuesAffectingIsExecuting
+{
+    return [NSSet setWithObjects:@"executing", nil];
+}
+
++ (id)taskOperation
+{
+    return [[[self alloc] init] autorelease];
+}
+
++ (id)taskOperationWithOperation:(NSOperation *)theOperation
+{
+    return [[[self alloc] initWithOperation:theOperation] autorelease];
+}
+
+- (id)init
+{
+    return [self initWithOperation:[[[NSOperation alloc] init] autorelease]];
+}
+
+- (id)initWithOperation:(NSOperation *)theOperation
+{
+    self = [super init];
+    if(self)
+        operation = [theOperation retain];
+    return self;
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:NSTaskDidTerminateNotification
+     object:operation];
+    [operation release];
+    [super dealloc];
+}
+
+@synthesize executing;
+@synthesize finished;
+
+- (void)start
+{
+    self.executing = YES;
+    [self performSelectorOnMainThread:@selector(startOnMainThread) withObject:nil waitUntilDone:YES];
+}
+
+- (void)startOnMainThread
+{
+    if([self isCancelled])
+    {
+        self.executing = NO;
+        self.finished = YES;
+        return;
+    }
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(taskTerminated:)
+     name:NSTaskDidTerminateNotification
+     object:operation];
+    
+    [operation main];
+}
+
+- (BOOL)isConcurrent
+{
+    return YES;
+}
+
+- (void)cancel
+{
+    [super cancel];
+    if([self isExecuting]) [operation cancel];
+}
+
+// status
+- (BOOL)isRunning
+{
+    return [operation isExecuting];
+}
+
+- (void)taskTerminated:(NSNotification *)note
+{
+    [[NSNotificationCenter defaultCenter]
+     removeObserver:self
+     name:NSTaskDidTerminateNotification
+     object:operation];
+    self.executing = NO;
+    self.finished = YES;
+}
+@end    
+
+
+
 @implementation MZTaskOperation
 
 + (NSSet *)keyPathsForValuesAffectingIsFinished

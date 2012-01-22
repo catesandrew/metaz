@@ -13,13 +13,10 @@
 
 @interface MP4v2DataProvider : NSObject <MZDataProvider>
 {
-    MP42File  *mp4File;
     NSArray* types;
     NSArray* tags;
     NSDictionary* read_mapping;
-    NSDictionary* write_mapping;
     NSDictionary* rating_read;
-    NSDictionary* rating_write;
     NSMutableArray* writes;
 }
 
@@ -30,5 +27,5 @@
 - (void)removeWriteManager:(id)writeManager;
 
 - (void)parseData:(NSString *)fileName dict:(NSMutableDictionary *)tagdict;
-
+- (id<MZDataController>)saveChanges:(MetaEdits *)data delegate:(id<MZDataWriteDelegate>)delegate queue:(NSOperationQueue *)queue;
 @end

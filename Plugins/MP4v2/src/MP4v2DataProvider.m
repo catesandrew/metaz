@@ -93,47 +93,6 @@
         read_mapping = [[NSDictionary alloc]
             initWithObjects:readmapvalues
                     forKeys:readmapkeys];
-
-// return [NSArray arrayWithObjects:  @"Composer",
-// @"Track #", @"Disk #", @"Tempo", 
-// @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
-// @"Studio", @"Rating", @"Rating Annotation",
-// @"Lyrics", @"Encoded By", @"contentID", @"XID", @"iTunes Account", 
-// @"Sort Composer", nil];
-
-        NSArray* writemapkeys = [NSArray arrayWithObjects:
-            MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
-            //MZRatingTagIdent,
-            //MZGenreTagIdent,
-            MZAlbumTagIdent, MZAlbumArtistTagIdent, MZPurchaseDateTagIdent, MZShortDescriptionTagIdent,
-            MZLongDescriptionTagIdent, //MZVideoTypeTagIdent,
-            MZTVShowTagIdent, MZTVEpisodeIDTagIdent,
-            MZTVSeasonTagIdent, MZTVEpisodeTagIdent, MZTVNetworkTagIdent, MZFeedURLTagIdent,
-            MZEpisodeURLTagIdent, MZCategoryTagIdent, MZKeywordTagIdent, MZAdvisoryTagIdent,
-            MZPodcastTagIdent, MZCopyrightTagIdent, MZGroupingTagIdent, MZEncodingToolTagIdent,
-            MZCommentTagIdent, MZGaplessTagIdent, MZCompilationTagIdent,
-            MZSortTitleTagIdent, MZSortArtistTagIdent, MZSortAlbumArtistTagIdent,
-            MZSortAlbumTagIdent, MZSortTVShowTagIdent,
-            nil];
-
-        NSArray* writemapvalues = [NSArray arrayWithObjects:
-            @"Name", @"Artist", @"Release Date",
-            //@"contentRating",
-            //@"Genre",
-            @"Album", @"Album Artist", @"Purchase Date", @"Description",
-            @"Long Description", 
-            @"TV Show", @"TV Episode ID",
-            @"TV Season", @"TV Episode #", @"TV Network", @"__podcastURL",
-            @"__podcastGUID",@"Category", @"Keywords", @"__advisory",
-            @"__podcastFlag", @"Copyright", @"Grouping", @"Encoding Tool",
-            @"Comments", @"__gapless", @"__compilation",
-            @"Sort Name", @"Sort Artist", @"Sort Album Artist", 
-            @"Sort Album", @"Sort TV Show",     
-            nil];
-
-        write_mapping = [[NSDictionary alloc]
-            initWithObjects:writemapvalues
-                    forKeys:writemapkeys];
                     
         NSArray* ratingkeys = [NSArray arrayWithObjects:
         // US
@@ -351,9 +310,7 @@
             @"nz-tv|AO|600|",
             @"nz-tv|UNRATED|900|",
             nil];
-        rating_write = [[NSDictionary alloc]
-            initWithObjects:ratingvalues
-                    forKeys:ratingkeys];
+
         rating_read = [[NSDictionary alloc]
             initWithObjects:ratingkeys
                     forKeys:ratingvalues];
@@ -368,9 +325,7 @@
     [types release];
     [tags release];
     [read_mapping release];
-    [write_mapping release];
     [rating_read release];
-    [rating_write release];
     [super dealloc];
 }
 
@@ -408,7 +363,7 @@
 
 - (void)parseData:(NSString *)fileName dict:(NSMutableDictionary *)tagdict
 {
-    mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
+    MP42File  *mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
 
     NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithCapacity:[tags count]];
     MP42Metadata* metadata = [mp4File metadata];    
@@ -640,319 +595,22 @@
     }
 }
 
-
 -(id<MZDataController>)saveChanges:(MetaEdits *)data
-          delegate:(id<MZDataWriteDelegate>)delegate
-             queue:(NSOperationQueue *)queue;
+                          delegate:(id<MZDataWriteDelegate>)delegate
+                             queue:(NSOperationQueue *)queue;
 {
-    BOOL success = NO;
-    BOOL optimize = NO;
-    NSString* fileName = [data loadedFileName];
-    mp4File = [[MP42File alloc] initWithExistingFile:fileName andDelegate:self];
-    MP42Metadata* metadata = [mp4File metadata];
-        
-    NSDictionary* changes = [data changes];
-    for(NSString* key in [changes allKeys])
-    {
-        NSString* map = [write_mapping objectForKey:key]; // map - Name, key - title
-        if(map)
-        {
-            MZTag* tag = [MZTag tagForIdentifier:key];
-            id value = [changes objectForKey:key];
-            value = [tag stringForObject:value];
-            NSString *oldValue = [[[metadata tagsDict] valueForKey:key] retain];            
-            if (![metadata setTag:value forKey:map]) {
-                MZLoggerDebug(@"Value %@ not updated for key %@", value, map);
-                break;
-            }
-            [oldValue release];
-        }
-    }
-    
-    // Special rating handling
-    id rating = [changes objectForKey:MZRatingTagIdent];
-    if(rating)
-    {
-        NSString* rate = [rating_write objectForKey:rating];
-        if(rate)
-        {
-            if (![metadata setTag:rate forKey:@"Rating"]) {
-                MZLoggerDebug(@"Rating not updated for value %@", rate);
-            }
-        }
-    }
-    
-    // Special video type handling
-    id stikNo = [changes objectForKey:MZVideoTypeTagIdent];
-    if(stikNo)
-    {
-        MZVideoType stik;
-        MZTag* tag = [MZTag tagForIdentifier:MZVideoTypeTagIdent];
-        [tag nullConvertObject:stikNo toValue:&stik];
-        NSString* stikStr = nil;
-        switch (stik) {
-            case MZUnsetVideoType:
-                stikStr = @"";
-                break;
-            case MZMusicType:
-                stikStr = @"Music";
-                break;
-            case MZAudiobookVideoType:
-                stikStr = @"Audiobook";
-                break;
-            case MZMusicVideoType:
-                stikStr = @"Music Video";
-                break;
-            case MZMovieVideoType:
-                stikStr = @"Movie";
-                break;
-            case MZTVShowVideoType:
-                stikStr = @"TV Show";
-                break;
-            case MZBookletVideoType:
-                stikStr = @"Booklet";
-                break;
-            case MZRingtoneVideoType:
-                stikStr = @"Ringtone";
-                break;
-        }
-        if(stikStr)
-        {
-            if (![metadata setTag:stikStr forKey:@"Media Kind"]) {
-                MZLoggerDebug(@"Media Kind not updated for value %@", stikStr);
-            }
-        }
-    }
-    
-    // Special track number/count handling    
-    MZTag* numberTag = [MZTag tagForIdentifier:MZTrackNumberTagIdent];
-    MZTag* countTag = [MZTag tagForIdentifier:MZTrackCountTagIdent];
-    id number = [changes objectForKey:[numberTag identifier]];
-    if(!number)
-    {
-        numberTag = [MZTag tagForIdentifier:MZTVEpisodeTagIdent];
-        number = [changes objectForKey:[numberTag identifier]];
-    }
-    id count = [changes objectForKey:[countTag identifier]];
-    if(number || count)
-    {
-        number = [numberTag stringForObject:number];
-        count = [countTag stringForObject:count];
-        NSUInteger numberLen = [number length];
-        NSUInteger countLen = [count length];
-    
-        NSString* value = @"";
-        if(numberLen > 0 || countLen > 0)
-        {
-            if(numberLen > 0 && countLen > 0)
-                value = [NSString stringWithFormat:@"%@/%@", number, count];
-            else if(numberLen > 0)
-                value = number;
-            else
-                value = [NSString stringWithFormat:@"/%@", count];
-        }
-        if (![metadata setTag:value forKey:@"Track #"]) {
-            MZLoggerDebug(@"Track not updated for value %@", value);
-        }
-    }
-
-    // Special disc number/count handling
-    numberTag = [MZTag tagForIdentifier:MZDiscNumberTagIdent];
-    countTag = [MZTag tagForIdentifier:MZDiscCountTagIdent];
-    number = [changes objectForKey:[numberTag identifier]];
-    count = [changes objectForKey:[countTag identifier]];
-    if(number || count)
-    {
-        number = [numberTag stringForObject:number];
-        count = [countTag stringForObject:count];
-        NSUInteger numberLen = [number length];
-        NSUInteger countLen = [count length];
-
-        NSString* value = @"";
-        if(numberLen > 0 || countLen > 0)
-        {
-            if(numberLen > 0 && countLen > 0)
-                value = [NSString stringWithFormat:@"%@/%@", number, count];
-            else if(numberLen > 0)
-                value = number;
-            else
-                value = [NSString stringWithFormat:@"/%@", count];
-        }
-        if (![metadata setTag:value forKey:@"Disk #"]) {
-            MZLoggerDebug(@"Disk not updated for value %@", value);
-        }
-    }
-    
-    
-    // Special image handling
-    id pictureObj = [changes objectForKey:MZPictureTagIdent];
-    NSString* pictureFile = nil;
-    if(pictureObj == [NSNull null])
-    {
-        if (![metadata setTag:nil forKey:@"Artwork"]) {
-            MZLoggerDebug(@"Artwork not removed");
-        }
-    }
-    else if(pictureObj)
-    {
-        NSData* picture = pictureObj;
-
-        pictureFile = [NSString temporaryPathWithFormat:@"MetaZImage_%@.png"];
-                
-        //NSData *imageData = [picture TIFFRepresentation];
-        NSBitmapImageRep* imageRep = [NSBitmapImageRep imageRepWithData:picture];
-        picture = [imageRep representationUsingType:NSPNGFileType properties:[NSDictionary dictionary]];
-
-        NSError* error = nil;
-        if([picture writeToFile:pictureFile options:0 error:&error])
-        {
-            if (![metadata setTag:pictureFile forKey:@"Artwork"]) {
-                MZLoggerDebug(@"Artwork not updated for value %@", pictureFile);
-            }
-        }
-        else
-        {
-            MZLoggerError(@"Failed to write image to temp '%@' %@", pictureFile, [error localizedDescription]);
-            pictureFile = nil;
-        }
-    }
-    
-    //Special handling for directors, producers, actors, screenwriters
-    NSString* actors = [changes objectForKey:MZActorsTagIdent];
-    if(actors)
-    {
-        if (![metadata setTag:actors forKey:@"Cast"]) {
-            MZLoggerDebug(@"Actors not updated for value %@", actors);
-        }
-    }
-    
-    NSString* directors = [changes objectForKey:MZDirectorTagIdent];
-    if(directors)
-    {
-        if (![metadata setTag:directors forKey:@"Director"]) {
-            MZLoggerDebug(@"Directors not updated for value %@", directors);
-        }
-    }
-    
-    NSString* codirectors = [changes objectForKey:MZCoDirectorTagIdent];
-    if(codirectors)
-    {
-        if (![metadata setTag:codirectors forKey:@"Codirector"]) {
-            MZLoggerDebug(@"Codirector not updated for value %@", codirectors);
-        }
-    }
-    
-    NSString* producers = [changes objectForKey:MZProducerTagIdent];
-    if(producers)
-    {
-        if (![metadata setTag:producers forKey:@"Producers"]) {
-            MZLoggerDebug(@"Producers not updated for value %@", producers);
-        }
-    }
-    
-    NSString* screenwriters = [changes objectForKey:MZScreenwriterTagIdent];
-    if(screenwriters)
-    {
-        if (![metadata setTag:screenwriters forKey:@"Screenwriters"]) {
-            MZLoggerDebug(@"Screenwriters not updated for value %@", screenwriters);
-        }
-    }
-    
-    NSString* studio = [changes objectForKey:MZStudioTagIdent];
-    if(studio)
-    {
-        if (![metadata setTag:studio forKey:@"Studio"]) {
-            MZLoggerDebug(@"Studio not updated for value %@", studio);
-        }
-    }
-        
     MP4v2WriteOperationsController* ctrl = [MP4v2WriteOperationsController controllerWithProvider:self delegate:delegate edits:data];
-    MP4v2MainWriteTask* mainWrite = [MP4v2MainWriteTask taskWithController:ctrl];
+    MP4v2MainWriteTask* mainWrite = [MP4v2MainWriteTask taskWithController:ctrl metaEdits:data];
+    
     [ctrl addOperation:mainWrite];
-    
-//    int status=0;
-//    [mainWrite setErrorFromStatus:status];
-    
-    [ctrl notifyPercent:0.10];
-    //    NSString* fileName;
-    //    if([args count]-3 == 0)
-    //        fileName = [data loadedFileName];
-    //    else
-    //        fileName = [data savedTempFileName];
-    
-    NSError	 **outError;
-    NSMutableDictionary * attributes = [[NSMutableDictionary alloc] init];
-    int saveOperation = 1; /* 1 = Save, 2 = Save As */
-    if (saveOperation == 1) {
-        // movie file already exists, so we'll just update
-        // the movie resource
-        success = [mp4File updateMP4FileWithAttributes:attributes error:outError];
-    } else {
-        [attributes setObject:[NSNumber numberWithBool:YES] forKey:MP42Create64BitData];
-        [attributes setObject:[NSNumber numberWithBool:YES] forKey:MP42Create64BitTime];
-        success = [mp4File writeToUrl:fileName withAttributes:attributes error:outError];
-    }
-    [ctrl notifyPercent:0.8];
-    if (optimize)
-    {
-        [mp4File optimize];
-        optimize = NO;
-    }
-    [ctrl notifyPercent:0.9];
-    [attributes release];
-    
-    if (pictureFile) {
-        NSError* tempError = nil;
-        NSFileManager* mgr = [NSFileManager manager];
-        if(![mgr removeItemAtPath:pictureFile error:&tempError])
-        {
-            MZLoggerError(@"Failed to remove temp picture file %@", [tempError localizedDescription]);
-            tempError = nil;
-        }
-    }
-    [ctrl notifyPercent:1.0];
-    [ctrl operationsFinished];
-    
-    // Special chapters handling
-//    id chaptersObj = [changes objectForKey:MZChaptersTagIdent];
-//    NSString* chaptersFile = nil;
-//    if(chaptersObj == [NSNull null] || (chaptersObj && [chaptersObj count] == 0))
-//    {
-//        chaptersFile = @"";
-//    }
-//    else if(chaptersObj)
-//    {
-//        NSArray* chapters = chaptersObj;
-//        chaptersFile = [NSString temporaryPathWithFormat:@"MetaZChapters_%@.txt"];
-//
-//        NSString* data = [[chapters arrayByPerformingSelector:@selector(description)]
-//            componentsJoinedByString:@"\n"];
-//                
-//        NSError* error = nil;
-//        if(![data writeToFile:chaptersFile atomically:NO encoding:NSUTF8StringEncoding error:&error])
-//        {
-//            MZLoggerError(@"Failed to write chapters to temp '%@' %@", chaptersFile, [error localizedDescription]);
-//            chaptersFile = nil;
-//        }
-//    }
-//    
-//    if(chaptersFile)
-//    {
-//        MP4v2ChapterWriteTask* chapterWrite = [MP4v2ChapterWriteTask
-//                taskWithFileName:fileName
-//                    chaptersFile:chaptersFile];
-//        [chapterWrite setLaunchPath:[self launchChapsPath]];
-//        [chapterWrite addDependency:chapterRead];
-//        [ctrl addOperation:chapterWrite];
-//    }
-
+ 
     [writes addObject:ctrl];
-
     [delegate dataProvider:self controller:ctrl writeStartedForEdits:data];
     [ctrl addOperationsToQueue:queue];
-
+    
     return ctrl;
 }
+
 
 - (void)removeWriteManager:(id)writeManager
 {
