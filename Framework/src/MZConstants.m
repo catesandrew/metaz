@@ -113,7 +113,8 @@ CFStringRef MZCopyDescription(const void *ns)
 @implementation MZConstants
 
 + (NSString *) movieGenreFromIndex: (NSInteger)index {
-    if ((index >= 0 && index < 127) || index == 255) {
+    int length = sizeof(genreMovieType_strings)/sizeof(genreType_t);
+    if (index >= 0 && index < length) {
         genreType_t *genre = (genreType_t*) genreMovieType_strings;
         genre += index - 1;
         return genre->english_name;
@@ -122,7 +123,8 @@ CFStringRef MZCopyDescription(const void *ns)
 }
 
 + (uint16_t) movieGenreIdFromIndex: (NSInteger)index {
-    if ((index >= 0 && index < 127) || index == 255) {
+    int length = sizeof(genreMovieType_strings)/sizeof(genreType_t);
+    if (index >= 0 && index < length) {
         genreType_t *genre = (genreType_t*) genreMovieType_strings;
         genre += index - 1;
         return genre->id;
@@ -154,7 +156,8 @@ CFStringRef MZCopyDescription(const void *ns)
 }
 
 + (NSString *) tvGenreFromIndex: (NSInteger)index {
-    if ((index >= 0 && index < 127) || index == 255) {
+    int length = sizeof(genreTvType_strings)/sizeof(genreType_t);
+    if (index >= 0 && index < length) {
         genreType_t *genre = (genreType_t*) genreTvType_strings;
         genre += index - 1;
         return genre->english_name;
@@ -163,7 +166,8 @@ CFStringRef MZCopyDescription(const void *ns)
 }
 
 + (uint16_t) tvGenreIdFromIndex: (NSInteger)index {
-    if ((index >= 0 && index < 127) || index == 255) {
+    int length = sizeof(genreTvType_strings)/sizeof(genreType_t);
+    if (index >= 0 && index < length) {
         genreType_t *genre = (genreType_t*) genreTvType_strings;
         genre += index - 1;
         return genre->id;
@@ -199,7 +203,8 @@ CFStringRef MZCopyDescription(const void *ns)
 }
 
 + (NSString *) ratingDescriptionFromIndex: (NSInteger)index {
-    if (index >= 0 && index < 71) {
+    int length = sizeof(rating_strings)/sizeof(iTMF_rating_t);
+    if (index >= 0 && index < length) {
         iTMF_rating_t *rating = (iTMF_rating_t*) rating_strings;
         rating += index;
         return rating->rating;    
