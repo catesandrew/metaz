@@ -648,38 +648,31 @@
         }
     }
 
-// Special chapters handling
-//    id chaptersObj = [changes objectForKey:MZChaptersTagIdent];
-//    NSString* chaptersFile = nil;
-//    if(chaptersObj == [NSNull null] || (chaptersObj && [chaptersObj count] == 0))
-//    {
-//        chaptersFile = @"";
-//    }
-//    else if(chaptersObj)
-//    {
-//        NSArray* chapters = chaptersObj;
-//        chaptersFile = [NSString temporaryPathWithFormat:@"MetaZChapters_%@.txt"];
-//
-//        NSString* data = [[chapters arrayByPerformingSelector:@selector(description)]
-//            componentsJoinedByString:@"\n"];
-//                
-//        NSError* error = nil;
-//        if(![data writeToFile:chaptersFile atomically:NO encoding:NSUTF8StringEncoding error:&error])
-//        {
-//            MZLoggerError(@"Failed to write chapters to temp '%@' %@", chaptersFile, [error localizedDescription]);
-//            chaptersFile = nil;
-//        }
-//    }
-//    
-//    if(chaptersFile)
-//    {
-//        MP4v2ChapterWriteTask* chapterWrite = [MP4v2ChapterWriteTask
-//                taskWithFileName:fileName
-//                    chaptersFile:chaptersFile];
-//        [chapterWrite setLaunchPath:[self launchChapsPath]];
-//        [chapterWrite addDependency:chapterRead];
-//        [ctrl addOperation:chapterWrite];
-//    }
+    // Special chapters handling
+    // If the mp4File doesn't have a chapter track,
+    // we will have to create with with mp4File addTrack()
+    id chaptersObj = [changes objectForKey:MZChaptersTagIdent];
+    MP42ChapterTrack* chapterTrack = [mp4File chapters];
+    if(chaptersObj == [NSNull null] || (chaptersObj && [chaptersObj count] == 0))
+    {
+        if (chapterTrack != NULL) { 
+            NSInteger chapCount = [chapterTrack chapterCount];
+            if (chapCount > 0) {
+                for (int i = 0; i < chapCount; i++) {
+                   [chapterTrack removeChapterAtIndex:i]; 
+                }
+            }
+        }
+    }
+    else if(chaptersObj)
+    {
+        NSArray* chapters = chaptersObj;             
+        if (chapterTrack != NULL) {  
+            // Loop through chapters, call [chapterTrack addChapter]
+            uint32_t chapterCount = [chapters count];
+            
+        }
+    }
     
     [mp4v2WriteTask notifyPercent:1.0];
     [mp4v2WriteTask operationFinished];
