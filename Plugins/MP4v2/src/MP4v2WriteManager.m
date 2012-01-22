@@ -116,7 +116,7 @@
 // @"Sort Composer", nil];
         
         NSArray* writemapkeys = [NSArray arrayWithObjects:
-            MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
+            MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent, MZGenreTagIdent,
             //MZRatingTagIdent,
             MZAlbumTagIdent, MZAlbumArtistTagIdent, MZPurchaseDateTagIdent, MZShortDescriptionTagIdent,
             MZLongDescriptionTagIdent, //MZVideoTypeTagIdent,
@@ -130,7 +130,7 @@
             nil];
         
         NSArray* writemapvalues = [NSArray arrayWithObjects:
-            @"Name", @"Artist", @"Release Date",
+            @"Name", @"Artist", @"Release Date", @"Genre",
             //@"contentRating",
             @"Album", @"Album Artist", @"Purchase Date", @"Description",
             @"Long Description", 
@@ -465,8 +465,6 @@
         }
     }
     
-    // Special Genre
-    
     // Special track number/count handling    
     MZTag* numberTag = [MZTag tagForIdentifier:MZTrackNumberTagIdent];
     MZTag* countTag = [MZTag tagForIdentifier:MZTrackCountTagIdent];
@@ -557,15 +555,6 @@
         {
             MZLoggerError(@"Failed to write image to temp '%@' %@", pictureFile, [error localizedDescription]);
             pictureFile = nil;
-        }
-    }
-    
-    // Special genre handling
-    NSString* genre = [changes objectForKey:MZGenreTagIdent];
-    if(genre)
-    {
-        if (![metadata setTag:genre forKey:@"Genre"]) {
-            MZLoggerDebug(@"Genre not updated for value %@", genre);
         }
     }
     

@@ -454,11 +454,13 @@ CFStringRef MZCopyDescription(const void *ns);
 + (uint16_t) movieGenreIdFromIndex: (NSInteger)index;
 + (NSString *) movieGenreFromIndex: (NSInteger)index;
 + (NSInteger) movieGenreIndexFromString: (NSString *)genreString;
++ (NSString *) movieGenreFromId: (uint16_t)id;
 
 + (uint16_t) tvGenreIdFromString: (NSString *)genreString;
 + (uint16_t) tvGenreIdFromIndex: (NSInteger)index;
 + (NSString *) tvGenreFromIndex: (NSInteger)index;
 + (NSInteger) tvGenreIndexFromString: (NSString *)genreString;
++ (NSString *) tvGenreFromId: (uint16_t)id;
 
 + (NSString *) ratingFromIndex: (NSInteger)index;
 + (NSString *) ratingDescriptionFromIndex: (NSInteger)index;

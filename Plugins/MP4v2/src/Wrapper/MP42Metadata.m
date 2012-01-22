@@ -270,11 +270,10 @@
         [tagsDict setObject:[self stringFromMetadata:tags->genre]
                      forKey:@"Genre"];
     
-    // TODO: Check if kind is movie or tv
-    if (tags->genreType && !tags->genre) {
-        [tagsDict setObject:[MZConstants movieGenreFromIndex:*tags->genreType]
-                     forKey:@"Genre"];
-    }
+//    if (tags->genreType && !tags->genre) {
+//        [tagsDict setObject:[MZConstants movieGenreFromIndex:*tags->genreType]
+//                     forKey:@"Genre"];
+//    }
 
     if (tags->releaseDate)
         [tagsDict setObject:[self stringFromMetadata:tags->releaseDate]
@@ -516,17 +515,32 @@
 
     MP4TagsSetComments(tags, [[tagsDict valueForKey:@"Comments"] UTF8String]);
 
-    // TODO: Check if video kind is tv or movie
-    uint16_t genreType = [MZConstants movieGenreIndexFromString:[tagsDict valueForKey:@"Genre"]];
-    if (genreType) {
-        MP4TagsSetGenre(tags, NULL);
-        MP4TagsSetGenreType(tags, &genreType);
-    }
-    else {
-        MP4TagsSetGenreType(tags, NULL);
-        MP4TagsSetGenre(tags, [[tagsDict valueForKey:@"Genre"] UTF8String]);
-    }
+    MP4TagsSetGenre(tags, [[tagsDict valueForKey:@"Genre"] UTF8String]);
 
+    if (mediaKind != 0) {
+        if (mediaKind == MZMovieVideoType) {
+            uint32_t genreId = [MZConstants movieGenreIdFromString:[tagsDict valueForKey:@"Genre"]];
+            if (genreId > 0) {
+                MP4TagsSetGenreID(tags, &genreId);
+                MP4TagsSetGenreType(tags, NULL);
+            }
+            else {
+                MP4TagsSetGenreID(tags, NULL);
+            }
+        }
+        
+        else if (mediaKind == MZTVShowVideoType) {
+            uint32_t genreId = [MZConstants tvGenreIdFromString:[tagsDict valueForKey:@"Genre"]];
+            if (genreId > 0) {
+                MP4TagsSetGenreID(tags, &genreId);
+                MP4TagsSetGenreType(tags, NULL);
+            }
+            else {
+                MP4TagsSetGenreID(tags, NULL);
+            }
+        }
+    }
+    
     MP4TagsSetReleaseDate(tags, [[tagsDict valueForKey:@"Release Date"] UTF8String]);
 
     if ([tagsDict valueForKey:@"Track #"]) {

@@ -155,6 +155,16 @@ CFStringRef MZCopyDescription(const void *ns)
     return 0;
 }
 
++ (NSString *) movieGenreFromId: (uint16_t)id {
+    genreType_t *genreList;
+    for ( genreList = (genreType_t*) genreMovieType_strings; genreList->id; genreList++) {
+        if (id == genreList->id) {
+            return genreList->english_name;
+        }
+    }
+    return NULL;
+}
+
 + (NSString *) tvGenreFromIndex: (NSInteger)index {
     int length = sizeof(genreTvType_strings)/sizeof(genreType_t);
     if (index >= 0 && index < length) {
@@ -194,6 +204,16 @@ CFStringRef MZCopyDescription(const void *ns)
         }
     }
     return 0;
+}
+
++ (NSString *) tvGenreFromId: (uint16_t)id {
+    genreType_t *genreList;
+    for ( genreList = (genreType_t*) genreTvType_strings; genreList->id; genreList++) {
+        if (id == genreList->id) {
+            return genreList->english_name;
+        }
+    }
+    return NULL;
 }
 
 + (NSString *) ratingFromIndex: (NSInteger)index {
