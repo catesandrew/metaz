@@ -110,16 +110,14 @@
         data = [meta retain];
         
 // return [NSArray arrayWithObjects:  @"Composer",
-// @"Track #", @"Disk #", @"Tempo", 
-// @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
-// @"Studio", @"Rating", @"Rating Annotation",
+// @"Tempo", 
+// @"Rating Annotation", "Content Rating" 
 // @"Lyrics", @"Encoded By", @"contentID", @"XID", @"iTunes Account", 
 // @"Sort Composer", nil];
         
         NSArray* writemapkeys = [NSArray arrayWithObjects:
             MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
             //MZRatingTagIdent,
-            //MZGenreTagIdent,
             MZAlbumTagIdent, MZAlbumArtistTagIdent, MZPurchaseDateTagIdent, MZShortDescriptionTagIdent,
             MZLongDescriptionTagIdent, //MZVideoTypeTagIdent,
             MZTVShowTagIdent, MZTVEpisodeIDTagIdent,
@@ -134,7 +132,6 @@
         NSArray* writemapvalues = [NSArray arrayWithObjects:
             @"Name", @"Artist", @"Release Date",
             //@"contentRating",
-            //@"Genre",
             @"Album", @"Album Artist", @"Purchase Date", @"Description",
             @"Long Description", 
             @"TV Show", @"TV Episode ID",
@@ -468,6 +465,8 @@
         }
     }
     
+    // Special Genre
+    
     // Special track number/count handling    
     MZTag* numberTag = [MZTag tagForIdentifier:MZTrackNumberTagIdent];
     MZTag* countTag = [MZTag tagForIdentifier:MZTrackCountTagIdent];
@@ -558,6 +557,15 @@
         {
             MZLoggerError(@"Failed to write image to temp '%@' %@", pictureFile, [error localizedDescription]);
             pictureFile = nil;
+        }
+    }
+    
+    // Special genre handling
+    NSString* genre = [changes objectForKey:MZGenreTagIdent];
+    if(genre)
+    {
+        if (![metadata setTag:genre forKey:@"Genre"]) {
+            MZLoggerDebug(@"Genre not updated for value %@", genre);
         }
     }
     

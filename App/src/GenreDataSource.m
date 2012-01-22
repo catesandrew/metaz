@@ -14,14 +14,21 @@
 {
     self = [super init];
     if(self) {
-        genres = [[NSUserDefaults standardUserDefaults] arrayForKey:@"genres"];
+        // TODO: Check video kind and use appropriate genre list
+        genres = [[NSUserDefaults standardUserDefaults] arrayForKey:@"genres_movie"];
         if(!genres)
             genres = [NSArray array];
+        
         NSSet* set = [NSSet setWithArray:genres];
+        NSArray *availableGenres = [MZConstants availableMovieGenres];
+        for (NSString* genre in availableGenres) {
+            set = [set setByAddingObject:genre];
+        }
+        
         genres = [set allObjects];
         genres = [[genres sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)] retain];
-        [[NSUserDefaults standardUserDefaults] setObject:genres forKey:@"genres"];
-        [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"genres" options:0 context:NULL];
+        [[NSUserDefaults standardUserDefaults] setObject:genres forKey:@"genres_movie"];
+        [[NSUserDefaults standardUserDefaults] addObserver:self forKeyPath:@"genres_movie" options:0 context:NULL];
         [[NSNotificationCenter defaultCenter]
             addObserver:self
                selector:@selector(dataWritingStarted:)
@@ -67,14 +74,14 @@
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if([keyPath isEqual:@"genres"] && object == [NSUserDefaults standardUserDefaults])
+    if([keyPath isEqual:@"genres_movie"] && object == [NSUserDefaults standardUserDefaults])
     {
         NSSet* set = [NSSet setWithArray:genres];
         NSArray* newGenres = [set allObjects];
         newGenres = [newGenres sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-        [self willChangeValueForKey:@"genres"];
+        [self willChangeValueForKey:@"genres_movie"];
         genres = [newGenres retain];
-        [self didChangeValueForKey:@"genres"];
+        [self didChangeValueForKey:@"genres_movie"];
     }
 }
 
@@ -89,10 +96,10 @@
         set = [set setByAddingObject:genre];
         NSArray* newGenres = [set allObjects];
         newGenres = [newGenres sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-        [self willChangeValueForKey:@"genres"];
+        [self willChangeValueForKey:@"genres_movie"];
         genres = [newGenres retain];
-        [[NSUserDefaults standardUserDefaults] setObject:genres forKey:@"genres"];
-        [self didChangeValueForKey:@"genres"];
+        [[NSUserDefaults standardUserDefaults] setObject:genres forKey:@"genres_movie"];
+        [self didChangeValueForKey:@"genres_movie"];
     }
 }
 

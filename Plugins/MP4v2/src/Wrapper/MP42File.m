@@ -410,7 +410,7 @@ NSString * const MP42CreateChaptersPreviewTrack = @"ChaptersPreview";
 
         for (SBTextSample * chapter in [chapterTrack chapters]) {
             QTTime chapterTime = {
-                [chapter timestamp] + 1500, // Add a short offset, hopefully we will get a better image
+                [chapter getTimestamp] + 1500, // Add a short offset, hopefully we will get a better image
                 1000,                       // if there is a fade
                 0
             };

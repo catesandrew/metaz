@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "mp4v2.h"
+#import <MetaZKit/MZConstants.h>
 
 enum rating_type {
     MPAA_NR = 1,
@@ -88,14 +89,6 @@ enum rating_type {
 - (id) initWithSourcePath:(NSString *)source fileHandle:(MP4FileHandle)fileHandle;
 - (NSArray *) availableMetadata;
 - (NSArray *) writableMetadata;
-
-- (NSArray *) availableRatings;
-- (NSString *) ratingFromIndex: (NSInteger)index;
-- (NSString *) ratingDescriptionFromIndex: (NSInteger)index;
-- (NSInteger) ratingIndexFromString: (NSString *)ratingString;
-- (NSInteger) ratingDescriptionIndexFromString: (NSString *)ratingString;
-
-- (NSArray *) availableGenres;
 
 - (void) removeTagForKey:(NSString *)aKey;
 - (BOOL) setTag:(id)value forKey:(NSString *)key;

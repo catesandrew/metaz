@@ -10,257 +10,6 @@
 #import "MP42Utilities.h"
 #import "RegexKitLite.h"
 
-typedef struct mediaKind_t
-{
-    uint8_t stik;
-    NSString *english_name;
-} mediaKind_t;
-
-static const mediaKind_t mediaKind_strings[] = {
-    {1, @"Music"},
-    {2, @"Audiobook"},
-    {6, @"Music Video"},
-    {9, @"Movie"},
-    {10, @"TV Show"},
-    {11, @"Booklet"},
-    {14, @"Ringtone"},  
-    {0, NULL},
-};
-
-typedef struct contentRating_t
-{
-    uint8_t rtng;
-    NSString *english_name;
-} contentRating_t;
-
-static const contentRating_t contentRating_strings[] = {
-    {0, @"None"},
-    {2, @"Clean"},
-    {4, @"Explicit"},
-    {0, NULL},
-};
-
-typedef struct iTMF_rating_t
-{
-    const char * rating;
-    const char * english_name;
-} iTMF_rating_t;
-
-static const iTMF_rating_t rating_strings[] = {
-    {"--", "-- United States"},
-    {"mpaa|NR|000|", "Not Rated"},          // 1
-    {"mpaa|G|100|", "G"},
-    {"mpaa|PG|200|", "PG"},
-    {"mpaa|PG-13|300|", "PG-13"},
-    {"mpaa|R|400|", "R" },
-    {"mpaa|NC-17|500|", "NC-17"},
-    {"mpaa|Unrated|???|", "Unrated"},
-    {"--", ""},
-    {"us-tv|TV-Y|100|", "TV-Y"},            // 9
-    {"us-tv|TV-Y7|200|", "TV-Y7"},
-    {"us-tv|TV-G|300|", "TV-G"},
-    {"us-tv|TV-PG|400|", "TV-PG"},
-    {"us-tv|TV-14|500|", "TV-14"},
-    {"us-tv|TV-MA|600|", "TV-MA"},
-    {"us-tv|Unrated|???|", "Unrated"},
-    {"--", "-- United Kingdom"},
-    {"uk-movie|NR|000|", "Not Rated"},      // 17
-    {"uk-movie|U|100|", "U"},
-    {"uk-movie|Uc|150|", "Uc"},
-    {"uk-movie|PG|200|", "PG"},
-    {"uk-movie|12|300|", "12"},
-    {"uk-movie|12A|325|", "12A"},
-    {"uk-movie|15|350|", "15"},
-    {"uk-movie|18|400|", "18"},
-    {"uk-movie|R18|600|", "R18"},
-    {"uk-movie|E|0|", "Exempt" },
-    {"uk-movie|Unrated|???|", "Unrated"},
-    {"--", ""},
-    {"uk-tv|Caution|500|", "Caution"},      // 29
-    {"--", "-- Germany"},
-    {"de-movie|ab 0 Jahren|75|", "ab 0 Jahren"},		// 31
-    {"de-movie|ab 6 Jahren|100|", "ab 6 Jahren"},
-    {"de-movie|ab 12 Jahren|200|", "ab 12 Jahren"},
-    {"de-movie|ab 16 Jahren|500|", "ab 16 Jahren"},
-    {"de-movie|ab 18 Jahren|600|", "ab 18 Jahren"},
-    {"--", ""},
-    {"de-tv|ab 0 Jahren|75|", "ab 0 Jahren"},		// 37
-    {"de-tv|ab 6 Jahren|100|", "ab 6 Jahren"},
-    {"de-tv|ab 12 Jahren|200|", "ab 12 Jahren"},
-    {"de-tv|ab 16 Jahren|500|", "ab 16 Jahren"},
-    {"de-tv|ab 18 Jahren|600|", "ab 18 Jahren"},
-    {"--", "-- Australia"},
-    {"au-movie|G|100|", "G"},               // 43
-    {"au-movie|PG|200|", "PG"},
-    {"au-movie|M|350|", "M"},
-    {"au-movie|MA15+|375|", "MA 15+"},
-    {"au-movie|R18+|400|", "R18+"},
-    {"--", ""},
-    {"au-tv|P|100|", "P"},                  // 49
-    {"au-tv|C|200|", "C"},
-    {"au-tv|G|300|", "G"},
-    {"au-tv|PG|400|", "PG"},
-    {"au-tv|M|500|", "M"},
-    {"au-tv|MA15+|550|", "MA 15+"},
-    {"au-tv|AV15+|575|", "AV 15+"},
-    {"au-tv|R18+|600|", "R18+"},
-    {"--", "-- France"},
-    {"fr-movie|Tout Public|100|", "Tout Public"},     // 58
-    {"fr-movie|-10|100|", "-10"},
-    {"fr-movie|-12|300|", "-12"},
-    {"fr-movie|-16|375|", "-16"},
-    {"fr-movie|-18|400|", "-18"},
-    {"fr-movie|Unrated|???|", "Unrated"},
-    {"--", ""},
-    {"fr-tv|-10|100|", "-10"},              // 65
-    {"fr-tv|-12|200|", "-12"},
-    {"fr-tv|-16|500|", "-16"},
-    {"fr-tv|-18|600|", "-18"},
-    {"--", ""},
-    {"--", "Unknown"},                      // 70
-    {NULL, NULL},
-};
-
-typedef struct genreType_t
-{
-    uint8_t index;
-    const char *short_name;
-    const char *english_name;
-} genreType_t;
-
-static const genreType_t genreType_strings[] = {
-    {1,   "blues",             "Blues" },
-    {2,   "classicrock",       "Classic Rock" },
-    {3,   "country",           "Country" },
-    {4,   "dance",             "Dance" },
-    {5,   "disco",             "Disco" },
-    {6,   "funk",              "Funk" },
-    {7,   "grunge",            "Grunge" },
-    {8,   "hiphop",            "Hop-Hop" },
-    {9,   "jazz",              "Jazz" },
-    {10,  "metal",             "Metal" },
-    {11,  "newage",            "New Age" },
-    {12,  "oldies",            "Oldies" },
-    {13,  "other",             "Other" },
-    {14,  "pop",               "Pop" },
-    {15,  "rand_b",            "R&B" },
-    {16,  "rap",               "Rap" },
-    {17,  "reggae",            "Reggae" },
-    {18,  "rock",              "Rock" },
-    {19,  "techno",            "Techno" },
-    {20,  "industrial",        "Industrial" },
-    {21,  "alternative",       "Alternative" },
-    {22,  "ska",               "Ska" },
-    {23,  "deathmetal",        "Death Metal" },
-    {24,  "pranks",            "Pranks" },
-    {25,  "soundtrack",        "Soundtrack" },
-    {26,  "eurotechno",        "Euro-Techno" },
-    {27,  "ambient",           "Ambient" },
-    {28,  "triphop",           "Trip-Hop" },
-    {29,  "vocal",             "Vocal" },
-    {30,  "jazzfunk",          "Jazz+Funk" },
-    {31,  "fusion",            "Fusion" },
-    {32,  "trance",            "Trance" },
-    {33,  "classical",         "Classical" },
-    {34,  "instrumental",      "Instrumental" },
-    {35,  "acid",              "Acid" },
-    {36,  "house",             "House" },
-    {37,  "game",              "Game" },
-    {38,  "soundclip",         "Sound Clip" },
-    {39,  "gospel",            "Gospel" },
-    {40,  "noise",             "Noise" },
-    {41,  "alternrock",        "AlternRock" },
-    {42,  "bass",              "Bass" },
-    {43,  "soul",              "Soul" },
-    {44,  "punk",              "Punk" },
-    {45,  "space",             "Space" },
-    {46,  "meditative",        "Meditative" },
-    {47,  "instrumentalpop",   "Instrumental Pop" },
-    {48,  "instrumentalrock",  "Instrumental Rock" },
-    {49,  "ethnic",            "Ethnic" },
-    {50,  "gothic",            "Gothic" },
-    {51,  "darkwave",          "Darkwave" },
-    {52,  "technoindustrial",  "Techno-Industrial" },
-    {53,  "electronic",        "Electronic" },
-    {54,  "popfolk",           "Pop-Folk" },
-    {55,  "eurodance",         "Eurodance" },
-    {56,  "dream",             "Dream" },
-    {57,  "southernrock",      "Southern Rock" },
-    {58,  "comedy",            "Comedy" },
-    {59,  "cult",              "Cult" },
-    {60,  "gangsta",           "Gangsta" },
-    {61,  "top40",             "Top 40" },
-    {62,  "christianrap",      "Christian Rap" },
-    {63,  "popfunk",           "Pop/Funk" },
-    {64,  "jungle",            "Jungle" },
-    {65,  "nativeamerican",    "Native American" },
-    {66,  "cabaret",           "Cabaret" },
-    {67,  "newwave",           "New Wave" },
-    {68,  "psychedelic",       "Psychedelic" },
-    {69,  "rave",              "Rave" },
-    {70,  "showtunes",         "Showtunes" },
-    {71,  "trailer",           "Trailer" },
-    {72,  "lofi",              "Lo-Fi" },
-    {73,  "tribal",            "Tribal" },
-    {74,  "acidpunk",          "Acid Punk" },
-    {75,  "acidjazz",          "Acid Jazz" },
-    {76,  "polka",             "Polka" },
-    {77,  "retro",             "Retro" },
-    {78,  "musical",           "Musical" },
-    {79,  "rockand_roll",      "Rock & Roll" },
-    
-    {80,  "hardrock",          "Hard Rock" },
-    {81,  "folk",              "Folk" },
-    {82,  "folkrock",          "Folk-Rock" },
-    {83,  "nationalfolk",      "National Folk" },
-    {84,  "swing",             "Swing" },
-    {85,  "fastfusion",        "Fast Fusion" },
-    {86,  "bebob",             "Bebob" },
-    {87,  "latin",             "Latin" },
-    {88,  "revival",           "Revival" },
-    {89,  "celtic",            "Celtic" },
-    {90,  "bluegrass",         "Bluegrass" },
-    {91,  "avantgarde",        "Avantgarde" },
-    {92,  "gothicrock",        "Gothic Rock" },
-    {93,  "progressiverock",   "Progresive Rock" },
-    {94,  "psychedelicrock",   "Psychedelic Rock" },
-    {95,  "symphonicrock",     "SYMPHONIC_ROCK" },
-    {96,  "slowrock",          "Slow Rock" },
-    {97,  "bigband",           "Big Band" },
-    {98,  "chorus",            "Chorus" },
-    {99,  "easylistening",     "Easy Listening" },
-    {100, "acoustic",          "Acoustic" },
-    {101, "humour",            "Humor" },
-    {102, "speech",            "Speech" },
-    {103, "chanson",           "Chason" },
-    {104, "opera",             "Opera" },
-    {105, "chambermusic",      "Chamber Music" },
-    {106, "sonata",            "Sonata" },
-    {107, "symphony",          "Symphony" },
-    {108, "bootybass",         "Booty Bass" },
-    {109, "primus",            "Primus" },
-    {110, "porngroove",        "Porn Groove" },
-    {111, "satire",            "Satire" },
-    {112, "slowjam",           "Slow Jam" },
-    {113, "club",              "Club" },
-    {114, "tango",             "Tango" },
-    {115, "samba",             "Samba" },
-    {116, "folklore",          "Folklore" },
-    {117, "ballad",            "Ballad" },
-    {118, "powerballad",       "Power Ballad" },
-    {119, "rhythmicsoul",      "Rhythmic Soul" },
-    {120, "freestyle",         "Freestyle" },
-    {121, "duet",              "Duet" },
-    {122, "punkrock",          "Punk Rock" },
-    {123, "drumsolo",          "Drum Solo" },
-    {124, "acapella",          "A capella" },
-    {125, "eurohouse",         "Euro-House" },
-    {126, "dancehall",         "Dance Hall" },
-    {255, "none",              "none" },
-    
-    {0, "undefined" } // must be last
-};
-
 @interface MP42Metadata (Private)
 
 -(void) readMetaDataFromFileHandle:(MP4FileHandle)fileHandle;
@@ -340,6 +89,32 @@ static const genreType_t genreType_strings[] = {
             @"Sort Artist", @"Sort Album Artist", @"Sort Album", @"Sort Composer", @"Sort TV Show", nil];
 }
 
+
+
+- (BOOL) setArtworkFromFilePath:(NSString *)imageFilePath;
+{
+    if(imageFilePath != nil && [imageFilePath length] > 0) {
+        NSImage *artworkImage = nil;
+        artworkImage = [[NSImage alloc] initByReferencingFile:imageFilePath];
+        if([artworkImage isValid]) {
+            [artwork release];
+            artwork = artworkImage;
+            isEdited =YES;
+            isArtworkEdited = YES;
+            return YES;
+        } else {
+            [artworkImage release];
+            return NO;
+        }
+    } else {
+        [artwork release];
+        artwork = nil;
+        isEdited =YES;
+        isArtworkEdited = YES;
+        return YES;
+    }
+}
+
 - (BOOL) setMediaKindFromString:(NSString *)mediaKindString;
 {
     mediaKind_t *mediaKindList;
@@ -377,107 +152,6 @@ static const genreType_t genreType_strings[] = {
     return NO;
 }
 
-- (BOOL) setArtworkFromFilePath:(NSString *)imageFilePath;
-{
-    if(imageFilePath != nil && [imageFilePath length] > 0) {
-        NSImage *artworkImage = nil;
-        artworkImage = [[NSImage alloc] initByReferencingFile:imageFilePath];
-        if([artworkImage isValid]) {
-            [artwork release];
-            artwork = artworkImage;
-            isEdited =YES;
-            isArtworkEdited = YES;
-            return YES;
-        } else {
-            [artworkImage release];
-            return NO;
-        }
-    } else {
-        [artwork release];
-        artwork = nil;
-        isEdited =YES;
-        isArtworkEdited = YES;
-        return YES;
-    }
-}
-
-- (NSArray *) availableRatings
-{
-    NSMutableArray *ratingsArray = [[NSMutableArray alloc] init];
-    iTMF_rating_t *rating;
-    for ( rating = (iTMF_rating_t*) rating_strings; rating->english_name; rating++ )
-        [ratingsArray addObject:[NSString stringWithUTF8String:rating->english_name]];
-
-    return [ratingsArray autorelease];
-}
-
-- (NSString *) genreFromIndex: (NSInteger)index {
-    if ((index >= 0 && index < 127) || index == 255) {
-        genreType_t *genre = (genreType_t*) genreType_strings;
-        genre += index - 1;
-        return [NSString stringWithUTF8String:genre->english_name];
-    }
-    else return nil;
-}
-
-- (NSInteger) genreIndexFromString: (NSString *)genreString {
-    NSInteger genreIndex = 0;
-    genreType_t *genreList;
-    NSInteger k = 0;
-    for ( genreList = (genreType_t*) genreType_strings; genreList->english_name; genreList++, k++ ) {
-        if ([genreString isEqualToString:[NSString stringWithUTF8String:genreList->english_name]])
-            genreIndex = k + 1;
-    }
-    return genreIndex;
-}
-
-- (NSString *) ratingFromIndex: (NSInteger)index {
-    iTMF_rating_t *rating = (iTMF_rating_t*) rating_strings;
-    rating += index;
-    return [NSString stringWithUTF8String:rating->english_name];    
-}
-
-- (NSString *) ratingDescriptionFromIndex: (NSInteger)index {
-    if (index >= 0 && index < 71) {
-        iTMF_rating_t *rating = (iTMF_rating_t*) rating_strings;
-        rating += index;
-        return [NSString stringWithUTF8String:rating->rating];    
-    }
-    else return nil;
-}
-
-- (NSInteger) ratingIndexFromString: (NSString *)ratingString{
-    NSInteger ratingIndex = 0;
-    iTMF_rating_t *ratingList;
-    NSInteger k = 0;
-    for ( ratingList = (iTMF_rating_t*) rating_strings; ratingList->english_name; ratingList++, k++ ) {
-        if ([ratingString isEqualToString:[NSString stringWithUTF8String:ratingList->english_name]]) {
-            ratingIndex = k;
-            break;
-        }
-    }
-    return ratingIndex;
-}
-
-- (NSInteger) ratingDescriptionIndexFromString: (NSString *)ratingString{
-    NSInteger ratingIndex = 0;
-    iTMF_rating_t *ratingList;
-    NSInteger k = 0;
-    for ( ratingList = (iTMF_rating_t*) rating_strings; ratingList->rating; ratingList++, k++ ) {
-        if ([ratingString isEqualToString:[NSString stringWithUTF8String:ratingList->rating]]) {
-            ratingIndex = k;
-            break;
-        }
-    }
-    return ratingIndex;
-}
-
-- (NSArray *) availableGenres
-{
-    return [NSArray arrayWithObjects:  @"Animation", @"Classic TV", @"Comedy", @"Drama", 
-            @"Fitness & Workout", @"Kids", @"Non-Fiction", @"Reality TV", @"Sci-Fi & Fantasy",
-            @"Sports", nil];
-}
 
 - (void) removeTagForKey:(NSString *)aKey
 {
@@ -527,7 +201,7 @@ static const genreType_t genreType_strings[] = {
         if ([value isKindOfClass:[NSNumber class]])
             [tagsDict setValue:value forKey:key];
         else {
-            NSString *rating_index = [[NSNumber numberWithInt:[self ratingDescriptionIndexFromString:value]] stringValue];
+            NSString *rating_index = [[NSNumber numberWithInt:[MZConstants ratingDescriptionIndexFromString:value]] stringValue];
             [tagsDict setValue:rating_index forKey:key];
         }
 
@@ -596,8 +270,9 @@ static const genreType_t genreType_strings[] = {
         [tagsDict setObject:[self stringFromMetadata:tags->genre]
                      forKey:@"Genre"];
     
+    // TODO: Check if kind is movie or tv
     if (tags->genreType && !tags->genre) {
-        [tagsDict setObject:[self genreFromIndex:*tags->genreType]
+        [tagsDict setObject:[MZConstants movieGenreFromIndex:*tags->genreType]
                      forKey:@"Genre"];
     }
 
@@ -772,7 +447,7 @@ static const genreType_t genreType_strings[] = {
                     iTMF_rating_t *ratingList;
                     int k = 0;
                     for ( ratingList = (iTMF_rating_t*) rating_strings; ratingList->rating; ratingList++, k++ ) {
-                        if ([ratingCompareString isEqualToString:[NSString stringWithUTF8String:ratingList->rating]])
+                        if ([ratingCompareString isEqualToString:ratingList->rating])
                             ratingIndex = k;
                     }
                 }
@@ -841,7 +516,8 @@ static const genreType_t genreType_strings[] = {
 
     MP4TagsSetComments(tags, [[tagsDict valueForKey:@"Comments"] UTF8String]);
 
-    uint16_t genreType = [self genreIndexFromString:[tagsDict valueForKey:@"Genre"]];
+    // TODO: Check if video kind is tv or movie
+    uint16_t genreType = [MZConstants movieGenreIndexFromString:[tagsDict valueForKey:@"Genre"]];
     if (genreType) {
         MP4TagsSetGenre(tags, NULL);
         MP4TagsSetGenreType(tags, &genreType);
@@ -1004,8 +680,7 @@ static const genreType_t genreType_strings[] = {
         newItem->name = strdup( "iTunEXTC" );
         
         MP4ItmfData* data = &newItem->dataList.elements[0];
-        NSString * ratingString = [NSString stringWithUTF8String:
-                                   rating_strings[[[tagsDict valueForKey:@"Rating"] integerValue]].rating];
+        NSString * ratingString = rating_strings[[[tagsDict valueForKey:@"Rating"] integerValue]].rating;
         if ([[tagsDict valueForKey:@"Rating Annotation"] length] && [ratingString length])
             ratingString = [ratingString stringByAppendingString:[tagsDict valueForKey:@"Rating Annotation"]];
         data->typeCode = MP4_ITMF_BT_UTF8;

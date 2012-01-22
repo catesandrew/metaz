@@ -60,9 +60,8 @@
         tags = [[MZTag allKnownTags] retain];
         
         // return [NSArray arrayWithObjects:  @"Composer",
-        // @"Track #", @"Disk #", @"Tempo", 
-        // @"Rating", @"Rating Annotation",
-        // @"Studio", @"Cast", @"Director", @"Codirector", @"Producers", @"Screenwriters",
+        // @"Tempo", 
+        // @"Rating Annotation",
         // @"Lyrics", @"Encoded By", @"contentID", @"artistID", @"playlistID", @"genreID", @"composerID",
         // @"XID", @"iTunes Account", @"Sort Composer", @"Sort TV Show", nil];
         
@@ -370,7 +369,7 @@
     
     // Special rating handling
     NSNumber *rating_index = [dict objectForKey:@"Rating"];
-    NSString *rating = [metadata ratingDescriptionFromIndex:[rating_index intValue]];
+    NSString *rating = [MZConstants ratingDescriptionFromIndex:[rating_index intValue]];
     if(rating)
     {
         id rate = [rating_read objectForKey:rating];
