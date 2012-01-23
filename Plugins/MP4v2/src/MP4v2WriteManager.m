@@ -106,7 +106,7 @@
     if(self)
     {
         lock = [[NSLock alloc] init];
-        mp4v2WriteTask = [theMp4v2WriteTask retain];
+        mp4v2WriteTask = theMp4v2WriteTask;
         data = [meta retain];
         
 // return [NSArray arrayWithObjects:  @"Composer",

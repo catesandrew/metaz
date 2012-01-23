@@ -54,7 +54,7 @@
     if(self)
     {
         lock = [[NSLock alloc] init];
-        readDataTask = [theTask retain];
+        readDataTask = theTask;
         fileName = [theFileName retain];
         tagdict = [theTagdict retain];
         tags = [[MZTag allKnownTags] retain];
