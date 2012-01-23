@@ -130,7 +130,7 @@
 - (NSString *) mediaKindAsString
 {
     mediaKind_t *mediaKindList;
-    NSString *mediaKindString;
+    NSString *mediaKindString = @"";
     for (mediaKindList = (mediaKind_t*) mediaKind_strings; mediaKindList->english_name; mediaKindList++) {
         if (mediaKind == mediaKindList->stik) {
             mediaKindString = mediaKindList->english_name;
