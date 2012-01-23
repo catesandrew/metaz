@@ -448,7 +448,7 @@ CFStringRef MZCopyDescription(const void *ns);
 
 
 
-@interface MZConstants {
+@interface MZConstants : NSObject {
 }
 + (uint16_t) movieGenreIdFromString: (NSString *)genreString;
 + (uint16_t) movieGenreIdFromIndex: (NSInteger)index;
