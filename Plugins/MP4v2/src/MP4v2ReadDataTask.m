@@ -475,7 +475,7 @@
     }
 
 
-/*    // Chapters
+    // Chapters
     MP42ChapterTrack* chapterTrack = [mp4File chapters];
     if (chapterTrack != NULL) {       
         NSArray *chaps = [chapterTrack chapters];
@@ -487,8 +487,7 @@
                 SBTextSample *sb_prev = [chaps objectAtIndex:i-1];
                 SBTextSample *sb_current = [chaps objectAtIndex:i];
                 
-                //NSString *ch_name = [NSString stringWithUTF8String:[sb_prev title]];
-                NSString* ch_name = [[[NSString alloc] initWithString:[sb_prev title]] autorelease];
+                NSString* ch_name = [[[NSString alloc] initWithString:[sb_prev title]] retain];
                 MP4Duration prev_timestamp = [sb_prev getTimestamp];
                 MP4Duration ch_timestamp = [sb_current getTimestamp];
                 
@@ -502,13 +501,12 @@
                 
                 MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:ch_start duration:ch_duration text:ch_name];
                 [chapters addObject:item];
-                [item release];
                 sum = sum + ch_timestamp;
             }
             
             // last chapter
             SBTextSample *sb_last = [chaps objectAtIndex:chapter_count-1];
-            NSString *ch_name = [sb_last title];
+            NSString* ch_name = [[[NSString alloc] initWithString:[sb_last title]] retain];
             MP4Duration ch_timestamp = [sb_last getTimestamp];
             ch_timestamp = duration - ch_timestamp;
             
@@ -518,7 +516,6 @@
             if(ch_start && ch_duration) {
                 MZTimedTextItem* item = [MZTimedTextItem textItemWithStart:ch_start duration:ch_duration text:ch_name];
                 [chapters addObject:item];
-                [item release];
                 sum = sum + ch_timestamp;
             }
             
@@ -527,7 +524,7 @@
             }
         }
     }
-*/
+
   
     [readDataTask operationFinished];
     [lock unlock];
