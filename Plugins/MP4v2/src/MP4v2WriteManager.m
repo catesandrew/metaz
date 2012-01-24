@@ -116,22 +116,22 @@
 // @"Sort Composer", nil];
         
         NSArray* writemapkeys = [NSArray arrayWithObjects:
-            MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent, MZGenreTagIdent,
-            //MZRatingTagIdent,
+            MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent, 
             MZAlbumTagIdent, MZAlbumArtistTagIdent, MZPurchaseDateTagIdent, MZShortDescriptionTagIdent,
-            MZLongDescriptionTagIdent, //MZVideoTypeTagIdent,
+            MZLongDescriptionTagIdent, 
             MZTVShowTagIdent, MZTVEpisodeIDTagIdent,
             MZTVSeasonTagIdent, MZTVEpisodeTagIdent, MZTVNetworkTagIdent, MZFeedURLTagIdent,
             MZEpisodeURLTagIdent, MZCategoryTagIdent, MZKeywordTagIdent, MZAdvisoryTagIdent,
             MZPodcastTagIdent, MZCopyrightTagIdent, MZGroupingTagIdent, MZEncodingToolTagIdent,
             MZCommentTagIdent, MZGaplessTagIdent, MZCompilationTagIdent,
             MZSortTitleTagIdent, MZSortArtistTagIdent, MZSortAlbumArtistTagIdent,
-            MZSortAlbumTagIdent, MZSortTVShowTagIdent,
+            MZSortAlbumTagIdent, MZSortTVShowTagIdent, MZGenreTagIdent,
+            MZStudioTagIdent, MZScreenwriterTagIdent, MZProducerTagIdent, 
+            MZCoDirectorTagIdent, MZDirectorTagIdent, MZActorsTagIdent,
             nil];
         
         NSArray* writemapvalues = [NSArray arrayWithObjects:
-            @"Name", @"Artist", @"Release Date", @"Genre",
-            //@"contentRating",
+            @"Name", @"Artist", @"Release Date",
             @"Album", @"Album Artist", @"Purchase Date", @"Description",
             @"Long Description", 
             @"TV Show", @"TV Episode ID",
@@ -140,7 +140,9 @@
             @"__podcastFlag", @"Copyright", @"Grouping", @"Encoding Tool",
             @"Comments", @"__gapless", @"__compilation",
             @"Sort Name", @"Sort Artist", @"Sort Album Artist", 
-            @"Sort Album", @"Sort TV Show",     
+            @"Sort Album", @"Sort TV Show", @"Genre", 
+            @"Studio", @"Screenwriters", @"Producers", 
+            @"Codirector", @"Director", @"Cast",
             nil];
         
         write_mapping = [[NSDictionary alloc]
@@ -555,55 +557,6 @@
         {
             MZLoggerError(@"Failed to write image to temp '%@' %@", pictureFile, [error localizedDescription]);
             pictureFile = nil;
-        }
-    }
-    
-    //Special handling for directors, producers, actors, screenwriters
-    NSString* actors = [changes objectForKey:MZActorsTagIdent];
-    if(actors)
-    {
-        if (![metadata setTag:actors forKey:@"Cast"]) {
-            MZLoggerDebug(@"Actors not updated for value %@", actors);
-        }
-    }
-    
-    NSString* directors = [changes objectForKey:MZDirectorTagIdent];
-    if(directors)
-    {
-        if (![metadata setTag:directors forKey:@"Director"]) {
-            MZLoggerDebug(@"Directors not updated for value %@", directors);
-        }
-    }
-    
-    NSString* codirectors = [changes objectForKey:MZCoDirectorTagIdent];
-    if(codirectors)
-    {
-        if (![metadata setTag:codirectors forKey:@"Codirector"]) {
-            MZLoggerDebug(@"Codirector not updated for value %@", codirectors);
-        }
-    }
-    
-    NSString* producers = [changes objectForKey:MZProducerTagIdent];
-    if(producers)
-    {
-        if (![metadata setTag:producers forKey:@"Producers"]) {
-            MZLoggerDebug(@"Producers not updated for value %@", producers);
-        }
-    }
-    
-    NSString* screenwriters = [changes objectForKey:MZScreenwriterTagIdent];
-    if(screenwriters)
-    {
-        if (![metadata setTag:screenwriters forKey:@"Screenwriters"]) {
-            MZLoggerDebug(@"Screenwriters not updated for value %@", screenwriters);
-        }
-    }
-    
-    NSString* studio = [changes objectForKey:MZStudioTagIdent];
-    if(studio)
-    {
-        if (![metadata setTag:studio forKey:@"Studio"]) {
-            MZLoggerDebug(@"Studio not updated for value %@", studio);
         }
     }
     

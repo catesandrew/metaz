@@ -61,21 +61,24 @@
         
         // return [NSArray arrayWithObjects:  @"Composer",
         // @"Tempo", 
-        // @"Rating Annotation",
+        // @"Rating Annotation", @"Content Rating"
         // @"Lyrics", @"Encoded By", @"contentID", @"artistID", @"playlistID", @"genreID", @"composerID",
-        // @"XID", @"iTunes Account", @"Sort Composer", @"Sort TV Show", nil];
+        // @"XID", @"iTunes Account", @"Sort Composer", nil];
         
         NSArray* readmapkeys = [NSArray arrayWithObjects:
             @"Name", @"Artist", @"Release Date",
             @"Album", @"Album Artist", @"Purchase Date", @"Description", 
             @"Long Description",
             @"TV Show", @"TV Episode ID",
-            @"TV Season", @"TV Episode #", @"TV Network", @"__purl", // MZFeedURLTagIdent
-            @"__egid", @"Category", @"Keywords", @"__rtng", //MZEpisodeURLTagIdent, MZAdvisoryTagIdent
-            @"__pcst", @"Copyright", @"Grouping", @"Encoding Tool", // MZPodcastTagIdent
-            @"Comments", @"__pgap", @"__cpil", @"Sort Name", // MZGaplessTagIdent, MZCompilationTagIdent
+            @"TV Season", @"TV Episode #", @"TV Network", @"__podcastURL", // MZFeedURLTagIdent
+            @"__podcastGUID", @"Category", @"Keywords", @"__advisory", //MZEpisodeURLTagIdent, MZAdvisoryTagIdent
+            @"__podcastFlag", @"Copyright", @"Grouping", @"Encoding Tool", // MZPodcastTagIdent
+            @"Comments", @"__gapless", @"__compilation", @"Sort Name", // MZGaplessTagIdent, MZCompilationTagIdent
             @"Sort Artist", @"Sort Album Artist", @"Sort Album",
-            @"Sort TV Show", nil];
+            @"Sort TV Show", @"Genre",
+            @"Studio", @"Screenwriters", @"Producers", 
+            @"Codirector", @"Director", @"Cast",
+            nil];
         
         NSArray* readmapvalues = [NSArray arrayWithObjects:
             MZTitleTagIdent, MZArtistTagIdent, MZDateTagIdent,
@@ -87,7 +90,10 @@
             MZPodcastTagIdent, MZCopyrightTagIdent, MZGroupingTagIdent, MZEncodingToolTagIdent,
             MZCommentTagIdent, MZGaplessTagIdent, MZCompilationTagIdent, MZSortTitleTagIdent,
             MZSortArtistTagIdent, MZSortAlbumArtistTagIdent, MZSortAlbumTagIdent,
-            MZSortTVShowTagIdent,nil];
+            MZSortTVShowTagIdent, MZGenreTagIdent,
+            MZStudioTagIdent, MZScreenwriterTagIdent, MZProducerTagIdent, 
+            MZCoDirectorTagIdent, MZDirectorTagIdent, MZActorsTagIdent,
+            nil];
         
         read_mapping = [[NSDictionary alloc]
             initWithObjects:readmapvalues
@@ -360,13 +366,6 @@
             [tagdict setObject:[tag convertObjectForStorage:[tag objectFromString:value]] forKey:tagId];
     }
     
-    // Special genre handling
-    NSString* genre = [dict objectForKey:@"Genre"];
-    if(genre)
-    {
-        [tagdict setObject:genre forKey:MZGenreTagIdent];
-    }
-    
     // Special rating handling
     NSNumber *rating_index = [dict objectForKey:@"Rating"];
     NSString *rating = [MZConstants ratingDescriptionFromIndex:[rating_index intValue]];
@@ -403,44 +402,7 @@
                         forKey:MZVideoTypeTagIdent];
         }
     }
-    
-    // Special handling for cast, directors, producers and screenwriters
-    NSString* value = [dict objectForKey:@"Cast"];
-    if(value)
-    {
-        [tagdict setObject:value forKey:MZActorsTagIdent];
-    }
-    
-    value = [dict objectForKey:@"Director"];
-    if(value)
-    {
-        [tagdict setObject:value forKey:MZDirectorTagIdent];
-    }
-    
-    value = [dict objectForKey:@"Codirector"];
-    if(value)
-    {
-        [tagdict setObject:value forKey:MZCoDirectorTagIdent];
-    }
-    
-    value = [dict objectForKey:@"Producers"];
-    if(value)
-    {
-        [tagdict setObject:value forKey:MZProducerTagIdent];
-    }
-    
-    value = [dict objectForKey:@"Screenwriters"];
-    if(value)
-    {
-        [tagdict setObject:value forKey:MZScreenwriterTagIdent];
-    }
-    
-    value = [dict objectForKey:@"Studio"];
-    if(value)
-    {
-        [tagdict setObject:value forKey:MZStudioTagIdent];
-    }
-    
+   
     // Special handling of track
     NSString* trkn = [dict objectForKey:@"Track #"];
     if(trkn)
@@ -478,7 +440,7 @@
             [tagdict setObject:count forKey:MZDiscCountTagIdent];
         }
     }
-    
+   
     // Filename auto set
     [tagdict setObject:[fileName lastPathComponent] forKey:MZFileNameTagIdent];
     id title = [tagdict objectForKey:MZTitleTagIdent];
@@ -511,8 +473,9 @@
         MZLoggerDebug(@"Movie duration '%@'", description);
         [tagdict setObject:movieDuration forKey:MZDurationTagIdent];
     }
-    
-    // Chapters
+
+
+/*    // Chapters
     MP42ChapterTrack* chapterTrack = [mp4File chapters];
     if (chapterTrack != NULL) {       
         NSArray *chaps = [chapterTrack chapters];
@@ -524,7 +487,8 @@
                 SBTextSample *sb_prev = [chaps objectAtIndex:i-1];
                 SBTextSample *sb_current = [chaps objectAtIndex:i];
                 
-                NSString *ch_name = [sb_prev title];
+                //NSString *ch_name = [NSString stringWithUTF8String:[sb_prev title]];
+                NSString* ch_name = [[[NSString alloc] initWithString:[sb_prev title]] autorelease];
                 MP4Duration prev_timestamp = [sb_prev getTimestamp];
                 MP4Duration ch_timestamp = [sb_current getTimestamp];
                 
@@ -563,7 +527,8 @@
             }
         }
     }
-    
+*/
+  
     [readDataTask operationFinished];
     [lock unlock];
 }

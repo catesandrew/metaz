@@ -58,6 +58,8 @@
     [self registerTag:[MZVideoTypeTagClass tag]];
     [self registerTag:[MZStringTag tagWithIdentifier:MZActorsTagIdent]];
     [self registerTag:[MZStringTag tagWithIdentifier:MZDirectorTagIdent]];
+    [self registerTag:[MZStringTag tagWithIdentifier:MZStudioTagIdent]];
+    [self registerTag:[MZStringTag tagWithIdentifier:MZCoDirectorTagIdent]];
     [self registerTag:[MZStringTag tagWithIdentifier:MZProducerTagIdent]];
     [self registerTag:[MZStringTag tagWithIdentifier:MZScreenwriterTagIdent]];
     [self registerTag:[MZStringTag tagWithIdentifier:MZTVShowTagIdent]];
@@ -151,6 +153,8 @@ static NSMutableDictionary *sharedTags = nil;
         [self tagForIdentifier:MZVideoTypeTagIdent],
         [self tagForIdentifier:MZActorsTagIdent],
         [self tagForIdentifier:MZDirectorTagIdent],
+        [self tagForIdentifier:MZStudioTagIdent],
+        [self tagForIdentifier:MZCoDirectorTagIdent],
         [self tagForIdentifier:MZProducerTagIdent],
         [self tagForIdentifier:MZScreenwriterTagIdent],
         [self tagForIdentifier:MZTVShowTagIdent],
